@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="GameTest.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="App\app.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="App\main.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="App\SimpleController.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="App\SimpleSound.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="App\SimpleSprite.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image\stb_image.cpp">
+      <Filter>API\third_party\stb_image</Filter>
+    </ClCompile>
+    <ClCompile Include="miniaudio\miniaudio.cpp">
+      <Filter>API\third_party\miniaudio</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="App\app.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="App\AppSettings.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="App\main.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="App\SimpleController.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="App\SimpleSound.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="App\SimpleSprite.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image\stb_image.h">
+      <Filter>API\third_party\stb_image</Filter>
+    </ClInclude>
+    <ClInclude Include="miniaudio\miniaudio.h">
+      <Filter>API\third_party\miniaudio</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="API">
+      <UniqueIdentifier>{f318918d-bb9f-4402-ae1c-4f72186d16f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="API\third_party">
+      <UniqueIdentifier>{27bd8d9d-bd08-4004-9045-4e86e26c901f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="API\third_party\miniaudio">
+      <UniqueIdentifier>{957ea575-fd4f-4ede-b4f9-66b4022639a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="API\third_party\stb_image">
+      <UniqueIdentifier>{61cfc19b-c57e-4021-b530-bac172fcba86}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>API</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
