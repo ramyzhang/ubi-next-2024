@@ -6,6 +6,7 @@ Completed:
 - Free camera
 - Scene management for levels
 - Tiny Vector3 and Matrix4x4 math library
+- Core game loop
 
 To-do:
 - Entity manager (game object creation)
