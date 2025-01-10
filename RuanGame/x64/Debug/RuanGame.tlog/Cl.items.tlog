@@ -3,7 +3,10 @@ C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\external\App\main.cpp;
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\external\App\SimpleController.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\SimpleController.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\external\App\SimpleSound.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\SimpleSound.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\external\App\SimpleSprite.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\SimpleSprite.obj
+C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\engine\ecs\EntityPool.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\EntityPool.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\engine\Engine.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\Engine.obj
+C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\engine\ecs\Entity.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\Entity.obj
+C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\engine\ecs\SEntityManager.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\SEntityManager.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\engine\graphics\Primitives.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\Primitives.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\engine\graphics\SRenderer.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\SRenderer.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\external\miniaudio\miniaudio.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\miniaudio.obj

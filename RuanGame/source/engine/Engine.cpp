@@ -2,13 +2,13 @@
 
 #include "Engine.h"
 
-bool Engine::m_instantiated = false; // define the static variable
-
 void Engine::CoreInit() {
+	SEntityManager::Instance().Init();
 	SRenderer::Instance().Init();
 }
 
 void Engine::CoreUpdate(const float deltaTime) {
+	SEntityManager::Instance().Update();
 	SRenderer::Instance().Update(deltaTime);
 }
 
@@ -16,3 +16,6 @@ void Engine::CoreRender() {
 	SRenderer::Instance().Render();
 }
 
+void Engine::CoreShutdown() {
+	SEntityManager::Instance().Shutdown();
+}

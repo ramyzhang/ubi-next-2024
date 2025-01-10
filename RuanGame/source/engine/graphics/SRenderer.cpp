@@ -2,10 +2,10 @@
 
 #include "SRenderer.h"
 
-static SRenderer& sRenderer = SRenderer::Instance();
+//static SRenderer& sRenderer = SRenderer::Instance();
 
 void SRenderer::Init() {
-	if (!testMesh.LoadMeshFromFile("data/axis.obj", Vector3(0.92f, 0.25f, 0.2f))) {
+	if (!testMesh.LoadMeshFromFile("data/mountains.obj", Vector3(0.5f, 0.5f, 0.5f))) {
 		OutputDebugStringA("Couldn't load object from file!\n");
 	}
 
@@ -15,7 +15,7 @@ void SRenderer::Init() {
 	testMesh.projection[2][3] = 1;
 	testMesh.projection[3][2] = (-m_far * m_near) / (m_far - m_near);
 
-	depth_buffer = new float[WINDOW_WIDTH, WINDOW_HEIGHT];
+	m_depth_buffer = new float[WINDOW_WIDTH, WINDOW_HEIGHT];
 }
 
 void SRenderer::Update(const float deltaTime) {
@@ -23,9 +23,9 @@ void SRenderer::Update(const float deltaTime) {
 	float x = (10 / deltaTime) * (float)M_PI / 180.0f;
 	Matrix4x4 transform = Matrix4x4().rotate(Vector3(x, y, 0));*/
 
-	/*for (int i = 0; i < testMesh.tris.size(); i++) {
+	/*for (int i = 0; i < mesh.tris.size(); i++) {
 		for (int j = 0; j < 3; j++) {
-			testMesh.tris[i].verts[j] = transform * testMesh.tris[i].verts[j];
+			mesh.tris[i].verts[j] = transform * mesh.tris[i].verts[j];
 		}
 	}*/
 }
@@ -150,33 +150,14 @@ void SRenderer::Render() {
 
 		for (Triangle& draw_tri : tri_queue) {
 			// apply lighting and draw
-			Vector3 litcolor = testMesh.color * abs(draw_tri.light_sim);
+			Vector3 litcolor = testMesh.colour * abs(draw_tri.light_sim);
 			// Vector3 color = Vector3(abs(tri.normal.x), abs(tri.normal.y), abs(tri.normal.z));
 
+			//DrawTriangle(draw_tri, litcolor);
+			draw_tri.FillTriangle(litcolor);
+
 			if (wireframe_view) {
-				App::DrawLine(
-					draw_tri.verts[0].x,
-					draw_tri.verts[0].y,
-					draw_tri.verts[1].x,
-					draw_tri.verts[1].y,
-					1, 1, 1);
-
-				App::DrawLine(
-					draw_tri.verts[1].x,
-					draw_tri.verts[1].y,
-					draw_tri.verts[2].x,
-					draw_tri.verts[2].y,
-					1, 1, 1);
-
-				App::DrawLine(
-					draw_tri.verts[2].x,
-					draw_tri.verts[2].y,
-					draw_tri.verts[0].x,
-					draw_tri.verts[0].y,
-					1, 1, 1);
-			}
-			else {
-				DrawTriangle(draw_tri, litcolor);
+				
 			}
 		}
 	}

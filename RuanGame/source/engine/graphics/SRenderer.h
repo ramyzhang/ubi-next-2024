@@ -26,13 +26,13 @@ protected:
 	std::vector<Triangle> ClipTriangle(const Vector3& plane_p, Vector3& plane_n, const Triangle& in); // outputs 0, 1, or 2 triangles
 
 private:
-	Mesh testMesh; // TODO: remove this
+	Model	testMesh; // TODO: remove this
 
-	float* depth_buffer = nullptr;
+	float*	m_depth_buffer = nullptr;
 
-	float m_near = 0.1f;
-	float m_far = 1000;
-	float m_fov = 90;
-	float m_aspectratio = (float)WINDOW_HEIGHT / (float)WINDOW_WIDTH;
-	float m_fovrad = 1 / tanf(m_fov * 0.5f / 180.0f * (float)M_PI);
+	float	m_near = 0.1f;
+	float	m_far = 1000;
+	float	m_fov = 90;
+	float	m_aspectratio = (float)WINDOW_HEIGHT / (float)WINDOW_WIDTH;
+	float	m_fovrad = 1 / tanf(m_fov * 0.5f / 180.0f * (float)M_PI);
 };

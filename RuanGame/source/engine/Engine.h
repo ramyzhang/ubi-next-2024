@@ -1,28 +1,15 @@
 #pragma once
 
 #include <cassert>
+#include "core/System.h"
 #include "graphics/SRenderer.h"
+#include "ecs/SEntityManager.h"
 
 // Engine class holds and runs all of the core functions that aren't gameplay-related
-class Engine {
-
+class Engine : public System<Engine> {
 public:
-	// Grab the instance of the Engine singleton
-	Engine() {
-		assert(!m_instantiated);
-		m_instantiated = true;
-	};
-
-	~Engine() {
-		m_instantiated = false;
-	};
-
 	void CoreInit();
 	void CoreUpdate(const float deltaTime);
 	void CoreRender();
-	// void CoreShutdown();
-
-private:
-	static bool m_instantiated;
-
+	void CoreShutdown();
 };

@@ -29,6 +29,7 @@ struct Matrix4x4 {
 	Matrix4x4& times(const Matrix4x4& rhs); // this one, we can chain
 	Matrix4x4& rotate(const Vector3& euler); // multiplies current matrix by rotation (uses the euler angles alpha, beta, and gamma)
 	Matrix4x4& translate(const Vector3& rhs);
+	Matrix4x4& scale(const Vector3& rhs);
 	Matrix4x4& pointAt(const Vector3& pos, const Vector3& target, const Vector3& up);
 	Matrix4x4& dirtyInvert(); // only for rotation & translation matrices
 
@@ -92,8 +93,7 @@ inline Matrix4x4& Matrix4x4::rotate(const Vector3& euler) {
 	return *this;
 }
 
-inline Matrix4x4& Matrix4x4::translate(const Vector3& rhs)
-{
+inline Matrix4x4& Matrix4x4::translate(const Vector3& rhs) {
 	Matrix4x4 translation = Matrix4x4();
 
 	translation.mat[0][0] = 1.0f;
@@ -112,8 +112,21 @@ inline Matrix4x4& Matrix4x4::translate(const Vector3& rhs)
 	return *this;
 }
 
-inline Matrix4x4& Matrix4x4::pointAt(const Vector3& pos, const Vector3& target, const Vector3& up)
-{
+inline Matrix4x4& Matrix4x4::scale(const Vector3& rhs) {
+	Matrix4x4 scale = Matrix4x4();
+
+	scale.mat[0][0] = rhs.x;
+	scale.mat[1][1] = rhs.y;
+	scale.mat[2][2] = rhs.z;
+
+	scale = *this * scale;
+
+	memcpy(mat, scale.mat, 4 * 4 * sizeof(float));
+
+	return *this;
+}
+
+inline Matrix4x4& Matrix4x4::pointAt(const Vector3& pos, const Vector3& target, const Vector3& up) {
 	// new forward direction
 	Vector3 newz = target - pos;
 	newz.normalize();

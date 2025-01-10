@@ -123,6 +123,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\source;.\external;$(ProjectDir)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -168,6 +169,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\source;.\external;$(ProjectDir)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -193,10 +195,21 @@
     <ClInclude Include="external\App\SimpleSprite.h" />
     <ClInclude Include="external\miniaudio\miniaudio.h" />
     <ClInclude Include="external\stb_image\stb_image.h" />
+    <ClInclude Include="source\core\FreeContainer.h" />
     <ClInclude Include="source\core\System.h" />
+    <ClInclude Include="source\engine\ecs\ECSConstants.h" />
+    <ClInclude Include="source\engine\ecs\EntityPool.h" />
     <ClInclude Include="source\engine\Engine.h" />
+    <ClInclude Include="source\engine\ecs\Entity.h" />
+    <ClInclude Include="source\engine\ecs\SEntityManager.h" />
+    <ClInclude Include="source\engine\graphics\ModelManager.h" />
     <ClInclude Include="source\engine\graphics\SRenderer.h" />
     <ClInclude Include="source\engine\graphics\Primitives.h" />
+    <ClInclude Include="source\engine\ecs\ComponentPool.h" />
+    <ClInclude Include="source\game\components\CMesh.h" />
+    <ClInclude Include="source\engine\ecs\Component.h" />
+    <ClInclude Include="source\game\components\ComponentIncludes.h" />
+    <ClInclude Include="source\game\components\CTransform.h" />
     <ClInclude Include="source\game\Game.h" />
     <ClInclude Include="source\game\GameIncludes.h" />
     <ClInclude Include="source\game\SCamera.h" />
@@ -218,7 +231,10 @@
     <ClCompile Include="external\App\SimpleController.cpp" />
     <ClCompile Include="external\App\SimpleSound.cpp" />
     <ClCompile Include="external\App\SimpleSprite.cpp" />
+    <ClCompile Include="source\engine\ecs\EntityPool.cpp" />
     <ClCompile Include="source\engine\Engine.cpp" />
+    <ClCompile Include="source\engine\ecs\Entity.cpp" />
+    <ClCompile Include="source\engine\ecs\SEntityManager.cpp" />
     <ClCompile Include="source\engine\graphics\Primitives.cpp" />
     <ClCompile Include="source\engine\graphics\SRenderer.cpp" />
     <ClCompile Include="external\miniaudio\miniaudio.cpp" />

@@ -3,26 +3,33 @@
 #include <stdio.h>
 #include <vector>
 #include <string>
+#include <algorithm>
+#include <windows.h> // TODO: remove this
 
+#include "App\app.h"
 #include "math\Vector3.h"
 #include "math\Matrix4x4.h"
 
 struct Triangle {
-	Vector3 verts[3];
-	Vector3 normal;
-	float light_sim; // dot product with the lighting source for colour calcs
+	Vector3		verts[3];
+	Vector3		normal;
+	float		light_sim; // dot product with the lighting source for colour calcs
+
+	void FillTriangle(const Vector3& color) const;
 };
 
-struct Mesh {
-	std::vector<Triangle> tris;
-	Matrix4x4 projection;
-	Vector3 color;
+struct Model {
+	std::vector<Triangle>	tris;
+	Matrix4x4				projection;
+	Vector3					colour;
 	
 	bool LoadMeshFromFile(const char* fileName, const Vector3& rgb); // has to be an .obj file
 };
 
+// TODO: load meshes here, and then reference those meshes in CMesh component
+
 struct Camera {
-	Vector3 position;
-	Vector3 look;
-	float yaw; // in radians
+	Vector3		position;
+	Vector3		look;
+	float		yaw; // in radians
 };

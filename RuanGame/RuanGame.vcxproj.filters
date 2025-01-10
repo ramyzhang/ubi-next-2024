@@ -30,6 +30,9 @@
     <ClCompile Include="source\game\SCamera.cpp" />
     <ClCompile Include="source\game\Game.cpp" />
     <ClCompile Include="source\game\scenes\MainScene.cpp" />
+    <ClCompile Include="source\engine\ecs\Entity.cpp" />
+    <ClCompile Include="source\engine\ecs\SEntityManager.cpp" />
+    <ClCompile Include="source\engine\ecs\EntityPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -73,6 +76,17 @@
     <ClInclude Include="source\math\Intersection.h" />
     <ClInclude Include="source\game\scenes\MainScene.h" />
     <ClInclude Include="source\game\scenes\SceneInclude.h" />
+    <ClInclude Include="source\game\components\CTransform.h" />
+    <ClInclude Include="source\game\components\CMesh.h" />
+    <ClInclude Include="source\core\FreeContainer.h" />
+    <ClInclude Include="source\engine\ecs\ECSConstants.h" />
+    <ClInclude Include="source\engine\ecs\Entity.h" />
+    <ClInclude Include="source\engine\ecs\SEntityManager.h" />
+    <ClInclude Include="source\engine\ecs\ComponentPool.h" />
+    <ClInclude Include="source\engine\ecs\Component.h" />
+    <ClInclude Include="source\game\components\ComponentIncludes.h" />
+    <ClInclude Include="source\engine\ecs\EntityPool.h" />
+    <ClInclude Include="source\engine\graphics\ModelManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

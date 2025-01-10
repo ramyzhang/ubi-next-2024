@@ -1,0 +1,761 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\Primitives.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\graphics\\Primitives.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\SRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\graphics\\SRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\ModelManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\graphics\\ModelManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\Primitives.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\graphics\\Primitives.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\Engine.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\Engine.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\CMesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\game\\components\\CMesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.40.33807\\INCLUDE\\ALGORITHM||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\CTransform.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\game\\components\\CTransform.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\SRenderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\graphics\\SRenderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\Entity.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\ecs\\Entity.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\ECSConstants.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\ecs\\ECSConstants.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\EntityPool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\ecs\\EntityPool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\EntityPool.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\ecs\\EntityPool.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\Component.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\ecs\\Component.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\SEntityManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\ecs\\SEntityManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\SEntityManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\ecs\\SEntityManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\Entity.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\ecs\\Entity.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\core\\System.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\core\\System.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\Engine.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\Engine.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\ComponentPool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\engine\\ecs\\ComponentPool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\game\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\scenes\\MainScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\game\\scenes\\MainScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\scenes\\MainScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\game\\scenes\\MainScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\game\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\ComponentIncludes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\game\\components\\ComponentIncludes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\EntityManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RuanGame\\source\\engine\\entities\\EntityManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\core\\FreeContainer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\source\\core\\FreeContainer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleController.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\external\\App\\SimpleController.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSound.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\external\\App\\SimpleSound.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSprite.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\external\\App\\SimpleSprite.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSound.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\external\\App\\SimpleSound.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSprite.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\external\\App\\SimpleSprite.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\app.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\external\\App\\app.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\main.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\external\\App\\main.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\app.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\external\\App\\app.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\miniaudio\\miniaudio.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\external\\miniaudio\\miniaudio.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\miniaudio\\miniaudio.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7A12010B-608E-4FBE-9089-494DBB9078A1}|RuanGame\\RuanGame.vcxproj|solutionrelative:RuanGame\\external\\miniaudio\\miniaudio.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\mydirectsound.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RuanGame\\external\\App\\mydirectsound.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\DirectSound.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RuanGame\\external\\App\\DirectSound.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\DirectSound.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RuanGame\\external\\App\\DirectSound.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\Components.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RuanGame\\source\\game\\components\\Components.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\Entity.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RuanGame\\source\\engine\\entities\\Entity.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\Component.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RuanGame\\source\\game\\components\\Component.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\Entity.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RuanGame\\source\\engine\\entities\\Entity.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\EntityManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RuanGame\\source\\engine\\entities\\EntityManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\exception||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Primitives.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\Primitives.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\graphics\\Primitives.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\Primitives.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\graphics\\Primitives.h",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAewBwAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-02T20:49:18.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Engine.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\Engine.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\Engine.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\Engine.cpp",
+              "RelativeToolTip": "RuanGame\\source\\engine\\Engine.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-02T20:41:06.211Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SEntityManager.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\SEntityManager.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\ecs\\SEntityManager.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\SEntityManager.cpp",
+              "RelativeToolTip": "RuanGame\\source\\engine\\ecs\\SEntityManager.cpp",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAADYAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-05T21:01:19.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "EntityPool.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\EntityPool.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\ecs\\EntityPool.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\EntityPool.cpp",
+              "RelativeToolTip": "RuanGame\\source\\engine\\ecs\\EntityPool.cpp",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAACMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-06T04:09:29.072Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SRenderer.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\SRenderer.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\graphics\\SRenderer.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\SRenderer.cpp",
+              "RelativeToolTip": "RuanGame\\source\\engine\\graphics\\SRenderer.cpp",
+              "ViewState": "AQIAAJwAAAAAAAAAAADwv58AAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-09T03:37:15.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Primitives.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\Primitives.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\graphics\\Primitives.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\Primitives.cpp",
+              "RelativeToolTip": "RuanGame\\source\\engine\\graphics\\Primitives.cpp",
+              "ViewState": "AQIAAEYAAAAAAAAAAADwv1UAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-02T20:49:17.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CMesh.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\CMesh.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\game\\components\\CMesh.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\CMesh.h",
+              "RelativeToolTip": "RuanGame\\source\\game\\components\\CMesh.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-03T04:13:05.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ModelManager.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\ModelManager.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\graphics\\ModelManager.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\ModelManager.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\graphics\\ModelManager.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-10T03:04:24.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Component.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\Component.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\ecs\\Component.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\Component.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\ecs\\Component.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-05T21:12:00.715Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "algorithm",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\algorithm",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\algorithm",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\algorithm",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\algorithm",
+              "ViewState": "AQIAADwfAAAAAAAAAAAewEsfAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-01-10T02:59:05.703Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Engine.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\Engine.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\Engine.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\Engine.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\Engine.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-03T04:34:18.347Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CTransform.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\CTransform.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\game\\components\\CTransform.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\CTransform.h",
+              "RelativeToolTip": "RuanGame\\source\\game\\components\\CTransform.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-03T04:11:29.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "EntityPool.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\EntityPool.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\ecs\\EntityPool.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\EntityPool.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\ecs\\EntityPool.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-05T22:56:43.024Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Entity.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\Entity.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\ecs\\Entity.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\Entity.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\ecs\\Entity.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADEAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-05T21:04:33.52Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ECSConstants.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\ECSConstants.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\ecs\\ECSConstants.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\ECSConstants.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\ecs\\ECSConstants.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-05T21:12:02.967Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SRenderer.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\SRenderer.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\graphics\\SRenderer.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\graphics\\SRenderer.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\graphics\\SRenderer.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-02T20:48:03.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ComponentPool.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\ComponentPool.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\ecs\\ComponentPool.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\ComponentPool.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\ecs\\ComponentPool.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-05T21:02:16.62Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "SEntityManager.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\SEntityManager.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\ecs\\SEntityManager.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\SEntityManager.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\ecs\\SEntityManager.h",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAADQAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-05T21:02:14.018Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "exception",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\exception",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\exception",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\exception",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\exception",
+              "ViewState": "AQIAAIsBAAAAAAAAAAAMwKABAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-01-06T04:10:31.152Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Entity.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\Entity.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\ecs\\Entity.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\ecs\\Entity.cpp",
+              "RelativeToolTip": "RuanGame\\source\\engine\\ecs\\Entity.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-05T21:04:34.296Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "System.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\core\\System.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\core\\System.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\core\\System.h",
+              "RelativeToolTip": "RuanGame\\source\\core\\System.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-03T04:32:51.647Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Game.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\Game.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\game\\Game.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\Game.h",
+              "RelativeToolTip": "RuanGame\\source\\game\\Game.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-06T03:42:18.437Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "MainScene.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\scenes\\MainScene.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\game\\scenes\\MainScene.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\scenes\\MainScene.h",
+              "RelativeToolTip": "RuanGame\\source\\game\\scenes\\MainScene.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-06T03:32:41.388Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "MainScene.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\scenes\\MainScene.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\source\\game\\scenes\\MainScene.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\scenes\\MainScene.cpp",
+              "RelativeToolTip": "RuanGame\\source\\game\\scenes\\MainScene.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-06T03:32:42.32Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Game.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\Game.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\source\\game\\Game.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\Game.cpp",
+              "RelativeToolTip": "RuanGame\\source\\game\\Game.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-06T03:32:31.987Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "EntityManager.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\EntityManager.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\entities\\EntityManager.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\EntityManager.cpp",
+              "RelativeToolTip": "RuanGame\\source\\engine\\entities\\EntityManager.cpp",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-04T05:11:59.493Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ComponentIncludes.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\ComponentIncludes.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\game\\components\\ComponentIncludes.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\ComponentIncludes.h",
+              "RelativeToolTip": "RuanGame\\source\\game\\components\\ComponentIncludes.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-05T22:13:32.446Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "EntityManager.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\EntityManager.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\entities\\EntityManager.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\EntityManager.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\entities\\EntityManager.h",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACYAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-04T05:12:02.762Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Entity.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\Entity.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\entities\\Entity.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\Entity.h",
+              "RelativeToolTip": "RuanGame\\source\\engine\\entities\\Entity.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-05T18:51:52.057Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Component.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\Component.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\game\\components\\Component.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\Component.h",
+              "RelativeToolTip": "RuanGame\\source\\game\\components\\Component.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-05T18:52:12.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Entity.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\Entity.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\source\\engine\\entities\\Entity.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\engine\\entities\\Entity.cpp",
+              "RelativeToolTip": "RuanGame\\source\\engine\\entities\\Entity.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-05T18:52:28.237Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "FreeContainer.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\core\\FreeContainer.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\core\\FreeContainer.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\core\\FreeContainer.h",
+              "RelativeToolTip": "RuanGame\\source\\core\\FreeContainer.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-04T05:11:56.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "SimpleController.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleController.h",
+              "RelativeDocumentMoniker": "RuanGame\\external\\App\\SimpleController.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleController.h",
+              "RelativeToolTip": "RuanGame\\external\\App\\SimpleController.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-03T04:33:59.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Components.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\Components.h",
+              "RelativeDocumentMoniker": "RuanGame\\source\\game\\components\\Components.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\source\\game\\components\\Components.h",
+              "RelativeToolTip": "RuanGame\\source\\game\\components\\Components.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-03T04:32:12.059Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "DirectSound.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\DirectSound.h",
+              "RelativeDocumentMoniker": "RuanGame\\external\\App\\DirectSound.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\DirectSound.h",
+              "RelativeToolTip": "RuanGame\\external\\App\\DirectSound.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-03T04:03:08.456Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "DirectSound.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\DirectSound.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\external\\App\\DirectSound.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\DirectSound.cpp",
+              "RelativeToolTip": "RuanGame\\external\\App\\DirectSound.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-03T04:03:07.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "app.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\app.h",
+              "RelativeDocumentMoniker": "RuanGame\\external\\App\\app.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\app.h",
+              "RelativeToolTip": "RuanGame\\external\\App\\app.h",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAF0AAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-02T21:53:16.285Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "SimpleSprite.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSprite.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\external\\App\\SimpleSprite.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSprite.cpp",
+              "RelativeToolTip": "RuanGame\\external\\App\\SimpleSprite.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-02T20:49:11.802Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "SimpleSprite.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSprite.h",
+              "RelativeDocumentMoniker": "RuanGame\\external\\App\\SimpleSprite.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSprite.h",
+              "RelativeToolTip": "RuanGame\\external\\App\\SimpleSprite.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-02T20:49:11.017Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "mydirectsound.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\mydirectsound.h",
+              "RelativeDocumentMoniker": "RuanGame\\external\\App\\mydirectsound.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\mydirectsound.h",
+              "RelativeToolTip": "RuanGame\\external\\App\\mydirectsound.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-02T20:49:14.052Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "app.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\app.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\external\\App\\app.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\app.cpp",
+              "RelativeToolTip": "RuanGame\\external\\App\\app.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-02T20:49:06.996Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "main.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\main.h",
+              "RelativeDocumentMoniker": "RuanGame\\external\\App\\main.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\main.h",
+              "RelativeToolTip": "RuanGame\\external\\App\\main.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-02T20:49:10.224Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "SimpleSound.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSound.h",
+              "RelativeDocumentMoniker": "RuanGame\\external\\App\\SimpleSound.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSound.h",
+              "RelativeToolTip": "RuanGame\\external\\App\\SimpleSound.h",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAACgAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-02T20:44:29.443Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "SimpleSound.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSound.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\external\\App\\SimpleSound.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\App\\SimpleSound.cpp",
+              "RelativeToolTip": "RuanGame\\external\\App\\SimpleSound.cpp",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-02T20:44:28.562Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "miniaudio.cpp",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\miniaudio\\miniaudio.cpp",
+              "RelativeDocumentMoniker": "RuanGame\\external\\miniaudio\\miniaudio.cpp",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\miniaudio\\miniaudio.cpp",
+              "RelativeToolTip": "RuanGame\\external\\miniaudio\\miniaudio.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-02T20:44:22.734Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "miniaudio.h",
+              "DocumentMoniker": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\miniaudio\\miniaudio.h",
+              "RelativeDocumentMoniker": "RuanGame\\external\\miniaudio\\miniaudio.h",
+              "ToolTip": "C:\\Users\\ramy.zhang\\Documents\\Code\\ubi-next-2024\\RuanGame\\external\\miniaudio\\miniaudio.h",
+              "RelativeToolTip": "RuanGame\\external\\miniaudio\\miniaudio.h",
+              "ViewState": "AQIAAKsBAAAAAAAAAAAwwLMBAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-02T20:43:40.582Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
