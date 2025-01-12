@@ -66,7 +66,7 @@ namespace {
 	}
 }
 
-// Using the Bresenham algorithm to fill the triangle!
+// Using the flat-side triangle algorithm to fill the triangle!
 void Triangle::FillTriangle(const Vector3& color) const {
 	std::vector<Vector3> v(verts, verts + sizeof verts / sizeof verts[0]);
 
@@ -93,7 +93,7 @@ void Triangle::FillTriangle(const Vector3& color) const {
 	::DrawTriangleOutline(v, color * 1.5);
 }
 
-bool Model::LoadMeshFromFile(const char* fileName, const Vector3& rgb) {
+bool Model::LoadMeshFromFile(const char* fileName) {
 	FILE* file;
 	file = fopen(fileName, "r");
 	
@@ -111,9 +111,12 @@ bool Model::LoadMeshFromFile(const char* fileName, const Vector3& rgb) {
 			ended = true; break; // read the first word
 		}
 
-		if (strcmp(head, "#") == 0) { // it's a comment, skip this line
+		// it's a comment, skip this line
+		if (strcmp(head, "#") == 0) { 
 			continue; 
-		} else if (strcmp(head, "v") == 0) { // read in vectors
+		}
+		// read in vectors
+		else if (strcmp(head, "v") == 0) { 
 			Vector3 newvec = Vector3();
 
 			int res = fscanf(file, "%f %f %f\n", &newvec.x, &newvec.y, &newvec.z);
@@ -124,7 +127,9 @@ bool Model::LoadMeshFromFile(const char* fileName, const Vector3& rgb) {
 			}
 
 			vecbuf.push_back(newvec);
-		} else if (strcmp(head, "f") == 0) { // read in faces (triangles)
+		}
+		// read in faces (triangles)
+		else if (strcmp(head, "f") == 0) { 
 			Triangle newtri = Triangle();
 			int v0, v1, v2;
 
@@ -146,8 +151,6 @@ bool Model::LoadMeshFromFile(const char* fileName, const Vector3& rgb) {
 		OutputDebugStringA("No vectors found.\n");
 		return false;
 	}
-
-	this->colour = rgb;
 
 	return true;
 }

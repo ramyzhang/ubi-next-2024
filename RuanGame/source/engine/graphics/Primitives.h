@@ -20,10 +20,8 @@ struct Triangle {
 
 struct Model {
 	std::vector<Triangle>	tris;
-	Matrix4x4				projection;
-	Vector3					colour;
-	
-	bool LoadMeshFromFile(const char* fileName, const Vector3& rgb); // has to be an .obj file
+
+	bool LoadMeshFromFile(const char* fileName); // has to be an .obj file
 };
 
 // TODO: load meshes here, and then reference those meshes in CMesh component

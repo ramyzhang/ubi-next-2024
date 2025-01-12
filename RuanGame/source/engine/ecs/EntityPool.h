@@ -4,8 +4,8 @@
 #include "ECSConstants.h"
 #include "Entity.h"
 
-// All entities are the same size (components are stored elsewhere),
-// so let's store them in a pool!
+// Since all the entities are the same size (just an id and a bitmask),
+// Let's use an object pool to store them!
 class EntityPool {
 public:
     // thread all the "available" slots together into a 

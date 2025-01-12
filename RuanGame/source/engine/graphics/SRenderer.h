@@ -9,6 +9,7 @@
 #include "math\Intersection.h"
 #include "App\main.h"
 #include "App\app.h"
+#include "engine\ecs\EntityView.h"
 
 class SRenderer : public System<SRenderer> {
 
@@ -23,12 +24,13 @@ public:
 
 protected:
 	void DrawTriangle(const Triangle& tri, const Vector3& rgb);
+	void DrawMesh(const CMesh& mesh, const CTransform& transform);
 	std::vector<Triangle> ClipTriangle(const Vector3& plane_p, Vector3& plane_n, const Triangle& in); // outputs 0, 1, or 2 triangles
 
 private:
-	Model	testMesh; // TODO: remove this
+	Model		testMesh; // TODO: remove this
 
-	float*	m_depth_buffer = nullptr;
+	Matrix4x4	camera_projection;
 
 	float	m_near = 0.1f;
 	float	m_far = 1000;

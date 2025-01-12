@@ -2,46 +2,43 @@
 
 #include "SRenderer.h"
 
-//static SRenderer& sRenderer = SRenderer::Instance();
-
 void SRenderer::Init() {
-	if (!testMesh.LoadMeshFromFile("data/mountains.obj", Vector3(0.5f, 0.5f, 0.5f))) {
+	/*if (!testMesh.LoadMeshFromFile("data/mountains.obj")) {
 		OutputDebugStringA("Couldn't load object from file!\n");
-	}
+	}*/
 
-	testMesh.projection[0][0] = m_aspectratio * m_fovrad;
-	testMesh.projection[1][1] = m_fovrad;
-	testMesh.projection[2][2] = m_far / (m_far - m_near);
-	testMesh.projection[2][3] = 1;
-	testMesh.projection[3][2] = (-m_far * m_near) / (m_far - m_near);
-
-	m_depth_buffer = new float[WINDOW_WIDTH, WINDOW_HEIGHT];
+	camera_projection[0][0] = m_aspectratio * m_fovrad;
+	camera_projection[1][1] = m_fovrad;
+	camera_projection[2][2] = m_far / (m_far - m_near);
+	camera_projection[2][3] = 1;
+	camera_projection[3][2] = (-m_far * m_near) / (m_far - m_near);
 }
 
 void SRenderer::Update(const float deltaTime) {
-	/*float y = (20 / deltaTime) * (float)M_PI / 180.0f;
-	float x = (10 / deltaTime) * (float)M_PI / 180.0f;
-	Matrix4x4 transform = Matrix4x4().rotate(Vector3(x, y, 0));*/
-
-	/*for (int i = 0; i < mesh.tris.size(); i++) {
-		for (int j = 0; j < 3; j++) {
-			mesh.tris[i].verts[j] = transform * mesh.tris[i].verts[j];
-		}
-	}*/
 }
 
 void SRenderer::Render() {
-	std::vector<Triangle> trisToDraw;
+	// iterate through all mesh instances in the game
+	for (EntityID e : EntityView<CTransform, CMesh>(SEntityManager::Instance())) {
+		CMesh* cmesh = SEntityManager::Instance().GetComponent<CMesh>(e);
+		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(e);
 
-	for (int i = 0; i < testMesh.tris.size(); i++) {
+		DrawMesh(*cmesh, *ctrans);
+	}
+}
+
+void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
+	std::vector<Triangle> tris_to_draw;
+
+	for (int i = 0; i < mesh.model->tris.size(); i++) {
 		Triangle moved_tri;
 		Triangle viewed_tri;
 		Triangle projected_tri;
 
 		// displace the mesh backwards a bit
-		moved_tri.verts[0] = testMesh.tris[i].verts[0] + Vector3(0, 0, 30.0f);
-		moved_tri.verts[1] = testMesh.tris[i].verts[1] + Vector3(0, 0, 30.0f);
-		moved_tri.verts[2] = testMesh.tris[i].verts[2] + Vector3(0, 0, 30.0f);
+		moved_tri.verts[0] = transform.GetWorldMatrix() * mesh.model->tris[i].verts[0] + Vector3(0, 0, 30.0f);
+		moved_tri.verts[1] = transform.GetWorldMatrix() * mesh.model->tris[i].verts[1] + Vector3(0, 0, 30.0f);
+		moved_tri.verts[2] = transform.GetWorldMatrix() * mesh.model->tris[i].verts[2] + Vector3(0, 0, 30.0f);
 
 		// calculate the normal
 		Vector3 normal, line1, line2, camtotri;
@@ -79,11 +76,11 @@ void SRenderer::Render() {
 
 		// perform the projection from 3d to 2d
 		for (Triangle& tri : clipped_tris) {
-			projected_tri.verts[0] = testMesh.projection * tri.verts[0];
+			projected_tri.verts[0] = camera_projection * tri.verts[0];
 			projected_tri.verts[0].divideByW();
-			projected_tri.verts[1] = testMesh.projection * tri.verts[1];
+			projected_tri.verts[1] = camera_projection * tri.verts[1];
 			projected_tri.verts[1].divideByW();
-			projected_tri.verts[2] = testMesh.projection * tri.verts[2];
+			projected_tri.verts[2] = camera_projection * tri.verts[2];
 			projected_tri.verts[2].divideByW();
 
 			projected_tri.light_sim = tri.light_sim;
@@ -99,19 +96,19 @@ void SRenderer::Render() {
 				projected_tri.verts[j].y *= 0.5f * (float)WINDOW_HEIGHT;
 			}
 
-			trisToDraw.push_back(projected_tri);
+			tris_to_draw.push_back(projected_tri);
 		}
 	}
-	
+
 	// TODO: proper z-buffer
-	std::sort(trisToDraw.begin(), trisToDraw.end(), [](Triangle& a, Triangle& b)
+	std::sort(tris_to_draw.begin(), tris_to_draw.end(), [](Triangle& a, Triangle& b)
 		{
 			float za = (a.verts[0].z + a.verts[1].z + a.verts[2].z) / 3.0f;
 			float zb = (b.verts[0].z + b.verts[1].z + b.verts[2].z) / 3.0f;
 			return za > zb;
 		});
 
-	for (auto &tri : trisToDraw) {
+	for (auto& tri : tris_to_draw) {
 		// clip the triangles against the screen edges
 		std::vector<Triangle> clipped;
 		std::deque<Triangle> tri_queue;
@@ -119,7 +116,7 @@ void SRenderer::Render() {
 		tri_queue.push_back(tri);
 
 		size_t new_tris = 1;
-		
+
 		// for the four planes...
 		for (int i = 0; i < 4; i++) {
 			while (new_tris > 0) {
@@ -127,7 +124,7 @@ void SRenderer::Render() {
 				Triangle test = tri_queue.front();
 				tri_queue.pop_front();
 				new_tris--;
-				
+
 				// clip
 				switch (i) {
 				case 0:
@@ -150,14 +147,14 @@ void SRenderer::Render() {
 
 		for (Triangle& draw_tri : tri_queue) {
 			// apply lighting and draw
-			Vector3 litcolor = testMesh.colour * abs(draw_tri.light_sim);
+			Vector3 litcolor = mesh.colour * abs(draw_tri.light_sim);
 			// Vector3 color = Vector3(abs(tri.normal.x), abs(tri.normal.y), abs(tri.normal.z));
 
 			//DrawTriangle(draw_tri, litcolor);
 			draw_tri.FillTriangle(litcolor);
 
 			if (wireframe_view) {
-				
+
 			}
 		}
 	}

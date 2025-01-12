@@ -23,6 +23,16 @@ public:
     friend class EntityPool;
 
     std::string GetTag() const { return std::get<EntityLiveState>(m_state).m_tag; };
+
+    bool CheckComponent(ComponentID comp_id) {
+        EntityLiveState& e_data = std::get<EntityLiveState>(m_state);
+        return e_data.m_cmask.test(comp_id);
+    };
+
+    ComponentMask GetComponentMask() const {
+        return std::get<EntityLiveState>(m_state).m_cmask;
+    }
+
     bool IsActive() const { return m_isactive; };
 
     void Destroy() { m_isactive = false; };
@@ -31,16 +41,13 @@ private:
     // Constructor is private; only EntityManager can make new Entities
     Entity(const std::string& tag, const ComponentMask cmask)
         : m_state{ EntityLiveState{tag, cmask} } // Direct init of variant with LiveState
-    {}
+    {};
 
     Entity() : m_state(nullptr) {}; // Direct init of variant with "next" pointer
 
-    void AssignComponent(ComponentID comp_id); // only for EntityManager to use
-    void RemoveComponent(ComponentID comp_id); // only for EntityManager to use
-
     Entity*   GetNext() const { return std::get<Entity*>(m_state); };
-    void      SetNext(Entity* next) { m_state = next; }; // warning: this sets the entity to inactive!
-    void      SetData(const EntityLiveState& e_state) { m_state = e_state; };
+    void      SetNext(Entity* next) { m_state = next; m_isactive = false; }; // warning: this sets the entity to inactive!
+    void      SetData(const EntityLiveState& e_state) { m_state = e_state; m_isactive = true; };
 
     bool m_isactive = false;
 
