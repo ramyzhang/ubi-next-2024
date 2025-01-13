@@ -7,8 +7,8 @@ Completed:
 - Scene management for levels
 - Tiny Vector3 and Matrix4x4 math library
 - Core game loop
-- Entity manager (game object creation)
-- Components
+- Entity manager (game object creation), entity memory pool, custom entity iterator
+- Components, component memory pools
 
 To-do:
 - UI (mouse raycasting)
