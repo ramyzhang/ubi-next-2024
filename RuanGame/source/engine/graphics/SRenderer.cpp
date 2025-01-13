@@ -3,26 +3,36 @@
 #include "SRenderer.h"
 
 void SRenderer::Init() {
-	/*if (!testMesh.LoadMeshFromFile("data/mountains.obj")) {
-		OutputDebugStringA("Couldn't load object from file!\n");
-	}*/
-
-	camera_projection[0][0] = m_aspectratio * m_fovrad;
-	camera_projection[1][1] = m_fovrad;
-	camera_projection[2][2] = m_far / (m_far - m_near);
-	camera_projection[2][3] = 1;
-	camera_projection[3][2] = (-m_far * m_near) / (m_far - m_near);
+	camera.Init();
 }
 
 void SRenderer::Update(const float deltaTime) {
-}
-
-void SRenderer::Render() {
-	// iterate through all mesh instances in the game
+	m_render_queue.clear();
+	camera.HandleInputs(deltaTime);
+	
+	// set up render buffer such that farthest objects are drawn before closest objects
 	for (EntityID e : EntityView<CTransform, CMesh>(SEntityManager::Instance())) {
 		CMesh* cmesh = SEntityManager::Instance().GetComponent<CMesh>(e);
 		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(e);
 
+		Vector3 camera_space = camera.view * ctrans->position;
+
+		m_render_queue.push_back({
+			e,
+			camera_space.z  // Now using camera-space z value
+			});
+	}
+
+	std::sort(m_render_queue.begin(), m_render_queue.end(), [](RenderObject& a, RenderObject& b) {
+		return a.z_depth > b.z_depth;
+		});
+}
+
+void SRenderer::Render() {
+	// iterate through all render objects and draw them!
+	for (const auto& obj : m_render_queue) {
+		CMesh* cmesh = SEntityManager::Instance().GetComponent<CMesh>(obj.id);
+		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(obj.id);
 		DrawMesh(*cmesh, *ctrans);
 	}
 }
@@ -36,9 +46,10 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 		Triangle projected_tri;
 
 		// displace the mesh backwards a bit
-		moved_tri.verts[0] = transform.GetWorldMatrix() * mesh.model->tris[i].verts[0] + Vector3(0, 0, 30.0f);
-		moved_tri.verts[1] = transform.GetWorldMatrix() * mesh.model->tris[i].verts[1] + Vector3(0, 0, 30.0f);
-		moved_tri.verts[2] = transform.GetWorldMatrix() * mesh.model->tris[i].verts[2] + Vector3(0, 0, 30.0f);
+		Matrix4x4 world = transform.GetWorldMatrix();
+		moved_tri.verts[0] = world * mesh.model->tris[i].verts[0] + Vector3(0, 0, 30.0f);
+		moved_tri.verts[1] = world * mesh.model->tris[i].verts[1] + Vector3(0, 0, 30.0f);
+		moved_tri.verts[2] = world * mesh.model->tris[i].verts[2] + Vector3(0, 0, 30.0f);
 
 		// calculate the normal
 		Vector3 normal, line1, line2, camtotri;
@@ -55,20 +66,13 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 		if (dotprod >= 0) continue;
 
 		// get new lighting
-		Vector3 light_dir = Vector3(0, 1.0f, -1.0f).normalize();
-		float light_sim = max(0.1f, light_dir.dot(normal));
+		Vector3 light_dir = Vector3(-1.0f, 1.0f, -1.0f).normalize();
+		float light_sim = max(0.2f, light_dir.dot(normal));
 
 		// convert from world space to camera space
-		Vector3 up = Vector3(0, 1, 0);
-		Vector3 target = Vector3(0, 0, 1);
-		camera.look = Matrix4x4().rotate(Vector3(0, camera.yaw, 0)) * target;
-		target = camera.position + camera.look;
-
-		Matrix4x4 view_mat = Matrix4x4().pointAt(camera.position, target, up).dirtyInvert();
-
-		viewed_tri.verts[0] = view_mat * moved_tri.verts[0];
-		viewed_tri.verts[1] = view_mat * moved_tri.verts[1];
-		viewed_tri.verts[2] = view_mat * moved_tri.verts[2];
+		viewed_tri.verts[0] = camera.view * moved_tri.verts[0];
+		viewed_tri.verts[1] = camera.view * moved_tri.verts[1];
+		viewed_tri.verts[2] = camera.view * moved_tri.verts[2];
 		viewed_tri.light_sim = light_sim;
 		viewed_tri.normal = normal;
 
@@ -76,11 +80,11 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 
 		// perform the projection from 3d to 2d
 		for (Triangle& tri : clipped_tris) {
-			projected_tri.verts[0] = camera_projection * tri.verts[0];
+			projected_tri.verts[0] = camera.projection * tri.verts[0];
 			projected_tri.verts[0].divideByW();
-			projected_tri.verts[1] = camera_projection * tri.verts[1];
+			projected_tri.verts[1] = camera.projection * tri.verts[1];
 			projected_tri.verts[1].divideByW();
-			projected_tri.verts[2] = camera_projection * tri.verts[2];
+			projected_tri.verts[2] = camera.projection * tri.verts[2];
 			projected_tri.verts[2].divideByW();
 
 			projected_tri.light_sim = tri.light_sim;
@@ -100,12 +104,12 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 		}
 	}
 
-	// TODO: proper z-buffer
+	// TODO: proper z-buffer?
 	std::sort(tris_to_draw.begin(), tris_to_draw.end(), [](Triangle& a, Triangle& b)
 		{
 			float za = (a.verts[0].z + a.verts[1].z + a.verts[2].z) / 3.0f;
 			float zb = (b.verts[0].z + b.verts[1].z + b.verts[2].z) / 3.0f;
-			return za > zb;
+			return za < zb;
 		});
 
 	for (auto& tri : tris_to_draw) {
@@ -148,7 +152,6 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 		for (Triangle& draw_tri : tri_queue) {
 			// apply lighting and draw
 			Vector3 litcolor = mesh.colour * abs(draw_tri.light_sim);
-			// Vector3 color = Vector3(abs(tri.normal.x), abs(tri.normal.y), abs(tri.normal.z));
 
 			draw_tri.FillTriangle(litcolor);
 		}

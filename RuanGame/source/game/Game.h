@@ -1,6 +1,8 @@
 #pragma once
 
+#include <string>
 #include <unordered_map>
+#include <windows.h> 
 #include "scenes/Scene.h"
 #include "scenes/SceneInclude.h"
 

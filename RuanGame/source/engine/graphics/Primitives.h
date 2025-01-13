@@ -23,11 +23,3 @@ struct Model {
 
 	bool LoadMeshFromFile(const char* fileName); // has to be an .obj file
 };
-
-// TODO: load meshes here, and then reference those meshes in CMesh component
-
-struct Camera {
-	Vector3		position;
-	Vector3		look;
-	float		yaw; // in radians
-};

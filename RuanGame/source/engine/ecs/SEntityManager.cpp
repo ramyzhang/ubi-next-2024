@@ -29,6 +29,11 @@ void SEntityManager::Update() {
 
 		const EntityLiveState& e_data = std::get<EntityLiveState>(m_entities[i].m_state);
 		m_entity_map[e_data.m_tag].erase(i);
+		for (auto& [id, pool] : m_component_pool_map) {
+			std::visit([&](auto& concrete_pool) {
+				concrete_pool->DisableComponent(i);
+				}, pool);
+		} // erase in component pools too
 
 		m_entities.Remove(i);
 

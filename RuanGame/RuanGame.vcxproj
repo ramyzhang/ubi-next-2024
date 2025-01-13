@@ -203,6 +203,7 @@
     <ClInclude Include="source\engine\Engine.h" />
     <ClInclude Include="source\engine\ecs\Entity.h" />
     <ClInclude Include="source\engine\ecs\SEntityManager.h" />
+    <ClInclude Include="source\engine\EngineIncludes.h" />
     <ClInclude Include="source\engine\graphics\SModelManager.h" />
     <ClInclude Include="source\engine\graphics\SRenderer.h" />
     <ClInclude Include="source\engine\graphics\Primitives.h" />
@@ -212,8 +213,7 @@
     <ClInclude Include="source\engine\ecs\components\ComponentIncludes.h" />
     <ClInclude Include="source\engine\ecs\components\CTransform.h" />
     <ClInclude Include="source\game\Game.h" />
-    <ClInclude Include="source\game\GameIncludes.h" />
-    <ClInclude Include="source\game\SCamera.h" />
+    <ClInclude Include="source\engine\graphics\Camera.h" />
     <ClInclude Include="source\game\scenes\MainScene.h" />
     <ClInclude Include="source\game\scenes\Scene.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -222,6 +222,7 @@
     <ClInclude Include="source\game\scenes\SceneInclude.h" />
     <ClInclude Include="source\math\Intersection.h" />
     <ClInclude Include="source\math\Matrix4x4.h" />
+    <ClInclude Include="source\math\Utils.h" />
     <ClInclude Include="source\math\Vector3.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -240,7 +241,7 @@
     <ClCompile Include="external\miniaudio\miniaudio.cpp" />
     <ClCompile Include="external\stb_image\stb_image.cpp" />
     <ClCompile Include="source\game\Game.cpp" />
-    <ClCompile Include="source\game\SCamera.cpp" />
+    <ClCompile Include="source\engine\graphics\Camera.cpp" />
     <ClCompile Include="source\game\scenes\MainScene.cpp" />
     <ClCompile Include="source\RuanGame.cpp" />
     <ClCompile Include="stdafx.cpp">
