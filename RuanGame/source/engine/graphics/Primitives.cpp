@@ -4,38 +4,46 @@
 
 // anonymous namespace to put all helper functions
 namespace {
-	void FillBottomTriangle(const Vector3& side_1, const Vector3& top, const Vector3& side_2, const Vector3& color) {
-		float dxdy_left = (side_1.x - top.x) / (side_1.y - top.y);
-		float dxdy_right = (side_2.x - top.x) / (side_2.y - top.y);
+	void FillBottomTriangle(const Vector3& side_l, const Vector3& top, const Vector3& side_r, const Vector3& color) {
+		if (abs(side_l.y - top.y) < 0.1f || abs(side_r.y - top.y) < 0.1f) {
+			return; // avoid divide by 0
+		}
+		float dxdy_left = (side_l.x - top.x) / (side_l.y - top.y);
+		float dxdy_right = (side_r.x - top.x) / (side_r.y - top.y);
 
-		float curr_x_l = side_1.x;
-		float curr_x_r = side_2.x;
+		float curr_x_l = side_l.x;
+		float curr_x_r = side_r.x;
 
 		float pixel = 0;
 
 		// start from the bottom and draw horizontal lines up the triangle
-		for (int y = static_cast<int>(side_1.y); y <= static_cast<int>(top.y); y++)
+		for (int y = static_cast<int>(side_l.y); y <= static_cast<int>(top.y); y++)
 		{
-			App::DrawLine(curr_x_l, side_1.y + pixel, curr_x_r, side_1.y + pixel, color.x, color.y, color.z);
+			if (curr_x_l > curr_x_r) break;
+			App::DrawLine(curr_x_l, side_l.y + pixel, curr_x_r, side_l.y + pixel, color.x, color.y, color.z);
 			curr_x_l += dxdy_left;
 			curr_x_r += dxdy_right;
 			pixel = pixel + 1.0f;
 		}
 	}
 
-	void FillTopTriangle(const Vector3& bottom, const Vector3& side_1, const Vector3& side_2, const Vector3& color) {
-		float dxdy_left = (side_1.x - bottom.x) / (side_1.y - bottom.y);
-		float dxdy_right = (side_2.x - bottom.x) / (side_2.y - bottom.y);
+	void FillTopTriangle(const Vector3& bottom, const Vector3& side_l, const Vector3& side_r, const Vector3& color) {
+		if (abs(side_l.y - bottom.y) < 0.1f || abs(side_r.y - bottom.y) < 0.1f) {
+			return; // avoid divide by 0
+		}
+		float dxdy_left = (side_l.x - bottom.x) / (side_l.y - bottom.y);
+		float dxdy_right = (side_r.x - bottom.x) / (side_r.y - bottom.y);
 
-		float curr_x_l = side_1.x;
-		float curr_x_r = side_2.x;
+		float curr_x_l = side_l.x;
+		float curr_x_r = side_r.x;
 
 		float pixel = 0;
 
 		// start from the top and draw horizontal lines down the triangle
-		for (int y = static_cast<int>(side_2.y); y > static_cast<int>(bottom.y); y--)
+		for (int y = static_cast<int>(side_l.y); y >= static_cast<int>(bottom.y); y--)
 		{
-			App::DrawLine(curr_x_l, side_2.y - pixel, curr_x_r, side_2.y - pixel, color.x, color.y, color.z);
+			if (curr_x_l > curr_x_r) break;
+			App::DrawLine(curr_x_l, side_l.y - pixel, curr_x_r, side_l.y - pixel, color.x, color.y, color.z);
 			curr_x_l -= dxdy_left;
 			curr_x_r -= dxdy_right;
 			pixel = pixel + 1.0f;
@@ -76,21 +84,32 @@ void Triangle::FillTriangle(const Vector3& color) const {
 
 	// first, check for trivial case of bottom-flat tri
 	if (v[0].y == v[1].y) {
-		::FillBottomTriangle(v[0], v[2], v[1], color);
+		if (v[0].x < v[1].x) ::FillBottomTriangle(v[0], v[2], v[1], color);
+		else ::FillBottomTriangle(v[1], v[2], v[0], color);
 	}
 	// then, check for trivial case of top-flat tri
 	else if (v[1].y == v[2].y) {
-		::FillTopTriangle(v[0], v[1], v[2], color);
-
+		if (v[1].x < v[2].x) ::FillTopTriangle(v[0], v[1], v[2], color);
+		else ::FillTopTriangle(v[0], v[2], v[1], color);
 	}
 	// if not, then split it by two flat tris
 	else {
 		Vector3 new_point = Vector3(v[2].x + ((v[1].y - v[2].y) / (v[0].y - v[2].y)) * (v[0].x - v[2].x), v[1].y, v[1].z);
-		::FillBottomTriangle(v[1], v[2], new_point, color);
-		::FillTopTriangle(v[0], v[1], new_point, color);
+		if (v[1].x < new_point.x) {
+			::FillBottomTriangle(v[1], v[2], new_point, color);
+			::FillTopTriangle(v[0], v[1], new_point, color);
+		}
+		else {
+			::FillBottomTriangle(new_point, v[2], v[1], color);
+			::FillTopTriangle(v[0], new_point, v[1], color);
+		}
 	}
 
-	::DrawTriangleOutline(v, color * 1.5);
+	Vector3 new_color = Vector3(
+		min(color.x * 1.5f, 1.0f),
+		min(color.y * 1.5f, 1.0f),
+		min(color.z * 1.5f, 1.0f));
+	::DrawTriangleOutline(v, new_color);
 }
 
 bool Model::LoadMeshFromFile(const char* fileName) {

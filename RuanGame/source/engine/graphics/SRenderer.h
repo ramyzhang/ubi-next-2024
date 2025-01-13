@@ -23,7 +23,6 @@ public:
 	bool wireframe_view;
 
 protected:
-	void DrawTriangle(const Triangle& tri, const Vector3& rgb);
 	void DrawMesh(const CMesh& mesh, const CTransform& transform);
 	std::vector<Triangle> ClipTriangle(const Vector3& plane_p, Vector3& plane_n, const Triangle& in); // outputs 0, 1, or 2 triangles
 

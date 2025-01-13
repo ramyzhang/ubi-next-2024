@@ -6,6 +6,7 @@
 
 // Since all the entities are the same size (just an id and a bitmask),
 // Let's use an object pool to store them!
+// Based on the object pool design from the Game Programming Patterns book
 class EntityPool {
 public:
     // thread all the "available" slots together into a 

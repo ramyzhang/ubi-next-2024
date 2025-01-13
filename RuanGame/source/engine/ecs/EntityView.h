@@ -2,7 +2,7 @@
 
 #include "SEntityManager.h"
 
-// Using David Colson's ECS SceneView as a starting point
+// Use this custom iterator to iterate through currently active entities
 template<typename ...ComponentTypes>
 class EntityView {
 public:

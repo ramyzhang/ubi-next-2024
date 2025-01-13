@@ -150,33 +150,9 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 			Vector3 litcolor = mesh.colour * abs(draw_tri.light_sim);
 			// Vector3 color = Vector3(abs(tri.normal.x), abs(tri.normal.y), abs(tri.normal.z));
 
-			//DrawTriangle(draw_tri, litcolor);
 			draw_tri.FillTriangle(litcolor);
-
-			if (wireframe_view) {
-
-			}
 		}
 	}
-}
-
-void SRenderer::DrawTriangle(const Triangle& tri, const Vector3& rgb) {
-	float v0x = tri.verts[0].x;		float v0y = tri.verts[0].y;
-	float v1x = tri.verts[1].x;		float v1y = tri.verts[1].y;
-	float v2x = tri.verts[2].x;		float v2y = tri.verts[2].y;
-
-#if APP_USE_VIRTUAL_RES		
-	APP_VIRTUAL_TO_NATIVE_COORDS(v0x, v0y);
-	APP_VIRTUAL_TO_NATIVE_COORDS(v1x, v1y);
-	APP_VIRTUAL_TO_NATIVE_COORDS(v2x, v2y);
-#endif
-
-	glBegin(GL_TRIANGLES);
-	glColor3f(rgb.x, rgb.y, rgb.z);
-	glVertex2f(v0x, v0y);
-	glVertex2f(v1x, v1y);
-	glVertex2f(v2x, v2y);
-	glEnd();
 }
 
 std::vector<Triangle> SRenderer::ClipTriangle(const Vector3& plane_p, Vector3& plane_n, const Triangle& in) {
