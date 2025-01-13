@@ -9,11 +9,13 @@ void Engine::CoreInit() {
 
 void Engine::CoreUpdate(const float deltaTime) {
 	SEntityManager::Instance().Update();
+	SUIManager::Instance().Update(deltaTime);
 	SRenderer::Instance().Update(deltaTime);
 }
 
 void Engine::CoreRender() {
 	SRenderer::Instance().Render();
+	SUIManager::Instance().Render();
 }
 
 void Engine::CoreShutdown() {

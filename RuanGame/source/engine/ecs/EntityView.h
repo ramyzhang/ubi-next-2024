@@ -63,10 +63,16 @@ public:
 	{
 		int first_i = 0;
 		while (first_i < MAX_ENTITIES &&
-			(m_cmask != (m_cmask & m_em->GetEntity(first_i).GetComponentMask())))
+			(!m_em->GetEntity(first_i).IsActive() ||
+				m_cmask != (m_cmask & m_em->GetEntity(first_i).GetComponentMask())))
 		{
 			first_i++;
 		}
+
+		if (first_i == MAX_ENTITIES) {
+			return end(); // nothing in collection, return .end() iterator
+		}
+
 		return Iterator(first_i, m_em, m_cmask, m_all);
 	};
 

@@ -3,9 +3,10 @@
 #include "Game.h"
 
 void Game::Init() {
+	scenes.insert_or_assign("MainMenu", new MainMenu);
 	scenes.insert_or_assign("MainScene", new MainScene);
 
-	current_scene = "MainScene";
+	current_scene = "MainMenu";
 	scenes[current_scene]->Init();
 };
 

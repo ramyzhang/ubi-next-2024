@@ -9,7 +9,9 @@ void MainScene::InitGOs() {
 	}
 	
 	SEntityManager::Instance().Update(); // initial update to get the new entity in the list
+}
 
+void MainScene::InstantiateGOs() {
 	EntityIDSet cube_ids = SEntityManager::Instance().GetEntities("cube");
 
 	float pos = 0.0f;
@@ -30,9 +32,6 @@ void MainScene::InitGOs() {
 
 		pos += 3.0f;
 	}
-}
-
-void MainScene::InstantiateGOs() {
 }
 
 void MainScene::Update(const float deltaTime) {

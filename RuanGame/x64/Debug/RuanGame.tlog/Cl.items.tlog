@@ -10,8 +10,10 @@ C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\engine\graphics
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\engine\graphics\SRenderer.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\SRenderer.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\external\miniaudio\miniaudio.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\miniaudio.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\external\stb_image\stb_image.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\stb_image.obj
+C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\engine\ui\SUIManager.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\SUIManager.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\game\Game.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\Game.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\engine\graphics\Camera.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\Camera.obj
+C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\game\scenes\MainMenu.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\MainMenu.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\game\scenes\MainScene.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\MainScene.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\source\RuanGame.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\RuanGame.obj
 C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\stdafx.cpp;C:\Users\ramy.zhang\Documents\Code\ubi-next-2024\RuanGame\x64\Debug\stdafx.obj

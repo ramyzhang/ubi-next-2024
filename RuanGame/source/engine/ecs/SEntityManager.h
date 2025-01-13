@@ -17,7 +17,10 @@
 // TODO: update whenever you make a new component type
 using ComponentPoolVariant = std::variant<
     ComponentPool<CMesh>*,
-    ComponentPool<CTransform>*
+    ComponentPool<CTransform>*,
+    ComponentPool<CCollider>*,
+    ComponentPool<CUISprite>*,
+    ComponentPool<CUIText>*
 >;
 
 typedef std::vector<Entity> EntityVector;

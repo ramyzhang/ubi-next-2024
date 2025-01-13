@@ -32,6 +32,8 @@
     <ClCompile Include="source\game\scenes\MainScene.cpp" />
     <ClCompile Include="source\engine\ecs\SEntityManager.cpp" />
     <ClCompile Include="source\engine\ecs\EntityPool.cpp" />
+    <ClCompile Include="source\game\scenes\MainMenu.cpp" />
+    <ClCompile Include="source\engine\ui\SUIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -88,6 +90,11 @@
     <ClInclude Include="source\engine\ecs\EntityPool.h" />
     <ClInclude Include="source\engine\EngineIncludes.h" />
     <ClInclude Include="source\math\Utils.h" />
+    <ClInclude Include="source\engine\ecs\components\CCollider.h" />
+    <ClInclude Include="source\engine\ecs\components\CUISprite.h" />
+    <ClInclude Include="source\engine\ecs\components\CUIText.h" />
+    <ClInclude Include="source\game\scenes\MainMenu.h" />
+    <ClInclude Include="source\engine\ui\SUIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
