@@ -13,6 +13,7 @@ Completed:
 To-do:
 - UI (mouse raycasting)
 - Particle system
+- Flocking & boids :D
 - Audio engine
 - Basic physics (mostly just collision)
 - Animation via tweening
