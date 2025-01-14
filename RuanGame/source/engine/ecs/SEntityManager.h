@@ -19,7 +19,6 @@ using ComponentPoolVariant = std::variant<
     ComponentPool<CMesh>*,
     ComponentPool<CTransform>*,
     ComponentPool<CCollider>*,
-    ComponentPool<CUISprite>*,
     ComponentPool<CUIText>*
 >;
 

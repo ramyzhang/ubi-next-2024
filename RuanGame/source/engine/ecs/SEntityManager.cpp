@@ -19,7 +19,6 @@ void SEntityManager::Init() {
 	m_component_pool_map.insert_or_assign(CMESH, new ComponentPool<CMesh>());
 	m_component_pool_map.insert_or_assign(CTRANSFORM, new ComponentPool<CTransform>());
 	m_component_pool_map.insert_or_assign(CCOLLIDER, new ComponentPool<CCollider>());
-	m_component_pool_map.insert_or_assign(CUISPRITE, new ComponentPool<CUISprite>());
 	m_component_pool_map.insert_or_assign(CUITEXT, new ComponentPool<CUIText>());
 	// TODO: add more here as we create more components
 }

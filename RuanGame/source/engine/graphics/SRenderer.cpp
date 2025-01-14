@@ -3,19 +3,19 @@
 #include "SRenderer.h"
 
 void SRenderer::Init() {
-	camera.Init();
+	SCamera::Instance().Init();
 }
 
 void SRenderer::Update(const float deltaTime) {
 	m_render_queue.clear();
-	camera.HandleInputs(deltaTime);
+	SCamera::Instance().HandleInputs(deltaTime);
 	
 	// set up render buffer such that farthest objects are drawn before closest objects
 	for (EntityID e : EntityView<CTransform, CMesh>(SEntityManager::Instance())) {
 		CMesh* cmesh = SEntityManager::Instance().GetComponent<CMesh>(e);
 		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(e);
 
-		Vector3 camera_space = camera.view * ctrans->position;
+		Vector3 camera_space = SCamera::Instance().view * ctrans->position;
 
 		m_render_queue.push_back({
 			e,
@@ -58,7 +58,7 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 		line2 = moved_tri.verts[2] - moved_tri.verts[0];
 		normal = line1.cross(line2);
 		normal.normalize();
-		camtotri = moved_tri.verts[0] - camera.position;
+		camtotri = moved_tri.verts[0] - SCamera::Instance().position;
 
 		// cull the backfaces
 		float dotprod = normal.dot(camtotri);
@@ -67,12 +67,12 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 
 		// get new lighting
 		Vector3 light_dir = Vector3(-1.0f, 1.0f, -1.0f).normalize();
-		float light_sim = max(0.2f, light_dir.dot(normal));
+		float light_sim = max(0.1f, light_dir.dot(normal));
 
 		// convert from world space to camera space
-		viewed_tri.verts[0] = camera.view * moved_tri.verts[0];
-		viewed_tri.verts[1] = camera.view * moved_tri.verts[1];
-		viewed_tri.verts[2] = camera.view * moved_tri.verts[2];
+		viewed_tri.verts[0] = SCamera::Instance().view * moved_tri.verts[0];
+		viewed_tri.verts[1] = SCamera::Instance().view * moved_tri.verts[1];
+		viewed_tri.verts[2] = SCamera::Instance().view * moved_tri.verts[2];
 		viewed_tri.light_sim = light_sim;
 		viewed_tri.normal = normal;
 
@@ -80,11 +80,11 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 
 		// perform the projection from 3d to 2d
 		for (Triangle& tri : clipped_tris) {
-			projected_tri.verts[0] = camera.projection * tri.verts[0];
+			projected_tri.verts[0] = SCamera::Instance().projection * tri.verts[0];
 			projected_tri.verts[0].divideByW();
-			projected_tri.verts[1] = camera.projection * tri.verts[1];
+			projected_tri.verts[1] = SCamera::Instance().projection * tri.verts[1];
 			projected_tri.verts[1].divideByW();
-			projected_tri.verts[2] = camera.projection * tri.verts[2];
+			projected_tri.verts[2] = SCamera::Instance().projection * tri.verts[2];
 			projected_tri.verts[2].divideByW();
 
 			projected_tri.light_sim = tri.light_sim;

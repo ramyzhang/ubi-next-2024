@@ -13,7 +13,6 @@ public:
 
 private:
 	std::vector<CUIText>	m_text_queue;
-	std::vector<CUISprite>	m_sprite_queue;
 
 	void*					m_font = GLUT_BITMAP_8_BY_13;
 };

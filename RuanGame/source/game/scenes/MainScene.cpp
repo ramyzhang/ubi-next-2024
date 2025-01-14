@@ -23,10 +23,11 @@ void MainScene::InstantiateGOs() {
 		cube_mesh.colour = Vector3(RandomFloat(0.0f, 1.0f), RandomFloat(0.0f, 1.0f), RandomFloat(0.0f, 1.0f));
 		SEntityManager::Instance().AddComponent<CMesh>(e_id, cube_mesh);
 
+		float size = RandomFloat(1.0f, 2.0f);
 		CTransform cube_transform = {};
 		cube_transform.position = Vector3(0.0f, 0.0f, pos);
 		cube_transform.rotation = Vector3(0, 0, 0);
-		cube_transform.scale = Vector3(1, 1, 1);
+		cube_transform.scale = Vector3(size, size, size);
 		cube_transform.velocity = Vector3(0, 0, 0);
 		SEntityManager::Instance().AddComponent<CTransform>(e_id, cube_transform);
 

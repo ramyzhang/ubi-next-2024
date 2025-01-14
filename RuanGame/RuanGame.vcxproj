@@ -198,7 +198,7 @@
     <ClInclude Include="source\core\FreeContainer.h" />
     <ClInclude Include="source\core\System.h" />
     <ClInclude Include="source\engine\ecs\components\CCollider.h" />
-    <ClInclude Include="source\engine\ecs\components\CUISprite.h" />
+    <ClInclude Include="source\engine\ecs\components\CUICollider.h" />
     <ClInclude Include="source\engine\ecs\components\CUIText.h" />
     <ClInclude Include="source\engine\ecs\ECSConstants.h" />
     <ClInclude Include="source\engine\ecs\EntityPool.h" />
@@ -217,7 +217,7 @@
     <ClInclude Include="source\engine\ecs\components\CTransform.h" />
     <ClInclude Include="source\engine\ui\SUIManager.h" />
     <ClInclude Include="source\game\Game.h" />
-    <ClInclude Include="source\engine\graphics\Camera.h" />
+    <ClInclude Include="source\engine\graphics\SCamera.h" />
     <ClInclude Include="source\game\scenes\MainMenu.h" />
     <ClInclude Include="source\game\scenes\MainScene.h" />
     <ClInclude Include="source\game\scenes\Scene.h">
@@ -225,6 +225,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="source\game\scenes\SceneInclude.h" />
+    <ClInclude Include="source\game\systems\SMenuBackground.h" />
+    <ClInclude Include="source\game\systems\SMenuInput.h" />
     <ClInclude Include="source\math\Intersection.h" />
     <ClInclude Include="source\math\Matrix4x4.h" />
     <ClInclude Include="source\math\Utils.h" />
@@ -247,9 +249,11 @@
     <ClCompile Include="external\stb_image\stb_image.cpp" />
     <ClCompile Include="source\engine\ui\SUIManager.cpp" />
     <ClCompile Include="source\game\Game.cpp" />
-    <ClCompile Include="source\engine\graphics\Camera.cpp" />
+    <ClCompile Include="source\engine\graphics\SCamera.cpp" />
     <ClCompile Include="source\game\scenes\MainMenu.cpp" />
     <ClCompile Include="source\game\scenes\MainScene.cpp" />
+    <ClCompile Include="source\game\systems\SMenuBackground.cpp" />
+    <ClCompile Include="source\game\systems\SMenuInput.cpp" />
     <ClCompile Include="source\RuanGame.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

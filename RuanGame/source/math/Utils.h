@@ -1,19 +1,29 @@
 #pragma once
-#include <stdlib.h>
 
-float RandomFloat(float a, float b) {
-    float random = ((float)rand()) / (float)RAND_MAX;
-    float diff = b - a;
-    float r = random * diff;
-    return a + r;
+#include <random>
+#include "Vector3.h"
+
+inline float RandomFloat(float a, float b, uint32_t seed = 0) {
+    std::mt19937 gen;
+
+    if (seed != 0) {
+        gen.seed(seed); 
+    }
+    else {
+        std::random_device rd;
+        gen.seed(rd());
+    }
+
+    std::uniform_real_distribution<float> dis(a, b);
+    return dis(gen);
 }
 
-inline float Lerp(float a, float b, float t)
+inline float Lerp(const float& a, const float& b, const float& t)
 {
-    return a * (1.0 - t) + (b * t);
+    return a * (1.0f - t) + (b * t);
 }
 
-inline Vector3 Lerp(Vector3 a, Vector3 b, float t)
+inline Vector3 Lerp(const Vector3& a, const Vector3& b, const float& t)
 {
     return a + (b - a) * t;
 }

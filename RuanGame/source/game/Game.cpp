@@ -5,6 +5,7 @@
 void Game::Init() {
 	scenes.insert_or_assign("MainMenu", new MainMenu);
 	scenes.insert_or_assign("MainScene", new MainScene);
+	scenes["MainMenu"]->next_scene = "MainScene";
 
 	current_scene = "MainMenu";
 	scenes[current_scene]->Init();
@@ -31,7 +32,7 @@ void Game::LateUpdate(const float deltaTime) {
 		scenes[current_scene]->state = SCENE_STAY;
 		current_scene = next;
 
-		// TODO: destroy all current active game objects
+		SEntityManager::Instance().ClearAllEntities();
 		scenes[current_scene]->Init();
 	}
 }
