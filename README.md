@@ -9,9 +9,9 @@ Completed:
 - Core game loop
 - Entity manager (game object creation), entity memory pool, custom entity iterator
 - Components, component memory pools
+- UI (mouse raycasting)
 
 To-do:
-- UI (mouse raycasting)
 - Particle system
 - Flocking & boids :D
 - Audio engine
