@@ -12,6 +12,7 @@ Completed:
 - UI system
 
 To-do:
+- documentation
 - Particle system
 - Flocking & boids :D
 - Audio engine
