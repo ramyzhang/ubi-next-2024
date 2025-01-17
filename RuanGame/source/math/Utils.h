@@ -3,11 +3,12 @@
 #include <random>
 #include "Vector3.h"
 
+// random float generator with option to change the seed
 inline float RandomFloat(float a, float b, uint32_t seed = 0) {
     std::mt19937 gen;
 
     if (seed != 0) {
-        gen.seed(seed); 
+        gen.seed(seed);
     }
     else {
         std::random_device rd;
@@ -25,5 +26,5 @@ inline float Lerp(const float& a, const float& b, const float& t)
 
 inline Vector3 Lerp(const Vector3& a, const Vector3& b, const float& t)
 {
-    return a + (b - a) * t;
+    return a + (b - a) * t; // same as unity's lerp
 }

@@ -11,15 +11,16 @@
 #include <variant>
 #include "core/FreeContainer.h"
 #include "core/System.h"
-#include "EntityPool.h"
-#include "ComponentPool.h"
+#include "engine/ecs/ecsutils/EntityPool.h"
+#include "engine/ecs/ecsutils/ComponentPool.h"
 
 // TODO: update whenever you make a new component type
 using ComponentPoolVariant = std::variant<
     ComponentPool<CMesh>*,
     ComponentPool<CTransform>*,
     ComponentPool<CCollider>*,
-    ComponentPool<CUIText>*
+    ComponentPool<CUIText>*,
+    ComponentPool<CRigidBody>*
 >;
 
 typedef std::vector<Entity> EntityVector;
@@ -40,11 +41,8 @@ public:
 
     EntityID AddEntity(const std::string& tag);
 
-    const Entity& GetEntity(const EntityID& e) { 
-        return m_entities.Get(e); 
-    };
+    const Entity& GetEntity(const EntityID& e) { return m_entities.Get(e); };
     EntityIDSet& GetEntities(const std::string& tag) { return m_entity_map[tag]; };
-
     size_t GetNumEntities() const { return m_total_entities; };
 
     void ChangeTag(const EntityID& e, const std::string& new_tag); // use this sparingly

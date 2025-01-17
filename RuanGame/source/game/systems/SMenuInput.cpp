@@ -5,33 +5,29 @@ void SMenuInput::Init(const EntityID& indic) {
 	m_indicator = indic;
 }
 
-bool SMenuInput::HandleInput(const float deltaTime) {
-	if (App::GetController().GetLeftThumbStickY() > 0.5f) {
+MenuResults SMenuInput::HandleInput(const float deltaTime) {
+	if (App::GetController().GetLeftThumbStickY() > 0.5f || App::GetController().GetLeftThumbStickY() < -0.5f) {
 		CUIText* ctext = SEntityManager::Instance().GetComponent<CUIText>(m_indicator);
 
-		if (m_indic_play) {
+		if (indic_play && m_receive_input) {
 			ctext->pos = m_quit_pos;
-			m_indic_play = false;
+			indic_play = false;
+			m_receive_input = false;
 		}
-		else {
+		else if (!indic_play && m_receive_input) {
 			ctext->pos = m_play_pos;
-			m_indic_play = true;
+			indic_play = true;
+			m_receive_input = false;
 		}
 	}
-	if (App::GetController().GetLeftThumbStickY() < -0.5f) {
-		CUIText* ctext = SEntityManager::Instance().GetComponent<CUIText>(m_indicator);
+	else {
+		m_receive_input = true;
+	}
 
-		if (m_indic_play) {
-			ctext->pos = m_quit_pos;
-			m_indic_play = false;
-		}
-		else {
-			ctext->pos = m_play_pos;
-			m_indic_play = true;
-		}
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_START)) {
+		if (indic_play) return PLAY;
+		else return QUIT; // quit
 	}
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A)) {
-		if (m_indic_play) return true;
-	}
-	return false;
+
+	return NOTHING;
 }

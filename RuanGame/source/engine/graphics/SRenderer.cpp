@@ -7,10 +7,10 @@ void SRenderer::Init() {
 }
 
 void SRenderer::Update(const float deltaTime) {
-	m_render_queue.clear();
 	SCamera::Instance().HandleInputs(deltaTime);
 	
 	// set up render buffer such that farthest objects are drawn before closest objects
+	m_render_queue.clear();
 	for (EntityID e : EntityView<CTransform, CMesh>(SEntityManager::Instance())) {
 		CMesh* cmesh = SEntityManager::Instance().GetComponent<CMesh>(e);
 		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(e);
@@ -29,12 +29,23 @@ void SRenderer::Update(const float deltaTime) {
 }
 
 void SRenderer::Render() {
+	if (SEntityManager::Instance().GetNumEntities() < 1) FreeContainer(m_render_queue);
+
 	// iterate through all render objects and draw them!
 	for (const auto& obj : m_render_queue) {
 		CMesh* cmesh = SEntityManager::Instance().GetComponent<CMesh>(obj.id);
 		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(obj.id);
 		DrawMesh(*cmesh, *ctrans);
 	}
+
+#ifdef _DEBUG 
+	// let's draw the colliders in debug mode
+	for (EntityID e : EntityView<CCollider>(SEntityManager::Instance())) {
+		CCollider* ccollider = SEntityManager::Instance().GetComponent<CCollider>(e);
+
+		DrawCollider(*ccollider);
+	}
+#endif // _DEBUG
 }
 
 void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
@@ -47,9 +58,9 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 
 		// displace the mesh backwards a bit
 		Matrix4x4 world = transform.GetWorldMatrix();
-		moved_tri.verts[0] = world * mesh.model->tris[i].verts[0] + Vector3(0, 0, 30.0f);
-		moved_tri.verts[1] = world * mesh.model->tris[i].verts[1] + Vector3(0, 0, 30.0f);
-		moved_tri.verts[2] = world * mesh.model->tris[i].verts[2] + Vector3(0, 0, 30.0f);
+		moved_tri.verts[0] = world * mesh.model->tris[i].verts[0];
+		moved_tri.verts[1] = world * mesh.model->tris[i].verts[1];
+		moved_tri.verts[2] = world * mesh.model->tris[i].verts[2];
 
 		// calculate the normal
 		Vector3 normal, line1, line2, camtotri;
@@ -74,7 +85,6 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 		viewed_tri.verts[1] = SCamera::Instance().view * moved_tri.verts[1];
 		viewed_tri.verts[2] = SCamera::Instance().view * moved_tri.verts[2];
 		viewed_tri.light_sim = light_sim;
-		viewed_tri.normal = normal;
 
 		std::vector<Triangle> clipped_tris = ClipTriangle(Vector3(0, 0, 0.1f), Vector3(0, 0, 1.0f), viewed_tri);
 
@@ -88,7 +98,6 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 			projected_tri.verts[2].divideByW();
 
 			projected_tri.light_sim = tri.light_sim;
-			projected_tri.normal = tri.normal;
 
 			Vector3 offset = Vector3(1.0f, 1.0f, 0.0f);
 
@@ -158,6 +167,64 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 	}
 }
 
+// not perfect, just for visualizing the boxes to debug
+void SRenderer::DrawCollider(const CCollider& collider) {
+	// only handle AABB for now
+	if (collider.volume_type != AABB) return;
+
+	Matrix4x4 view = SCamera::Instance().view;
+	Matrix4x4 proj = SCamera::Instance().projection;
+
+	// calculate the 8 corners of the box in world space
+	Vector3 min = collider.center - collider.half_size;
+	Vector3 max = collider.center + collider.half_size;
+
+	Vector3 corners[8] = {
+		Vector3(min.x, min.y, min.z, 1.0f), // front bottom left
+		Vector3(max.x, min.y, min.z, 1.0f), // front bottom right
+		Vector3(max.x, max.y, min.z, 1.0f), // front top right
+		Vector3(min.x, max.y, min.z, 1.0f), // front top left
+		Vector3(min.x, min.y, max.z, 1.0f), // back bottom left
+		Vector3(max.x, min.y, max.z, 1.0f), // back bottom right
+		Vector3(max.x, max.y, max.z, 1.0f), // back top right
+		Vector3(min.x, max.y, max.z, 1.0f)  // back top left
+	};
+	
+	// project all corners to screen space
+	Vector3 projected[8];
+	Vector3 offset = Vector3(1.0f, 1.0f, 0.0f);
+	for (int i = 0; i < 8; i++) {
+		projected[i] = view * proj * corners[i];
+		if (projected[i].z <= 0) return;
+
+		projected[i].divideByW();
+
+		projected[i].add(offset);
+
+		projected[i].x *= 0.5f * (float)WINDOW_WIDTH;
+		projected[i].y *= 0.5f * (float)WINDOW_HEIGHT;
+	}
+	
+	Vector3 colour = Vector3(0.502f, 0.098f, 0.098f); // dark red
+	// front face
+	App::DrawLine(projected[0].x, projected[0].y, projected[1].x, projected[1].y, colour.x, colour.y, colour.z);
+	App::DrawLine(projected[1].x, projected[1].y, projected[2].x, projected[2].y, colour.x, colour.y, colour.z);
+	App::DrawLine(projected[2].x, projected[2].y, projected[3].x, projected[3].y, colour.x, colour.y, colour.z);
+	App::DrawLine(projected[3].x, projected[3].y, projected[0].x, projected[0].y, colour.x, colour.y, colour.z);
+
+	// face
+	App::DrawLine(projected[4].x, projected[4].y, projected[5].x, projected[5].y, colour.x, colour.y, colour.z);
+	App::DrawLine(projected[5].x, projected[5].y, projected[6].x, projected[6].y, colour.x, colour.y, colour.z);
+	App::DrawLine(projected[6].x, projected[6].y, projected[7].x, projected[7].y, colour.x, colour.y, colour.z);
+	App::DrawLine(projected[7].x, projected[7].y, projected[4].x, projected[4].y, colour.x, colour.y, colour.z);
+
+	// connecting lines
+	App::DrawLine(projected[0].x, projected[0].y, projected[4].x, projected[4].y, colour.x, colour.y, colour.z);
+	App::DrawLine(projected[1].x, projected[1].y, projected[5].x, projected[5].y, colour.x, colour.y, colour.z);
+	App::DrawLine(projected[2].x, projected[2].y, projected[6].x, projected[6].y, colour.x, colour.y, colour.z);
+	App::DrawLine(projected[3].x, projected[3].y, projected[7].x, projected[7].y, colour.x, colour.y, colour.z);
+}
+
 std::vector<Triangle> SRenderer::ClipTriangle(const Vector3& plane_p, Vector3& plane_n, const Triangle& in) {
 	std::vector<Triangle> res;
 
@@ -193,7 +260,6 @@ std::vector<Triangle> SRenderer::ClipTriangle(const Vector3& plane_p, Vector3& p
 	// then, create a new, smaller triangle
 	if (inside_points.size() == 1 && outside_points.size() == 2) { //
 		Triangle newtri;
-		newtri.normal = in.normal;
 		newtri.light_sim = in.light_sim;
 
 		newtri.verts[0] = inside_points[0];
@@ -208,8 +274,8 @@ std::vector<Triangle> SRenderer::ClipTriangle(const Vector3& plane_p, Vector3& p
 	if (inside_points.size() == 2 && outside_points.size() == 1) {
 		Triangle newtri1;
 		Triangle newtri2;
-		newtri1.normal = in.normal;		newtri1.light_sim = in.light_sim;
-		newtri2.normal = in.normal;		newtri2.light_sim = in.light_sim;
+		newtri1.light_sim = in.light_sim;
+		newtri2.light_sim = in.light_sim;
 
 		newtri1.verts[0] = inside_points[0];
 		newtri1.verts[1] = inside_points[1];

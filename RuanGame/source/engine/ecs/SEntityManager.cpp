@@ -8,7 +8,7 @@ EntityID SEntityManager::AddEntity(const std::string& tag) {
 	assert(m_total_entities < MAX_ENTITIES);
 
 	EntityID new_id = static_cast<EntityID>(m_total_entities);
-	m_entities_to_add.push_back(Entity(tag, ComponentMask())); // add components later
+	m_entities_to_add.push_back(Entity(tag, ComponentMask())); // add components later...
 	m_total_entities++;
 
 	return new_id;
@@ -16,10 +16,13 @@ EntityID SEntityManager::AddEntity(const std::string& tag) {
 
 void SEntityManager::Init() {
 	m_total_entities = 0;
+
+	// create the component pools!!!
 	m_component_pool_map.insert_or_assign(CMESH, new ComponentPool<CMesh>());
 	m_component_pool_map.insert_or_assign(CTRANSFORM, new ComponentPool<CTransform>());
 	m_component_pool_map.insert_or_assign(CCOLLIDER, new ComponentPool<CCollider>());
 	m_component_pool_map.insert_or_assign(CUITEXT, new ComponentPool<CUIText>());
+	m_component_pool_map.insert_or_assign(CRIGIDBODY, new ComponentPool<CRigidBody>());
 	// TODO: add more here as we create more components
 }
 
@@ -63,6 +66,7 @@ void SEntityManager::Update() {
 }
 
 void SEntityManager::ClearAllEntities() {
+	// reset the component pools (just a bitmap reset)
 	for (auto& [id, pool] : m_component_pool_map) {
 		std::visit([](auto& concrete_pool) {
 			concrete_pool->ResetComponentPool();
@@ -70,7 +74,9 @@ void SEntityManager::ClearAllEntities() {
 	}
 
 	FreeContainer(m_entity_map);
-	FreeContainer(m_entities);
+	FreeContainer(m_entities_to_add);
+	m_entities.ClearPool(); // have to thread through all the free slots again
+	m_total_entities = 0;
 }
 
 void SEntityManager::Shutdown() {

@@ -9,8 +9,9 @@ void Engine::CoreInit() {
 
 void Engine::CoreUpdate(const float deltaTime) {
 	SEntityManager::Instance().Update();
-	SUIManager::Instance().Update(deltaTime);
+	SPhysics::Instance().Update(deltaTime);
 	SRenderer::Instance().Update(deltaTime);
+	SUIManager::Instance().Update(deltaTime);
 }
 
 void Engine::CoreRender() {

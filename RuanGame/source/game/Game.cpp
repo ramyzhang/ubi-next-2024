@@ -7,17 +7,16 @@ void Game::Init() {
 	scenes.insert_or_assign("MainScene", new MainScene);
 	scenes["MainMenu"]->next_scene = "MainScene";
 
-	current_scene = "MainMenu";
+	current_scene = "MainScene";
 	scenes[current_scene]->Init();
 };
 
 void Game::Update(const float deltaTime) {
 	scenes[current_scene]->Update(deltaTime);
+	scenes[current_scene]->LateUpdate(deltaTime);
 };
 
-void Game::LateUpdate(const float deltaTime) {
-	scenes[current_scene]->LateUpdate(deltaTime);
-
+void Game::Render() {
 	// update scene if desired
 	if (scenes[current_scene]->state != SCENE_STAY) {
 		std::string next;
@@ -32,7 +31,6 @@ void Game::LateUpdate(const float deltaTime) {
 		scenes[current_scene]->state = SCENE_STAY;
 		current_scene = next;
 
-		SEntityManager::Instance().ClearAllEntities();
 		scenes[current_scene]->Init();
 	}
 }

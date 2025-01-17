@@ -28,6 +28,7 @@ void SCamera::HandleInputs(const float deltaTime) {
 			ClampedCameraUpdate(deltaTime);
 			break;
 		case SCamera::FIXEDTARGET:
+			FixedTargetCameraUpdate(deltaTime);
 			break;
 		default:
 			break;
@@ -38,58 +39,90 @@ void SCamera::HandleInputs(const float deltaTime) {
 
 void SCamera::UpdateViewMatrix() {
 	Vector3 up = Vector3(0, 1, 0);
+
 	Vector3 target = Vector3(0, 0, 1);
-	look = Matrix4x4().rotate(Vector3(pitch, yaw, 0)) * target;
+
+	switch (mode) {
+		case SCamera::FREE:
+			look = Matrix4x4().rotate(Vector3(pitch, yaw, 0)) * target;
+			break;
+		case SCamera::CLAMPED:
+			look = Matrix4x4().rotate(Vector3(pitch, yaw, 0)) * target;
+			break;
+		case SCamera::FIXEDTARGET:
+			// look has already been modified by the update function
+			break;
+		default:
+			break;
+	}
+
 	target = position + look;
 
 	view = Matrix4x4().pointAt(position, target, up).dirtyInvert();
 }
 
 void SCamera::FreeCameraUpdate(const float deltaTime) {
-	float speed = 0.03f;
+	Vector3 forward = look * m_move_speed * deltaTime;
+	Vector3 right = Vector3(0, 1, 0).cross(forward) * m_move_speed * deltaTime;
 
-	Vector3 forward = look * speed * deltaTime;
-	Vector3 right = Vector3(0, 1, 0).cross(forward) * speed * deltaTime;
-
-	// move camera
-	if (App::GetController().GetLeftThumbStickX() > 0.5f)
-	{
+	// move camera in space
+	if (App::GetController().GetLeftThumbStickX() > 0.5f) {
 		position.add(right);
 	}
-	if (App::GetController().GetLeftThumbStickX() < -0.5f)
-	{
+	if (App::GetController().GetLeftThumbStickX() < -0.5f) {
 		position.subtract(right);
 	}
-	if (App::GetController().GetLeftThumbStickY() > 0.5f)
-	{
+	if (App::GetController().GetLeftThumbStickY() > 0.5f) {
 		position.add(forward);
 	}
-	if (App::GetController().GetLeftThumbStickY() < -0.5f)
-	{
+	if (App::GetController().GetLeftThumbStickY() < -0.5f) {
 		position.subtract(forward);
 	}
+	
+	// update pitch and yaw of camera
+	float new_pitch = pitch;
+	float new_yaw = yaw;
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, false)) {
+		new_pitch -= m_rotate_speed * deltaTime;
+	}
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, false)) {
+		new_pitch += m_rotate_speed * deltaTime;
+	}
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, false)) {
+		new_yaw -= m_rotate_speed * deltaTime;
+	}
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, false)) {
+		new_yaw += m_rotate_speed * deltaTime;
+	}
 
-	// rotate camera with mouse
-	float curr_mouse_x, curr_mouse_y;
-	App::GetMousePos(curr_mouse_x, curr_mouse_y);
-
-	float delta_x = curr_mouse_x - m_prev_mouse_x;
-	float delta_y = curr_mouse_y - m_prev_mouse_y;
-
-	// update camera rotation
-	float target_yaw = yaw + delta_x * m_mouse_sens * deltaTime;
-	float target_pitch = pitch - delta_y * m_mouse_sens * deltaTime;
-	float new_yaw = Lerp(yaw, target_yaw, m_mouse_damping);
-	float new_pitch = Lerp(pitch, target_pitch, m_mouse_damping);
-
-	// clamp pitch to prevent camera flipping
-	float clamp_l = - 70.0f * (float)M_PI / 180.0f;
-	float clamp_r = 70.0f * (float)M_PI / 180.0f;
+	float clamp_l = - 80.0f * (float)M_PI / 180.0f;
+	float clamp_r = 80.0f * (float)M_PI / 180.0f;
 	pitch = std::clamp(new_pitch, clamp_l, clamp_r);
 	yaw = new_yaw;
+	
+	// this was for mouse-based camera controls but i decided against it
+	
+	//// rotate camera with mouse
+	//float curr_mouse_x, curr_mouse_y;
+	//App::GetMousePos(curr_mouse_x, curr_mouse_y);
 
-	m_prev_mouse_x = curr_mouse_x;
-	m_prev_mouse_y = curr_mouse_y;
+	//float delta_x = curr_mouse_x - m_prev_mouse_x;
+	//float delta_y = curr_mouse_y - m_prev_mouse_y;
+
+	//// update camera rotation
+	//float target_yaw = yaw + delta_x * m_mouse_sens * deltaTime;
+	//float target_pitch = pitch - delta_y * m_mouse_sens * deltaTime;
+	//float new_yaw = Lerp(yaw, target_yaw, m_mouse_damping);
+	//float new_pitch = Lerp(pitch, target_pitch, m_mouse_damping);
+
+	//// clamp pitch to prevent camera flipping
+	//float clamp_l = - 80.0f * (float)M_PI / 180.0f;
+	//float clamp_r = 80.0f * (float)M_PI / 180.0f;
+	//pitch = std::clamp(new_pitch, clamp_l, clamp_r);
+	//yaw = new_yaw;
+
+	//m_prev_mouse_x = curr_mouse_x;
+	//m_prev_mouse_y = curr_mouse_y;
 }
 
 void SCamera::ClampedCameraUpdate(const float deltaTime) {
@@ -114,4 +147,31 @@ void SCamera::ClampedCameraUpdate(const float deltaTime) {
 
 	m_prev_mouse_x = curr_mouse_x;
 	m_prev_mouse_y = curr_mouse_y;
+}
+
+void SCamera::FixedTargetCameraUpdate(const float deltaTime) {
+	CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(m_target);
+
+	float new_pitch = pitch;
+	float new_yaw = yaw;
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, false)) {
+		new_pitch -= m_rotate_speed * deltaTime;
+	}
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, false)) {
+		new_pitch += m_rotate_speed * deltaTime;
+	}
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, false)) {
+		new_yaw -= m_rotate_speed * deltaTime;
+	}
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, false)) {
+		new_yaw += m_rotate_speed * deltaTime;
+	}
+
+	float clamp_l = -80.0f * (float)M_PI / 180.0f;
+	float clamp_r = 80.0f * (float)M_PI / 180.0f;
+	pitch = std::clamp(new_pitch, clamp_l, clamp_r);
+	yaw = new_yaw;
+		
+	position = Matrix4x4().rotate(Vector3(pitch, yaw, 0)) * m_relative_pos + ctrans->position;
+	look = (ctrans->position - position).normalize();
 }

@@ -15,6 +15,7 @@ public:
 	void Shutdown();
 
 private:
+	// it's easier to keep track of the important entities like this
 	EntityID				m_title;
 	EntityID				m_play;
 	EntityID				m_quit;
@@ -34,4 +35,7 @@ private:
 
 	SMenuBackground			m_sbackground;
 	SMenuInput				m_sinput;
+
+	bool					m_zoom_done;
+	Vector3					m_pos_zoomed;
 };

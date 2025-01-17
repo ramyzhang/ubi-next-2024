@@ -16,6 +16,7 @@ struct EntityLiveState {
     ComponentMask   m_cmask;
 }; // define struct for handling entity data when it's alive
 
+// I know it looks complicated but it's really just an ID and a bitmap ;A;
 class Entity {
 public:
     // only allow managers and pools to access private variables
@@ -38,9 +39,9 @@ public:
     void Destroy() { m_isactive = false; };
 
 private:
-    // Constructor is private; only EntityManager can make new Entities
+    // constructor is private; only EntityManager can make new Entities
     Entity(const std::string& tag, const ComponentMask cmask)
-        : m_state{ EntityLiveState{tag, cmask} } // Direct init of variant with LiveState
+        : m_state{ EntityLiveState{tag, cmask} } // direct init of variant with LiveState
     {};
 
     Entity() : m_state(nullptr) {}; // Direct init of variant with "next" pointer

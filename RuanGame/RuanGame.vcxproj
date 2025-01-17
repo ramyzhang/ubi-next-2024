@@ -196,13 +196,14 @@
     <ClInclude Include="external\miniaudio\miniaudio.h" />
     <ClInclude Include="external\stb_image\stb_image.h" />
     <ClInclude Include="source\core\FreeContainer.h" />
+    <ClInclude Include="source\core\Observer.h" />
     <ClInclude Include="source\core\System.h" />
     <ClInclude Include="source\engine\ecs\components\CCollider.h" />
-    <ClInclude Include="source\engine\ecs\components\CUICollider.h" />
+    <ClInclude Include="source\engine\ecs\components\CRigidBody.h" />
     <ClInclude Include="source\engine\ecs\components\CUIText.h" />
     <ClInclude Include="source\engine\ecs\ECSConstants.h" />
-    <ClInclude Include="source\engine\ecs\EntityPool.h" />
-    <ClInclude Include="source\engine\ecs\EntityView.h" />
+    <ClInclude Include="source\engine\ecs\ecsutils\EntityPool.h" />
+    <ClInclude Include="source\engine\ecs\ecsutils\EntityView.h" />
     <ClInclude Include="source\engine\Engine.h" />
     <ClInclude Include="source\engine\ecs\Entity.h" />
     <ClInclude Include="source\engine\ecs\SEntityManager.h" />
@@ -210,12 +211,16 @@
     <ClInclude Include="source\engine\graphics\SModelManager.h" />
     <ClInclude Include="source\engine\graphics\SRenderer.h" />
     <ClInclude Include="source\engine\graphics\Primitives.h" />
-    <ClInclude Include="source\engine\ecs\ComponentPool.h" />
+    <ClInclude Include="source\engine\ecs\ecsutils\ComponentPool.h" />
     <ClInclude Include="source\engine\ecs\components\CMesh.h" />
     <ClInclude Include="source\engine\ecs\Component.h" />
     <ClInclude Include="source\engine\ecs\components\ComponentIncludes.h" />
     <ClInclude Include="source\engine\ecs\components\CTransform.h" />
+    <ClInclude Include="source\engine\physics\SCollision.h" />
+    <ClInclude Include="source\engine\physics\SPhysics.h" />
+    <ClInclude Include="source\core\Subject.h" />
     <ClInclude Include="source\engine\ui\SUIManager.h" />
+    <ClInclude Include="source\game\Event.h" />
     <ClInclude Include="source\game\Game.h" />
     <ClInclude Include="source\engine\graphics\SCamera.h" />
     <ClInclude Include="source\game\scenes\MainMenu.h" />
@@ -225,6 +230,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="source\game\scenes\SceneInclude.h" />
+    <ClInclude Include="source\game\systems\SMainInput.h" />
     <ClInclude Include="source\game\systems\SMenuBackground.h" />
     <ClInclude Include="source\game\systems\SMenuInput.h" />
     <ClInclude Include="source\math\Intersection.h" />
@@ -240,18 +246,22 @@
     <ClCompile Include="external\App\SimpleController.cpp" />
     <ClCompile Include="external\App\SimpleSound.cpp" />
     <ClCompile Include="external\App\SimpleSprite.cpp" />
-    <ClCompile Include="source\engine\ecs\EntityPool.cpp" />
+    <ClCompile Include="source\core\Subject.cpp" />
+    <ClCompile Include="source\engine\ecs\ecsutils\EntityPool.cpp" />
     <ClCompile Include="source\engine\Engine.cpp" />
     <ClCompile Include="source\engine\ecs\SEntityManager.cpp" />
     <ClCompile Include="source\engine\graphics\Primitives.cpp" />
     <ClCompile Include="source\engine\graphics\SRenderer.cpp" />
     <ClCompile Include="external\miniaudio\miniaudio.cpp" />
     <ClCompile Include="external\stb_image\stb_image.cpp" />
+    <ClCompile Include="source\engine\physics\SCollision.cpp" />
+    <ClCompile Include="source\engine\physics\SPhysics.cpp" />
     <ClCompile Include="source\engine\ui\SUIManager.cpp" />
     <ClCompile Include="source\game\Game.cpp" />
     <ClCompile Include="source\engine\graphics\SCamera.cpp" />
     <ClCompile Include="source\game\scenes\MainMenu.cpp" />
     <ClCompile Include="source\game\scenes\MainScene.cpp" />
+    <ClCompile Include="source\game\systems\SMainInput.cpp" />
     <ClCompile Include="source\game\systems\SMenuBackground.cpp" />
     <ClCompile Include="source\game\systems\SMenuInput.cpp" />
     <ClCompile Include="source\RuanGame.cpp" />

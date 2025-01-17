@@ -12,7 +12,7 @@
 
 struct Triangle {
 	Vector3		verts[3];
-	Vector3		normal;
+	// Vector3		normal;
 	float		light_sim; // dot product with the lighting source for colour calcs
 
 	void FillTriangle(const Vector3& color) const;

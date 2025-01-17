@@ -6,7 +6,8 @@ enum ComponentID {
 	CTRANSFORM,
 	CMESH,
 	CCOLLIDER,
-	CUITEXT
+	CUITEXT,
+	CRIGIDBODY
 };
 
 template <typename T>
@@ -22,4 +23,8 @@ template <>
 inline ComponentID GetComponentID<CCollider>() { return CCOLLIDER; };
 
 template <>
-inline ComponentID GetComponentID<CUIText>() { return CUITEXT; };
+inline ComponentID GetComponentID<CUIText>() { return CUITEXT; };\
+
+template <>
+inline ComponentID GetComponentID<CRigidBody>() { return CRIGIDBODY; };
+

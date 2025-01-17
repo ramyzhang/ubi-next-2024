@@ -101,21 +101,52 @@ void MainMenu::InstantiateGOs() {
 		ctrans.position = Vector3(RandomFloat(-20.0f, 20.0f), RandomFloat(-20.0f, 20.0f), RandomFloat(-10.0f, 100.0f));
 		ctrans.rotation = Vector3(0, 0, 0);
 		ctrans.scale = Vector3(size, size, size);
-		ctrans.velocity = Vector3(0, 0, 0);
 		SEntityManager::Instance().AddComponent<CTransform>(m_dodecahedrons[i], ctrans);
 	}
 
 	SCamera::Instance().position = Vector3(50.0f, 0.0f, 50.0f);
 	SCamera::Instance().yaw = -1.33f;
+
+	m_pos_zoomed = SCamera::Instance().position;
+
+	App::PlaySound("data/mainmenu.wav", true); // loop
 }
 
 void MainMenu::Update(const float deltaTime) {
-	if (m_sinput.HandleInput(deltaTime)) SetState(SCENE_NEXT);
+	// if "PLAY" was pressed, go to the next scene
+	MenuResults res = m_sinput.HandleInput(deltaTime);
+
+	if (res == PLAY) SetState(SCENE_NEXT);
+	else if (res == QUIT) glutLeaveMainLoop();
+
+	// update the background still, before the next frame
 	m_sbackground.Update(deltaTime);
 }
 
 void MainMenu::LateUpdate(const float deltaTime) {
+	// if the indicator is on the play button, "zoom" in
+	if (m_sinput.indic_play) {
+		Vector3 orig_pos = SCamera::Instance().position;
+
+		if (orig_pos.distance_squared(m_pos_zoomed) < 0.5f) return;
+
+		Vector3 new_pos = Lerp(orig_pos, m_pos_zoomed, 0.01f * deltaTime);
+		SCamera::Instance().position = new_pos;
+	}
+	// if the indicator is on the quit button, "zoom" out
+	else {
+		Vector3 orig_pos = SCamera::Instance().position;
+		Vector3 zoomed_out = m_pos_zoomed - SCamera::Instance().look * 20.0f;
+
+		if (orig_pos.distance_squared(zoomed_out) < 0.5f) return;
+
+		Vector3 new_pos = Lerp(orig_pos, zoomed_out, 0.01f * deltaTime);
+		SCamera::Instance().position = new_pos;
+	}
 }
 
 void MainMenu::Shutdown() {
+	SEntityManager::Instance().ClearAllEntities();
+
+	App::StopSound("data/mainmenu.wav");
 }

@@ -25,11 +25,12 @@ void Update(const float deltaTime) {
 	engine.CoreUpdate(deltaTime);
 
 	game.Update(deltaTime);
-	game.LateUpdate(deltaTime);
 }
 
 void Render() {
 	engine.CoreRender();
+
+	game.Render();
 
 	// TODO: gamerender()
 }

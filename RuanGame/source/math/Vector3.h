@@ -25,11 +25,18 @@ struct Vector3 {
     Vector3& divideByZ();
     Vector3& divideByW();
 
-    float distance(const Vector3& v) const;
-    Vector3& normalize();
-    float dot(const Vector3& v) const;
-    Vector3 cross(const Vector3& rhs) const;
+    float       distance(const Vector3& v) const;
+    float       distance_squared(const Vector3& v) const;
+    float       magnitude() const;
+    float       magnitude_squared() const;
+    Vector3&    normalize();
+    Vector3&    abs();
 
+    float       dot(const Vector3& v) const;
+    Vector3     cross(const Vector3& rhs) const;
+
+    Vector3& clamp(const Vector3& min, const Vector3& max);
+    Vector3& clamp(const float& min, const float& max); // overload for just the float
 };
 
 inline Vector3 Vector3::operator + (const Vector3& rhs) const {
@@ -90,6 +97,20 @@ inline float Vector3::distance(const Vector3& v) const {
     return sqrtf((v.x - x) * (v.x - x) + (v.y - y) * (v.y - y) + (v.z - z) * (v.z - z));
 }
 
+inline float Vector3::distance_squared(const Vector3& v) const {
+    return (v.x - x) * (v.x - x) + (v.y - y) * (v.y - y) + (v.z - z) * (v.z - z);
+}
+
+inline float Vector3::magnitude() const
+{
+    return sqrtf(x * x + y * y + z * z);
+}
+
+inline float Vector3::magnitude_squared() const
+{
+    return x * x + y * y + z * z;
+}
+
 inline Vector3& Vector3::normalize() {
     float norm = sqrtf(x * x + y * y + z * z);
 
@@ -102,10 +123,37 @@ inline Vector3& Vector3::normalize() {
     return *this;
 }
 
+inline Vector3& Vector3::abs() {
+    x = std::abs(x);
+    y = std::abs(y);
+    z = std::abs(z);
+    w = std::abs(z);
+
+    return *this;
+}
+
 inline float Vector3::dot(const Vector3& v) const {
     return (x * v.x + y * v.y + z * v.z);
 }
 
 inline Vector3 Vector3::cross(const Vector3& v) const {
     return Vector3(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x);
+}
+
+inline Vector3& Vector3::clamp(const Vector3& min, const Vector3& max) {
+    x = std::clamp(x, min.x, max.x);
+    y = std::clamp(y, min.y, max.y);
+    z = std::clamp(z, min.z, max.z);
+    w = std::clamp(w, min.w, max.w);
+    
+    return *this;
+}
+
+inline Vector3& Vector3::clamp(const float& min, const float& max) {
+    x = std::clamp(x, min, max);
+    y = std::clamp(y, min, max);
+    z = std::clamp(z, min, max);
+    w = std::clamp(w, min, max);
+
+    return *this;
 }

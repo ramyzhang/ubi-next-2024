@@ -3,7 +3,7 @@
 #include <vector>
 #include "core/System.h"
 #include "engine/ecs/components/ComponentIncludes.h"
-#include "engine/ecs/EntityView.h"
+#include "engine/ecs/ecsutils/EntityView.h"
 
 class SUIManager : public System<SUIManager> {
 public:

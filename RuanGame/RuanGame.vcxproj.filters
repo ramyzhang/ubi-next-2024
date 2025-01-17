@@ -31,11 +31,15 @@
     <ClCompile Include="source\game\Game.cpp" />
     <ClCompile Include="source\game\scenes\MainScene.cpp" />
     <ClCompile Include="source\engine\ecs\SEntityManager.cpp" />
-    <ClCompile Include="source\engine\ecs\EntityPool.cpp" />
+    <ClCompile Include="source\engine\ecs\ecsutils\EntityPool.cpp" />
     <ClCompile Include="source\game\scenes\MainMenu.cpp" />
     <ClCompile Include="source\engine\ui\SUIManager.cpp" />
     <ClCompile Include="source\game\systems\SMenuBackground.cpp" />
     <ClCompile Include="source\game\systems\SMenuInput.cpp" />
+    <ClCompile Include="source\engine\physics\SCollision.cpp" />
+    <ClCompile Include="source\game\systems\SMainInput.cpp" />
+    <ClCompile Include="source\engine\physics\SPhysics.cpp" />
+    <ClCompile Include="source\core\Subject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -82,23 +86,29 @@
     <ClInclude Include="source\engine\ecs\ECSConstants.h" />
     <ClInclude Include="source\engine\ecs\Entity.h" />
     <ClInclude Include="source\engine\ecs\SEntityManager.h" />
-    <ClInclude Include="source\engine\ecs\ComponentPool.h" />
+    <ClInclude Include="source\engine\ecs\ecsutils\ComponentPool.h" />
     <ClInclude Include="source\engine\ecs\Component.h" />
     <ClInclude Include="source\engine\graphics\SModelManager.h" />
-    <ClInclude Include="source\engine\ecs\EntityView.h" />
+    <ClInclude Include="source\engine\ecs\ecsutils\EntityView.h" />
     <ClInclude Include="source\engine\ecs\components\CMesh.h" />
     <ClInclude Include="source\engine\ecs\components\ComponentIncludes.h" />
     <ClInclude Include="source\engine\ecs\components\CTransform.h" />
-    <ClInclude Include="source\engine\ecs\EntityPool.h" />
+    <ClInclude Include="source\engine\ecs\ecsutils\EntityPool.h" />
     <ClInclude Include="source\engine\EngineIncludes.h" />
     <ClInclude Include="source\math\Utils.h" />
     <ClInclude Include="source\engine\ecs\components\CCollider.h" />
     <ClInclude Include="source\engine\ecs\components\CUIText.h" />
     <ClInclude Include="source\game\scenes\MainMenu.h" />
     <ClInclude Include="source\engine\ui\SUIManager.h" />
-    <ClInclude Include="source\engine\ecs\components\CUICollider.h" />
     <ClInclude Include="source\game\systems\SMenuBackground.h" />
     <ClInclude Include="source\game\systems\SMenuInput.h" />
+    <ClInclude Include="source\engine\physics\SCollision.h" />
+    <ClInclude Include="source\game\systems\SMainInput.h" />
+    <ClInclude Include="source\engine\physics\SPhysics.h" />
+    <ClInclude Include="source\core\Subject.h" />
+    <ClInclude Include="source\game\Event.h" />
+    <ClInclude Include="source\core\Observer.h" />
+    <ClInclude Include="source\engine\ecs\components\CRigidBody.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

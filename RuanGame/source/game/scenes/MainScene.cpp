@@ -1,14 +1,19 @@
 #include "stdafx.h"
 
 #include "MainScene.h"
-#include "math/Utils.h"
 
 void MainScene::InitGOs() {
-	for (int i = 0; i < 10; i++) {
-		SEntityManager::Instance().AddEntity("cube");
-	}
+	m_player = SEntityManager::Instance().AddEntity("cube");
+	SEntityManager::Instance().AddEntity("cube");
+	SEntityManager::Instance().AddEntity("cube");
 	
 	SEntityManager::Instance().Update(); // initial update to get the new entity in the list
+
+	SCamera::Instance().mode = SCamera::FIXEDTARGET;
+	SCamera::Instance().SetTarget(m_player);
+	SCamera::Instance().SetTargetDistance(m_camera_distance);
+
+	m_sinput.Init(m_player);
 }
 
 void MainScene::InstantiateGOs() {
@@ -25,17 +30,27 @@ void MainScene::InstantiateGOs() {
 
 		float size = RandomFloat(1.0f, 2.0f);
 		CTransform cube_transform = {};
-		cube_transform.position = Vector3(0.0f, 0.0f, pos);
+		cube_transform.position = Vector3(pos, 0.0f, 0.0f);
 		cube_transform.rotation = Vector3(0, 0, 0);
 		cube_transform.scale = Vector3(size, size, size);
-		cube_transform.velocity = Vector3(0, 0, 0);
 		SEntityManager::Instance().AddComponent<CTransform>(e_id, cube_transform);
 
-		pos += 3.0f;
+		CCollider cube_collider = {};
+		cube_collider.center = Vector3(pos, 0.0f, 0.0f);
+		cube_collider.volume_type = AABB;
+		cube_collider.half_size = Vector3(size, size, size); // since I know the cube model is a unit cube
+		SEntityManager::Instance().AddComponent<CCollider>(e_id, cube_collider);
+
+		CRigidBody cube_rb = {};
+		cube_rb.velocity = Vector3(0, 0, 0);
+		SEntityManager::Instance().AddComponent<CRigidBody>(e_id, cube_rb);
+
+		pos += 10.0f;
 	}
 }
 
 void MainScene::Update(const float deltaTime) {
+	m_sinput.HandleInput(deltaTime);
 }
 
 void MainScene::LateUpdate(const float deltaTime) {

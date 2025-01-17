@@ -14,7 +14,7 @@ public:
 
 	void Init();
 	void Update(const float deltaTime);
-	void LateUpdate(const float deltaTime);
+	void Render();
 	void Shutdown();
 
 };
