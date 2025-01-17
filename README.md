@@ -10,11 +10,10 @@ Completed:
 - Entity manager (game object creation), entity memory pool, custom entity iterator
 - Components, component memory pools
 - UI system
+- Basic physics (mostly just collision)
 
 To-do:
 - documentation
 - Particle system
 - Flocking & boids :D
-- Basic physics (mostly just collision)
 - Animation via tweening
-- Making a simple railgun shooter before the challenge begins
