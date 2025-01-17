@@ -17,6 +17,7 @@ namespace {
 
 		depth = min(min(overlap.x, overlap.y), overlap.z); // get the depth along the shortest axis
 		normal = Vector3();
+
 		if (overlap.x < overlap.y&& overlap.x < overlap.z) { // get the axes of the normal
 			normal.x = diff.x > 0 ? 1.0f : -1.0f;
 		}
@@ -79,10 +80,11 @@ void SCollision::NarrowUpdate(const float deltaTime) {
     for (CollisionObject& co : m_collided_pairs) {
         Vector3 relative_velo = co.orb->velocity - co.erb->velocity;
 
-        // collision impulse magnitude (j)
-        float restitution = min(co.erb->restitution, co.orb->restitution);
-        float j = -(1.0f + restitution) * relative_velo.dot(co.normal); // reverse and scale the collision depending on bounciness
+        // calculate the collision impulse magnitude (j)
+        float bounce = min(co.erb->bounciness, co.orb->bounciness);
+        float j = -(1.0f + bounce) * relative_velo.dot(co.normal); // reverse and scale the collision impact depending on bounciness
         j /= (1.0f / co.erb->mass + 1.0f / co.orb->mass); // divide by inverse mass to account for weight
+		// if it's heavier, it should be less impacted
 
         // apply impulse to velocities
 		if (!co.erb->is_static) {
@@ -92,10 +94,10 @@ void SCollision::NarrowUpdate(const float deltaTime) {
 			co.orb->velocity.add(co.normal * (1.0f / co.orb->mass) * j);
 		}
             
-        // positional correction (prevents sinking)
+        // prevent it from sinking in to the other object
         const float percent = 0.8f; // penetration recovery rate
-        const float slop = 0.01f;   // penetration allowance
-        Vector3 correction = co.normal * max(co.depth - slop, 0.0f) * percent
+        const float pene = 0.01f;   // let it penetrate a littttle bit
+        Vector3 correction = co.normal * max(co.depth - pene, 0.0f) * percent
 			* (1.0f / (1.0f / co.erb->mass + 1.0f / co.orb->mass));
 		
 		// apply position correction depending on mass
@@ -107,7 +109,7 @@ void SCollision::NarrowUpdate(const float deltaTime) {
 		}
     }
 
-    m_collided_pairs.clear();
+    m_collided_pairs.clear(); // clear the collision queue
 }
 
 // puts the collision normal and depth magnitude into the parameter references

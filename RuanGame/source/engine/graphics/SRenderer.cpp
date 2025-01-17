@@ -113,7 +113,8 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 		}
 	}
 
-	// TODO: proper z-buffer?
+	// TODO: proper z-buffer?\
+	// sortign the triangles within the mesh so that we draw the mesh itself back to front
 	std::sort(tris_to_draw.begin(), tris_to_draw.end(), [](Triangle& a, Triangle& b)
 		{
 			float za = (a.verts[0].z + a.verts[1].z + a.verts[2].z) / 3.0f;
@@ -140,14 +141,14 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 
 				// clip
 				switch (i) {
-				case 0:
-					clipped = ClipTriangle(Vector3(0, 0, 0), Vector3(0, 1.0f, 0), test); break; // bottom
-				case 1:
-					clipped = ClipTriangle(Vector3(0, (float)WINDOW_HEIGHT - 1.0f, 0), Vector3(0, -1.0f, 0), test); break; // top
-				case 2:
-					clipped = ClipTriangle(Vector3(0, 0, 0), Vector3(1.0f, 0, 0), test); break; // left
-				case 3:
-					clipped = ClipTriangle(Vector3((float)WINDOW_WIDTH - 1.0f, 0, 0), Vector3(-1.0f, 0, 0), test); break; // right
+					case 0:
+						clipped = ClipTriangle(Vector3(0, 0, 0), Vector3(0, 1.0f, 0), test); break; // bottom
+					case 1:
+						clipped = ClipTriangle(Vector3(0, (float)WINDOW_HEIGHT - 1.0f, 0), Vector3(0, -1.0f, 0), test); break; // top
+					case 2:
+						clipped = ClipTriangle(Vector3(0, 0, 0), Vector3(1.0f, 0, 0), test); break; // left
+					case 3:
+						clipped = ClipTriangle(Vector3((float)WINDOW_WIDTH - 1.0f, 0, 0), Vector3(-1.0f, 0, 0), test); break; // right
 				}
 
 				for (int j = 0; j < clipped.size(); j++) {
@@ -195,7 +196,7 @@ void SRenderer::DrawCollider(const CCollider& collider) {
 	Vector3 offset = Vector3(1.0f, 1.0f, 0.0f);
 	for (int i = 0; i < 8; i++) {
 		projected[i] = view * proj * corners[i];
-		if (projected[i].z <= 0) return;
+		if (projected[i].z <= 0) return; // early return if it's behind the screen
 
 		projected[i].divideByW();
 
