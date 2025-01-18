@@ -11,11 +11,13 @@ void SRenderer::Update(const float deltaTime) {
 	
 	// set up render buffer such that farthest objects are drawn before closest objects
 	m_render_queue.clear();
+
 	for (EntityID e : EntityView<CTransform, CMesh>(SEntityManager::Instance())) {
-		CMesh* cmesh = SEntityManager::Instance().GetComponent<CMesh>(e);
+		if (e == m_floor) continue;
+
 		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(e);
 
-		Vector3 camera_space = SCamera::Instance().view * ctrans->position;
+		Vector3 camera_space = SCamera::Instance().view * ctrans->position; // this is not very good
 
 		m_render_queue.push_back({
 			e,
@@ -24,17 +26,31 @@ void SRenderer::Update(const float deltaTime) {
 	}
 
 	std::sort(m_render_queue.begin(), m_render_queue.end(), [](RenderObject& a, RenderObject& b) {
-		return a.z_depth > b.z_depth;
+		return a.z_depth < b.z_depth; // sort in reverse order so i can just append the floor at the end
 		});
+
+	// hard coding the floor because I don't want to implement quadtree painter's algo...
+	// i'm so sorry...
+	if (m_floor < MAX_ENTITIES) {
+		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(m_floor);
+
+		Vector3 camera_space = SCamera::Instance().view * ctrans->position;
+
+		m_render_queue.push_back({
+			m_floor,
+			camera_space.z  // Now using camera-space z value
+			});
+	}
 }
 
 void SRenderer::Render() {
 	if (SEntityManager::Instance().GetNumEntities() < 1) FreeContainer(m_render_queue);
 
 	// iterate through all render objects and draw them!
-	for (const auto& obj : m_render_queue) {
-		CMesh* cmesh = SEntityManager::Instance().GetComponent<CMesh>(obj.id);
-		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(obj.id);
+	for (int i = (int)m_render_queue.size() - 1; i >= 0; i--) {
+		CMesh* cmesh = SEntityManager::Instance().GetComponent<CMesh>(m_render_queue[i].id);
+		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(m_render_queue[i].id);
+
 		DrawMesh(*cmesh, *ctrans);
 	}
 
@@ -43,9 +59,33 @@ void SRenderer::Render() {
 	for (EntityID e : EntityView<CCollider>(SEntityManager::Instance())) {
 		CCollider* ccollider = SEntityManager::Instance().GetComponent<CCollider>(e);
 
-		DrawCollider(*ccollider);
+		DrawDebugCollider(*ccollider);
 	}
 #endif // _DEBUG
+}
+
+void SRenderer::DrawDebugLine(Vector3 start, Vector3 end, Vector3 colour) const {
+	Matrix4x4 view = SCamera::Instance().view;
+	Matrix4x4 proj = SCamera::Instance().projection;
+
+	Vector3 proj_s = view * proj * start;
+	Vector3 proj_e = view * proj * end;
+
+	if (proj_s.z <= 0 || proj_e.z <= 0) return; // early return if it's behind the screen
+
+	proj_s.divideByW();
+	proj_e.divideByW();
+	
+	proj_s.add(m_offset);
+	proj_e.add(m_offset);
+
+	proj_s.x *= 0.5f * (float)WINDOW_WIDTH;
+	proj_s.y *= 0.5f * (float)WINDOW_HEIGHT;
+
+	proj_e.x *= 0.5f * (float)WINDOW_WIDTH;
+	proj_e.y *= 0.5f * (float)WINDOW_HEIGHT;
+
+	App::DrawLine(proj_s.x, proj_s.y, proj_e.x, proj_e.y, colour.x, colour.y, colour.z);
 }
 
 void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
@@ -56,7 +96,7 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 		Triangle viewed_tri;
 		Triangle projected_tri;
 
-		// displace the mesh backwards a bit
+		// translate model vertices to world pos
 		Matrix4x4 world = transform.GetWorldMatrix();
 		moved_tri.verts[0] = world * mesh.model->tris[i].verts[0];
 		moved_tri.verts[1] = world * mesh.model->tris[i].verts[1];
@@ -77,8 +117,7 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 		if (dotprod >= 0) continue;
 
 		// get new lighting
-		Vector3 light_dir = Vector3(-1.0f, 1.0f, -1.0f).normalize();
-		float light_sim = max(0.1f, light_dir.dot(normal));
+		float light_sim = std::max(0.35f, m_light_dir.dot(normal));
 
 		// convert from world space to camera space
 		viewed_tri.verts[0] = SCamera::Instance().view * moved_tri.verts[0];
@@ -99,11 +138,9 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 
 			projected_tri.light_sim = tri.light_sim;
 
-			Vector3 offset = Vector3(1.0f, 1.0f, 0.0f);
-
 			// offset into screenspace
 			for (int j = 0; j < 3; j++) {
-				projected_tri.verts[j].add(offset);
+				projected_tri.verts[j].add(m_offset);
 
 				projected_tri.verts[j].x *= 0.5f * (float)WINDOW_WIDTH;
 				projected_tri.verts[j].y *= 0.5f * (float)WINDOW_HEIGHT;
@@ -161,18 +198,36 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 
 		for (Triangle& draw_tri : tri_queue) {
 			// apply lighting and draw
-			Vector3 litcolor = mesh.colour * abs(draw_tri.light_sim);
-
-			draw_tri.FillTriangle(litcolor);
+			Vector3 litcolour = mesh.colour * abs(draw_tri.light_sim);
+			draw_tri.FillTriangle(litcolour);
 		}
 	}
 }
 
 // not perfect, just for visualizing the boxes to debug
-void SRenderer::DrawCollider(const CCollider& collider) {
-	// only handle AABB for now
-	if (collider.volume_type != AABB) return;
+void SRenderer::DrawDebugCollider(const CCollider& collider) const {
+	Vector3 colour = Vector3(0.502f, 0.098f, 0.098f); // dark red
 
+	// if it's a sphere, just draw 6 lines in each direction
+	if (collider.volume_type == SPHERE) {
+		Vector3 north = collider.center + Vector3(0, collider.radius, 0);
+		Vector3 south = collider.center + Vector3(0, -collider.radius, 0);
+		Vector3 east =	collider.center + Vector3(collider.radius, 0, 0);
+		Vector3 west =	collider.center + Vector3(-collider.radius, 0, 0);
+		Vector3 front = collider.center + Vector3(0, 0, -collider.radius);
+		Vector3 back =	collider.center + Vector3(0, 0, collider.radius);
+
+		DrawDebugLine(collider.center, north, colour);
+		DrawDebugLine(collider.center, south, colour);
+		DrawDebugLine(collider.center, east, colour);
+		DrawDebugLine(collider.center, west, colour);
+		DrawDebugLine(collider.center, front, colour);
+		DrawDebugLine(collider.center, back, colour);
+
+		return;
+	}
+
+	// if it's AABB, draw the cube
 	Matrix4x4 view = SCamera::Instance().view;
 	Matrix4x4 proj = SCamera::Instance().projection;
 
@@ -206,7 +261,6 @@ void SRenderer::DrawCollider(const CCollider& collider) {
 		projected[i].y *= 0.5f * (float)WINDOW_HEIGHT;
 	}
 	
-	Vector3 colour = Vector3(0.502f, 0.098f, 0.098f); // dark red
 	// front face
 	App::DrawLine(projected[0].x, projected[0].y, projected[1].x, projected[1].y, colour.x, colour.y, colour.z);
 	App::DrawLine(projected[1].x, projected[1].y, projected[2].x, projected[2].y, colour.x, colour.y, colour.z);

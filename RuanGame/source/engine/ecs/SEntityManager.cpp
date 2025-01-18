@@ -23,6 +23,7 @@ void SEntityManager::Init() {
 	m_component_pool_map.insert_or_assign(CCOLLIDER, new ComponentPool<CCollider>());
 	m_component_pool_map.insert_or_assign(CUITEXT, new ComponentPool<CUIText>());
 	m_component_pool_map.insert_or_assign(CRIGIDBODY, new ComponentPool<CRigidBody>());
+	m_component_pool_map.insert_or_assign(CBOID, new ComponentPool<CBoid>());
 	// TODO: add more here as we create more components
 }
 

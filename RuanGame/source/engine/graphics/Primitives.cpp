@@ -4,79 +4,80 @@
 
 // anonymous namespace to put all helper functions
 namespace {
-	void FillBottomTriangle(const Vector3& side_l, const Vector3& top, const Vector3& side_r, const Vector3& color) {
+	void FillBottomTriangle(
+		const Vector3& side_l,
+		const Vector3& top,
+		const Vector3& side_r,
+		const Vector3& color,
+		const Vector3& dither
+	) {
 		if (abs(side_l.y - top.y) < 0.1f || abs(side_r.y - top.y) < 0.1f) {
 			return; // avoid divide by 0
 		}
 		float dxdy_left = (side_l.x - top.x) / (side_l.y - top.y);
 		float dxdy_right = (side_r.x - top.x) / (side_r.y - top.y);
 
-		float curr_x_l = side_l.x;
-		float curr_x_r = side_r.x;
+		float curr_x_l = side_l.x - 1.0f;
+		float curr_x_r = side_r.x + 1.0f;
 
 		float pixel = 0;
 
 		// start from the bottom and draw horizontal lines up the triangle
-		for (int y = static_cast<int>(side_l.y); y <= static_cast<int>(top.y); y++)
+		for (int y = static_cast<int>(side_l.y); y < static_cast<int>(top.y); y++)
 		{
-			if (curr_x_l > curr_x_r) break;
-			App::DrawLine(curr_x_l, side_l.y + pixel, curr_x_r, side_l.y + pixel, color.x, color.y, color.z);
+			if (curr_x_l - 1.0f > curr_x_r) break;
+
+			// this adds a fun dithering effect :D
+			if (y % 4 < 2) App::DrawLine(curr_x_l, side_l.y + pixel, curr_x_r, side_l.y + pixel, color.x, color.y, color.z);
+			else App::DrawLine(curr_x_l, side_l.y + pixel, curr_x_r, side_l.y + pixel, dither.x, dither.y, dither.z);
+			
 			curr_x_l += dxdy_left;
 			curr_x_r += dxdy_right;
 			pixel = pixel + 1.0f;
 		}
 	}
 
-	void FillTopTriangle(const Vector3& bottom, const Vector3& side_l, const Vector3& side_r, const Vector3& color) {
+	void FillTopTriangle(
+		const Vector3& bottom,
+		const Vector3& side_l,
+		const Vector3& side_r,
+		const Vector3& color,
+		const Vector3& dither
+	) {
 		if (abs(side_l.y - bottom.y) < 0.1f || abs(side_r.y - bottom.y) < 0.1f) {
 			return; // avoid divide by 0
 		}
 		float dxdy_left = (side_l.x - bottom.x) / (side_l.y - bottom.y);
 		float dxdy_right = (side_r.x - bottom.x) / (side_r.y - bottom.y);
 
-		float curr_x_l = side_l.x;
-		float curr_x_r = side_r.x;
+		float curr_x_l = side_l.x - 1.0f;
+		float curr_x_r = side_r.x + 1.0f;
 
 		float pixel = 0;
 
 		// start from the top and draw horizontal lines down the triangle
 		for (int y = static_cast<int>(side_l.y); y >= static_cast<int>(bottom.y); y--)
 		{
-			if (curr_x_l > curr_x_r) break;
-			App::DrawLine(curr_x_l, side_l.y - pixel, curr_x_r, side_l.y - pixel, color.x, color.y, color.z);
+			if (curr_x_l - 1.0f > curr_x_r) break;
+
+			// this adds a fun dithering effect :D
+			if (y % 4 < 2) App::DrawLine(curr_x_l, side_l.y - pixel, curr_x_r, side_l.y - pixel, color.x, color.y, color.z);
+			else App::DrawLine(curr_x_l, side_l.y - pixel, curr_x_r, side_l.y - pixel, dither.x, dither.y, dither.z);
+
 			curr_x_l -= dxdy_left;
 			curr_x_r -= dxdy_right;
 			pixel = pixel + 1.0f;
 		}
-	}
-
-	void DrawTriangleOutline(const std::vector<Vector3>& verts, const Vector3& color) {
-		App::DrawLine(
-			verts[0].x,
-			verts[0].y,
-			verts[1].x,
-			verts[1].y,
-			color.x, color.y, color.z);
-
-		App::DrawLine(
-			verts[1].x,
-			verts[1].y,
-			verts[2].x,
-			verts[2].y,
-			color.x, color.y, color.z);
-
-		App::DrawLine(
-			verts[2].x,
-			verts[2].y,
-			verts[0].x,
-			verts[0].y,
-			color.x, color.y, color.z);
 	}
 }
 
 // Using the flat-side triangle algorithm to fill the triangle!
 void Triangle::FillTriangle(const Vector3& color) const {
 	std::vector<Vector3> v(verts, verts + sizeof verts / sizeof verts[0]);
+	Vector3 dither_colour = Vector3(
+		std::min(color.x * 1.5f, 1.0f),
+		std::min(color.y * 1.5f, 1.0f),
+		std::min(color.z * 1.5f, 1.0f));
 
 	std::sort(v.begin(), v.end(), [](Vector3& a, Vector3& b) {
 		return a.y < b.y;
@@ -84,32 +85,51 @@ void Triangle::FillTriangle(const Vector3& color) const {
 
 	// first, check for trivial case of bottom-flat tri
 	if (v[0].y == v[1].y) {
-		if (v[0].x < v[1].x) ::FillBottomTriangle(v[0], v[2], v[1], color);
-		else ::FillBottomTriangle(v[1], v[2], v[0], color);
+		if (v[0].x < v[1].x) ::FillBottomTriangle(v[0], v[2], v[1], color, dither_colour);
+		else ::FillBottomTriangle(v[1], v[2], v[0], color, dither_colour);
 	}
 	// then, check for trivial case of top-flat tri
 	else if (v[1].y == v[2].y) {
-		if (v[1].x < v[2].x) ::FillTopTriangle(v[0], v[1], v[2], color);
-		else ::FillTopTriangle(v[0], v[2], v[1], color);
+		if (v[1].x < v[2].x) ::FillTopTriangle(v[0], v[1], v[2], color, dither_colour);
+		else ::FillTopTriangle(v[0], v[2], v[1], color, dither_colour);
 	}
 	// if not, then split it by two flat tris
 	else {
 		Vector3 new_point = Vector3(v[2].x + ((v[1].y - v[2].y) / (v[0].y - v[2].y)) * (v[0].x - v[2].x), v[1].y, v[1].z);
 		if (v[1].x < new_point.x) {
-			::FillBottomTriangle(v[1], v[2], new_point, color);
-			::FillTopTriangle(v[0], v[1], new_point, color);
+			::FillBottomTriangle(v[1], v[2], new_point, color, dither_colour);
+			::FillTopTriangle(v[0], v[1], new_point, color, dither_colour);
 		}
 		else {
-			::FillBottomTriangle(new_point, v[2], v[1], color);
-			::FillTopTriangle(v[0], new_point, v[1], color);
+			::FillBottomTriangle(new_point, v[2], v[1], color, dither_colour);
+			::FillTopTriangle(v[0], new_point, v[1], color, dither_colour);
 		}
 	}
 
-	Vector3 new_color = Vector3(
-		min(color.x * 1.5f, 1.0f),
-		min(color.y * 1.5f, 1.0f),
-		min(color.z * 1.5f, 1.0f));
-	::DrawTriangleOutline(v, new_color);
+	// DrawTriangleOutline(color);	
+}
+
+void Triangle::DrawTriangleOutline(const Vector3& color) const {
+	App::DrawLine(
+		verts[0].x,
+		verts[0].y,
+		verts[1].x,
+		verts[1].y,
+		color.x, color.y, color.z);
+
+	App::DrawLine(
+		verts[1].x,
+		verts[1].y,
+		verts[2].x,
+		verts[2].y,
+		color.x, color.y, color.z);
+
+	App::DrawLine(
+		verts[2].x,
+		verts[2].y,
+		verts[0].x,
+		verts[0].y,
+		color.x, color.y, color.z);
 }
 
 bool Model::LoadMeshFromFile(const char* fileName) {

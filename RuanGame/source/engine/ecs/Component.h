@@ -2,12 +2,14 @@
 
 #include "components/ComponentIncludes.h"
 
+// TODO: update this when you make a new component
 enum ComponentID {
 	CTRANSFORM,
 	CMESH,
 	CCOLLIDER,
 	CUITEXT,
-	CRIGIDBODY
+	CRIGIDBODY,
+	CBOID
 };
 
 template <typename T>
@@ -27,4 +29,7 @@ inline ComponentID GetComponentID<CUIText>() { return CUITEXT; };\
 
 template <>
 inline ComponentID GetComponentID<CRigidBody>() { return CRIGIDBODY; };
+
+template <>
+inline ComponentID GetComponentID<CBoid>() { return CBOID; };
 

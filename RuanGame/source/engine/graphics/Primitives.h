@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <windows.h> // TODO: remove this
 
 #include "App\app.h"
 #include "math\Vector3.h"
@@ -12,10 +11,11 @@
 
 struct Triangle {
 	Vector3		verts[3];
-	// Vector3		normal;
+	// Vector3		normal; // no point in storing it here tbh, it only makes everything perform worse
 	float		light_sim; // dot product with the lighting source for colour calcs
 
 	void FillTriangle(const Vector3& color) const;
+	void DrawTriangleOutline(const Vector3& color) const;
 };
 
 struct Model {

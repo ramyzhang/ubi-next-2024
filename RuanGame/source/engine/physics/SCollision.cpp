@@ -1,21 +1,22 @@
 #include "stdafx.h"
+
 #include "SCollision.h"
 
-// helper functions for getting more collision info!
+// helper functions for getting more collision info! (normal and depth)
 namespace {
-	void SphereCollisionInfo(const CCollider& e, const CCollider& o, Vector3& normal, float& depth) {
+	inline void SphereCollisionInfo(const CCollider& e, const CCollider& o, Vector3& normal, float& depth) {
 		Vector3 diff = o.center - e.center; // get the distance between the centers
 		float distance = diff.magnitude();
 		normal = diff * (1.0f / distance); // that's the normal!
 		depth = (e.radius + o.radius) - distance; // get the depth of penetration
 	}
 
-	void AABBCollisionInfo(const CCollider& e, const CCollider& o, Vector3& normal, float& depth) {
+	inline void AABBCollisionInfo(const CCollider& e, const CCollider& o, Vector3& normal, float& depth) {
 		Vector3 overlap = (e.half_size + o.half_size) - (o.center - e.center).abs(); // how much is it overlapping?
 
 		Vector3 diff = o.center - e.center;
 
-		depth = min(min(overlap.x, overlap.y), overlap.z); // get the depth along the shortest axis
+		depth = std::min(std::min(overlap.x, overlap.y), overlap.z); // get the depth along the shortest axis
 		normal = Vector3();
 
 		if (overlap.x < overlap.y&& overlap.x < overlap.z) { // get the axes of the normal
@@ -29,23 +30,44 @@ namespace {
 		}
 	}
 
-	void AABBvsSphereCollisionInfo(const CCollider& box, const CCollider& sphere, Vector3& normal, float& depth) {
+	inline void AABBvsSphereCollisionInfo(const CCollider& e, const CCollider& o, Vector3& normal, float& depth) {
+		const CCollider& sphere = e.volume_type == SPHERE ? e : o;
+		const CCollider& box = e.volume_type == AABB ? e : o;
+
 		Vector3 center = sphere.center;
-		Vector3 closest = center.clamp(box.center - box.half_size, box.center + box.half_size); // similar to the spherevssphere
-		Vector3 diff = center - closest;
-		float distance = diff.magnitude();
-		normal = diff * (1.0f / distance);
-		depth = sphere.radius - distance;
+		Vector3 closest = center.clamp(box.center - box.half_size, box.center + box.half_size);
+		Vector3 diff = closest - sphere.center;
+
+		// check if sphere center is inside AABB, because sometimes it misses the frame before collision
+		if (diff.x == 0 && diff.y == 0 && diff.z == 0) {
+			// this will tell the collision resolver to make the object flip its velocity vector
+			normal = Vector3();
+			depth = sphere.radius * 2.0f;
+		}
+		else {
+			float distance = diff.magnitude();
+			normal = diff.normalize(); 
+			if (!(e.volume_type == SPHERE)) normal = Vector3() - normal; // normal needs to point from e to o
+
+			depth = sphere.radius - distance;
+		}
 	}
 }
 
 void SCollision::BroadUpdate(const float deltaTime) {
 	// just a n^2 loop... sadly
 	for (EntityID e : EntityView<CTransform, CCollider, CRigidBody>(SEntityManager::Instance())) {
+		Entity e_e = SEntityManager::Instance().GetEntity(e);
+
 		CCollider* ecollider = SEntityManager::Instance().GetComponent<CCollider>(e);
 
 		for (EntityID o : EntityView<CTransform, CCollider, CRigidBody>(SEntityManager::Instance())) {
 			if (o == e) continue;
+
+			Entity e_o = SEntityManager::Instance().GetEntity(o);
+
+			if (e_e.CheckComponent(CBOID) || e_o.CheckComponent(CBOID)) continue; // I'll deal with the boids in SBoid
+			// this is so not clean but sacrificing for performance lol
 
 			CCollider* ocollider = SEntityManager::Instance().GetComponent<CCollider>(o);
 
@@ -81,26 +103,28 @@ void SCollision::NarrowUpdate(const float deltaTime) {
         Vector3 relative_velo = co.orb->velocity - co.erb->velocity;
 
         // calculate the collision impulse magnitude (j)
-        float bounce = min(co.erb->bounciness, co.orb->bounciness);
-        float j = -(1.0f + bounce) * relative_velo.dot(co.normal); // reverse and scale the collision impact depending on bounciness
+		Vector3 velo = co.erb->velocity;
+		Vector3 normal = co.normal.isZero() ? velo.normalize() : co.normal;
+
+        float bounce = std::min(co.erb->bounciness, co.orb->bounciness);
+        float j = -(1.0f + bounce) * relative_velo.dot(normal); // reverse and scale the collision impact depending on bounciness
         j /= (1.0f / co.erb->mass + 1.0f / co.orb->mass); // divide by inverse mass to account for weight
 		// if it's heavier, it should be less impacted
 
         // apply impulse to velocities
 		if (!co.erb->is_static) {
-			co.erb->velocity.subtract(co.normal * (1.0f / co.erb->mass) * j);
+			co.erb->velocity.subtract(normal * (1.0f / co.erb->mass) * j);
 		}
 		if (!co.orb->is_static) {
-			co.orb->velocity.add(co.normal * (1.0f / co.orb->mass) * j);
+			co.orb->velocity.add(normal * (1.0f / co.orb->mass) * j);
 		}
             
-        // prevent it from sinking in to the other object
+        // prevent it from sinking into the other object
         const float percent = 0.8f; // penetration recovery rate
-        const float pene = 0.01f;   // let it penetrate a littttle bit
-        Vector3 correction = co.normal * max(co.depth - pene, 0.0f) * percent
+        const float pene = 0.1f;   // let it penetrate a littttle bit
+        Vector3 correction = normal * std::max(co.depth - pene, 0.0f) * percent
 			* (1.0f / (1.0f / co.erb->mass + 1.0f / co.orb->mass));
 		
-		// apply position correction depending on mass
 		if (!co.erb->is_static) {
 			co.etrans->position.subtract(correction * co.erb->mass);
 		}
@@ -120,7 +144,7 @@ void SCollision::GetCollisionInfo(const CCollider& e, const CCollider& o, Vector
 			else ::AABBvsSphereCollisionInfo(e, o, normal, depth);
 			break;
 		case SPHERE:
-			if (o.volume_type == AABB) ::AABBvsSphereCollisionInfo(o, e, normal, depth);
+			if (o.volume_type == AABB) ::AABBvsSphereCollisionInfo(e, o, normal, depth);
 			else ::SphereCollisionInfo(e, o, normal, depth);
 			break;
 		default:

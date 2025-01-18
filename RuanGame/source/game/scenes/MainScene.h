@@ -3,7 +3,7 @@
 #include "Scene.h"
 #include "engine/EngineIncludes.h"
 #include "math/Utils.h"
-#include "game/systems/SMainInput.h"
+#include "game/systems/SMovement.h"
 
 class MainScene : public Scene {
 
@@ -15,8 +15,12 @@ public:
 	void Shutdown();
 
 private:
-	EntityID	m_player;
-	Vector3		m_camera_distance = Vector3(0, 0, 20.0f);
+	EntityID				m_player;
+	EntityID				m_floor;
+	EntityID				m_boid; // TEMP
+	EntityID				m_dodec; // TEMP
+	EntityID				m_cube; // TEMP
 
-	SMainInput	m_sinput;
+	Vector3					m_camera_distance = Vector3(0, 0, 20.0f);
+	SMovement				m_sinput;
 };

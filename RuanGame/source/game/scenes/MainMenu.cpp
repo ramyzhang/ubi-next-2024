@@ -146,7 +146,7 @@ void MainMenu::LateUpdate(const float deltaTime) {
 }
 
 void MainMenu::Shutdown() {
-	SEntityManager::Instance().ClearAllEntities();
+	SEntityManager::Instance().ClearAllEntities(); //
 
-	App::StopSound("data/mainmenu.wav");
+	App::StopSound("data/water-menu.wav");
 }

@@ -9,4 +9,10 @@
 class SPhysics : public System<SPhysics> {
 public:
 	void Update(const float deltaTime);
+
+private:
+	void		ApplyGravity(CRigidBody* crb, CTransform* ctrans, const float deltaTime);
+
+	Vector3		m_gravity = Vector3(0, -9.81f, 0);
+	float		m_multiplier = 0.003f;
 };

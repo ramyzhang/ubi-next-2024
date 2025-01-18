@@ -8,18 +8,22 @@ void SPhysics::Update(const float deltaTime) {
 		CCollider* ccollider = SEntityManager::Instance().GetComponent<CCollider>(e);
 		CRigidBody* crb = SEntityManager::Instance().GetComponent<CRigidBody>(e);
 		
-		ctrans->position.add(crb->velocity); // update position!
+		if (!crb->is_static) ApplyGravity(crb, ctrans, deltaTime * m_multiplier);
+		crb->velocity.scale(pow(crb->drag, deltaTime * m_multiplier)); // apply drag
+		ctrans->position.add(crb->velocity * deltaTime * m_multiplier); // update position!
 		ccollider->center = ctrans->position; // update collider position
 
-		crb->velocity.scale(pow(crb->drag, 0.1f * deltaTime)); // apply drag
-		if (crb->velocity.magnitude_squared() < 0.01f) { // if it's very slow, just stop it
-			crb->velocity = Vector3(0, 0, 0);
-		}
-
-		// TODO: gravity??? idk lol
+		// if it's very slow, just stop it
+		if (crb->velocity.magnitude_squared() < 0.01f) crb->velocity = Vector3();
 	}
 
 	// perform collision resolution
 	SCollision::Instance().BroadUpdate(deltaTime);
 	SCollision::Instance().NarrowUpdate(deltaTime);
+}
+
+void SPhysics::ApplyGravity(CRigidBody* crb, CTransform* ctrans, const float deltaTime) {
+	crb->force.add(m_gravity * crb->mass); // f = m * a babyyy
+	crb->velocity.add(crb->force / crb->mass * deltaTime);
+	crb->force = Vector3();
 }

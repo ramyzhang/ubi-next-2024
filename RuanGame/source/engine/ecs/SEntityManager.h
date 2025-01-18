@@ -20,7 +20,8 @@ using ComponentPoolVariant = std::variant<
     ComponentPool<CTransform>*,
     ComponentPool<CCollider>*,
     ComponentPool<CUIText>*,
-    ComponentPool<CRigidBody>*
+    ComponentPool<CRigidBody>*,
+    ComponentPool<CBoid>*
 >;
 
 typedef std::vector<Entity> EntityVector;

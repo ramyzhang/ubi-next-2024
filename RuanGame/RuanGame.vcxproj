@@ -198,6 +198,7 @@
     <ClInclude Include="source\core\FreeContainer.h" />
     <ClInclude Include="source\core\Observer.h" />
     <ClInclude Include="source\core\System.h" />
+    <ClInclude Include="source\engine\ecs\components\CBoid.h" />
     <ClInclude Include="source\engine\ecs\components\CCollider.h" />
     <ClInclude Include="source\engine\ecs\components\CRigidBody.h" />
     <ClInclude Include="source\engine\ecs\components\CUIText.h" />
@@ -230,7 +231,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="source\game\scenes\SceneInclude.h" />
-    <ClInclude Include="source\game\systems\SMainInput.h" />
+    <ClInclude Include="source\game\systems\SBoids.h" />
+    <ClInclude Include="source\game\systems\SMovement.h" />
     <ClInclude Include="source\game\systems\SMenuBackground.h" />
     <ClInclude Include="source\game\systems\SMenuInput.h" />
     <ClInclude Include="source\math\Intersection.h" />
@@ -261,9 +263,11 @@
     <ClCompile Include="source\engine\graphics\SCamera.cpp" />
     <ClCompile Include="source\game\scenes\MainMenu.cpp" />
     <ClCompile Include="source\game\scenes\MainScene.cpp" />
-    <ClCompile Include="source\game\systems\SMainInput.cpp" />
+    <ClCompile Include="source\game\systems\SBoids.cpp" />
+    <ClCompile Include="source\game\systems\SMovement.cpp" />
     <ClCompile Include="source\game\systems\SMenuBackground.cpp" />
     <ClCompile Include="source\game\systems\SMenuInput.cpp" />
+    <ClCompile Include="source\math\Intersection.cpp" />
     <ClCompile Include="source\RuanGame.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

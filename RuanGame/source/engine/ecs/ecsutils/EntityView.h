@@ -3,6 +3,7 @@
 #include "engine/ecs/SEntityManager.h"
 
 // Use this custom iterator to iterate through currently active entities
+// Based on David Colson's ECS design principles
 template<typename ...ComponentTypes>
 class EntityView {
 public:

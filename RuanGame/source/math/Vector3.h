@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <algorithm>
 
 struct Vector3 {
 
@@ -15,9 +16,12 @@ struct Vector3 {
     Vector3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {};
     Vector3(float _x, float _y, float _z, float _w) : x(_x), y(_y), z(_z), w(_w) {};
 
+    bool        isZero() const;
+
     Vector3 operator + (const Vector3& rhs) const;
     Vector3 operator - (const Vector3& rhs) const;
     Vector3 operator * (const float& rhs) const;
+    Vector3 operator / (const float& rhs) const;
 
     Vector3& add(const Vector3& rhs);
     Vector3& subtract(const Vector3& rhs);
@@ -39,6 +43,10 @@ struct Vector3 {
     Vector3& clamp(const float& min, const float& max); // overload for just the float
 };
 
+inline bool Vector3::isZero() const {
+    return (x == 0 && y == 0 && z == 0);
+}
+
 inline Vector3 Vector3::operator + (const Vector3& rhs) const {
     return Vector3(x + rhs.x, y + rhs.y, z + rhs.z);
 }
@@ -49,6 +57,10 @@ inline Vector3 Vector3::operator - (const Vector3& rhs) const {
 
 inline Vector3 Vector3::operator * (const float& rhs) const {
     return Vector3(x * rhs, y * rhs, z * rhs);
+}
+
+inline Vector3 Vector3::operator / (const float& rhs) const {
+    return Vector3(x / rhs, y / rhs, z / rhs);
 }
 
 inline Vector3& Vector3::add(const Vector3& rhs) {

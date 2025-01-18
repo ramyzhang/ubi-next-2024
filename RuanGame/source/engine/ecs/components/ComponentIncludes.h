@@ -5,3 +5,4 @@
 #include "CCollider.h"
 #include "CUIText.h"
 #include "CRigidBody.h"
+#include "CBoid.h"

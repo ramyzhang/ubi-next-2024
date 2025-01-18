@@ -152,6 +152,7 @@ void SCamera::ClampedCameraUpdate(const float deltaTime) {
 void SCamera::FixedTargetCameraUpdate(const float deltaTime) {
 	CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(m_target);
 
+	// right keyboard arrows should control the rotation around the target object
 	float new_pitch = pitch;
 	float new_yaw = yaw;
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, false)) {
@@ -171,7 +172,8 @@ void SCamera::FixedTargetCameraUpdate(const float deltaTime) {
 	float clamp_r = 80.0f * (float)M_PI / 180.0f;
 	pitch = std::clamp(new_pitch, clamp_l, clamp_r);
 	yaw = new_yaw;
-		
+	
+	// rotate around the target, and always look at it O__O
 	position = Matrix4x4().rotate(Vector3(pitch, yaw, 0)) * m_relative_pos + ctrans->position;
 	look = (ctrans->position - position).normalize();
 }

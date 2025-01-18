@@ -8,6 +8,8 @@
 
 typedef std::bitset<MAX_ENTITIES> ComponentPoolMask;
 
+// David Colson used a non-templated data array, but I really want this to be type-safe
+// So let's make the component pools templated!
 template <typename T>
 class ComponentPool {
 public:

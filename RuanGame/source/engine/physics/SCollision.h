@@ -9,8 +9,6 @@ public:
 	void BroadUpdate(const float deltaTime); // really basic broad phase (just n^2 loop)
 	void NarrowUpdate(const float deltaTime); // narrow phase here (collision resolution)
 
-	void GetCollisionInfo(const CCollider& e, const CCollider& o, Vector3& normal, float& depth);
-
 	struct CollisionObject {
 		CTransform*		etrans;
 		CCollider*		ecollider;
@@ -23,6 +21,8 @@ public:
 		Vector3			normal;
 		float			depth;
 	};
+
+	void GetCollisionInfo(const CCollider& e, const CCollider& o, Vector3& normal, float& depth);
 
 private:
 	std::vector<CollisionObject> m_collided_pairs;

@@ -37,9 +37,11 @@
     <ClCompile Include="source\game\systems\SMenuBackground.cpp" />
     <ClCompile Include="source\game\systems\SMenuInput.cpp" />
     <ClCompile Include="source\engine\physics\SCollision.cpp" />
-    <ClCompile Include="source\game\systems\SMainInput.cpp" />
+    <ClCompile Include="source\game\systems\SMovement.cpp" />
     <ClCompile Include="source\engine\physics\SPhysics.cpp" />
     <ClCompile Include="source\core\Subject.cpp" />
+    <ClCompile Include="source\game\systems\SBoids.cpp" />
+    <ClCompile Include="source\math\Intersection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -103,12 +105,14 @@
     <ClInclude Include="source\game\systems\SMenuBackground.h" />
     <ClInclude Include="source\game\systems\SMenuInput.h" />
     <ClInclude Include="source\engine\physics\SCollision.h" />
-    <ClInclude Include="source\game\systems\SMainInput.h" />
+    <ClInclude Include="source\game\systems\SMovement.h" />
     <ClInclude Include="source\engine\physics\SPhysics.h" />
     <ClInclude Include="source\core\Subject.h" />
     <ClInclude Include="source\game\Event.h" />
     <ClInclude Include="source\core\Observer.h" />
     <ClInclude Include="source\engine\ecs\components\CRigidBody.h" />
+    <ClInclude Include="source\game\systems\SBoids.h" />
+    <ClInclude Include="source\engine\ecs\components\CBoid.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

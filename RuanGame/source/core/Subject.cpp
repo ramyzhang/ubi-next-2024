@@ -1,4 +1,5 @@
 #include "stdafx.h"
+
 #include "Subject.h"
 
 void Subject::AddObserver(Observer* observer) {
