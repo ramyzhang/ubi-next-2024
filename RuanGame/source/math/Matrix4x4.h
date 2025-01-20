@@ -3,7 +3,6 @@
 #include "Vector3.h"
 
 struct Matrix4x4 {
-
 	float mat[4][4];
 	
 	Matrix4x4() : mat{
@@ -21,18 +20,17 @@ struct Matrix4x4 {
 		}
 	}; // Populate it with a value upon construction
 
-	float* operator [] (const int& index) { return mat[index]; };
+	float*		operator [] (const int& index) { return mat[index]; };
 
-	Vector3 operator * (const Vector3& rhs) const; // note: this is for row vector parameters, not column vector
-	Matrix4x4 operator * (const Matrix4x4& rhs) const;
+	Vector3		operator * (const Vector3& rhs) const; // note: this is for row vector parameters, not column vector
+	Matrix4x4	operator * (const Matrix4x4& rhs) const;
 	
 	Matrix4x4& times(const Matrix4x4& rhs); // this one, we can chain
 	Matrix4x4& rotate(const Vector3& euler); // multiplies current matrix by rotation (uses the euler angles alpha, beta, and gamma)
 	Matrix4x4& translate(const Vector3& rhs);
 	Matrix4x4& scale(const Vector3& rhs);
-	Matrix4x4& pointAt(const Vector3& pos, const Vector3& target, const Vector3& up);
-	Matrix4x4& dirtyInvert(); // only for rotation & translation matrices
-
+	Matrix4x4& point_at(const Vector3& pos, const Vector3& target, const Vector3& up);
+	Matrix4x4& dirty_invert(); // only for rotation & translation matrices
 };
 
 inline Vector3 Matrix4x4::operator * (const Vector3& rhs) const {
@@ -126,7 +124,7 @@ inline Matrix4x4& Matrix4x4::scale(const Vector3& rhs) {
 	return *this;
 }
 
-inline Matrix4x4& Matrix4x4::pointAt(const Vector3& pos, const Vector3& target, const Vector3& up) {
+inline Matrix4x4& Matrix4x4::point_at(const Vector3& pos, const Vector3& target, const Vector3& up) {
 	// new forward direction
 	Vector3 newz = target - pos;
 	newz.normalize();
@@ -163,7 +161,7 @@ inline Matrix4x4& Matrix4x4::pointAt(const Vector3& pos, const Vector3& target, 
 	return *this;
 }
 
-inline Matrix4x4& Matrix4x4::dirtyInvert() {
+inline Matrix4x4& Matrix4x4::dirty_invert() {
 	Matrix4x4 copy = *this;
 
 	mat[0][0] = copy.mat[0][0];

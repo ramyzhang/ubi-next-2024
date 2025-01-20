@@ -9,4 +9,5 @@ struct CRigidBody {
     float       bounciness = 0.5f; // 1.0f for max, 0 for min
     float       drag = 0.95f; // it should decelerate eventually
     bool        is_static = false;
+    bool        has_gravity = false;
 };

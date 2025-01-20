@@ -12,7 +12,7 @@ typedef unsigned int EntityID;
 typedef std::bitset<MAX_COMPONENTS> ComponentMask;
 
 struct EntityLiveState {
-    std::string     m_tag;
+    std::string     m_tag; // the tag is mainly for debugging purposes
     ComponentMask   m_cmask;
 }; // define struct for handling entity data when it's alive
 

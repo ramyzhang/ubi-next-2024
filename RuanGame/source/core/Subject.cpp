@@ -24,8 +24,8 @@ void Subject::RemoveObserver(Observer* observer) {
     }
 }
 
-void Subject::Notify(Event e, const EntityID& entity) {
+void Subject::Notify(Event event, std::vector<EntityID> entities) {
     for (auto& o : m_observers) {
-        o->OnNotify(e, entity);
+        o->OnNotify(event, entities);
     }
 }

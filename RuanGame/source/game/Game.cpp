@@ -5,7 +5,10 @@
 void Game::Init() {
 	scenes.insert_or_assign("MainMenu", new MainMenu);
 	scenes.insert_or_assign("MainScene", new MainScene);
+	scenes.insert_or_assign("YouWin", new YouWin);
 	scenes["MainMenu"]->next_scene = "MainScene";
+	scenes["MainScene"]->next_scene = "YouWin";
+	scenes["YouWin"]->next_scene = "MainMenu";
 
 	current_scene = "MainScene";
 	scenes[current_scene]->Init();
@@ -39,7 +42,7 @@ void Game::Shutdown() {
 	scenes[current_scene]->Shutdown();
 
 	// delete memory allocated for scenes
-	for (auto pair : scenes)
+	for (auto& pair : scenes)
 	{
 		delete pair.second;
 		pair.second = nullptr;

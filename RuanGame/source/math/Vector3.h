@@ -26,8 +26,8 @@ struct Vector3 {
     Vector3& add(const Vector3& rhs);
     Vector3& subtract(const Vector3& rhs);
     Vector3& scale(const float& rhs);
-    Vector3& divideByZ();
-    Vector3& divideByW();
+    Vector3& divide_by_z();
+    Vector3& divide_by_w();
 
     float       distance(const Vector3& v) const;
     float       distance_squared(const Vector3& v) const;
@@ -38,9 +38,10 @@ struct Vector3 {
 
     float       dot(const Vector3& v) const;
     Vector3     cross(const Vector3& rhs) const;
-
+    
     Vector3& clamp(const Vector3& min, const Vector3& max);
     Vector3& clamp(const float& min, const float& max); // overload for just the float
+    Vector3& limit(const float& max);
 };
 
 inline bool Vector3::isZero() const {
@@ -84,7 +85,7 @@ inline Vector3& Vector3::scale(const float& rhs) {
     return *this;
 }
 
-inline Vector3& Vector3::divideByZ() {
+inline Vector3& Vector3::divide_by_z() {
     if (z == 0.0f) return *this;
 
     x /= z;
@@ -94,7 +95,7 @@ inline Vector3& Vector3::divideByZ() {
     return *this;
 }
 
-inline Vector3& Vector3::divideByW() {
+inline Vector3& Vector3::divide_by_w() {
     if (w == 0.0f) return *this;
 
     x /= w;
@@ -113,13 +114,11 @@ inline float Vector3::distance_squared(const Vector3& v) const {
     return (v.x - x) * (v.x - x) + (v.y - y) * (v.y - y) + (v.z - z) * (v.z - z);
 }
 
-inline float Vector3::magnitude() const
-{
+inline float Vector3::magnitude() const {
     return sqrtf(x * x + y * y + z * z);
 }
 
-inline float Vector3::magnitude_squared() const
-{
+inline float Vector3::magnitude_squared() const {
     return x * x + y * y + z * z;
 }
 
@@ -167,5 +166,15 @@ inline Vector3& Vector3::clamp(const float& min, const float& max) {
     z = std::clamp(z, min, max);
     w = std::clamp(w, min, max);
 
+    return *this;
+}
+
+inline Vector3& Vector3::limit(const float& max) {
+    float mag = this->magnitude();
+    if (mag > max) {
+        this->normalize();
+        this->scale(max);
+        return *this;
+    }
     return *this;
 }

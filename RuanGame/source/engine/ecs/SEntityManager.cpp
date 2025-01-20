@@ -5,13 +5,17 @@
 //static SEntityManager& sEntityManager = SEntityManager::Instance();
 
 EntityID SEntityManager::AddEntity(const std::string& tag) {
-	assert(m_total_entities < MAX_ENTITIES);
+	if (m_total_entities >= MAX_ENTITIES - 1) return MAX_ENTITIES;
 
-	EntityID new_id = static_cast<EntityID>(m_total_entities);
-	m_entities_to_add.push_back(Entity(tag, ComponentMask())); // add components later...
+	const EntityID new_id = m_entities.Add(Entity(tag, ComponentMask()));
 	m_total_entities++;
 
 	return new_id;
+}
+
+void SEntityManager::RemoveEntity(const EntityID& e)
+{
+	m_entities.Get(e).m_isactive = false; // queue the removal
 }
 
 void SEntityManager::Init() {
@@ -28,13 +32,14 @@ void SEntityManager::Init() {
 }
 
 void SEntityManager::Update() {
-	// first, erase all inactive entities from the tag map
+	// do a delayed erase of all destroyed entities at once
 	for (EntityID i = 0; i < MAX_ENTITIES; i++) {
 		if (m_entities[i].m_isactive) continue;
 		if (std::holds_alternative<Entity*>(m_entities[i].m_state)) continue;
 
-		const EntityLiveState& e_data = std::get<EntityLiveState>(m_entities[i].m_state);
-		m_entity_map[e_data.m_tag].erase(i);
+		// const EntityLiveState& e_data = std::get<EntityLiveState>(m_entities[i].m_state);
+		// m_entity_map[e_data.m_tag].erase(i);
+		
 		for (auto& [id, pool] : m_component_pool_map) {
 			std::visit([&](auto& concrete_pool) {
 				concrete_pool->DisableComponent(i);
@@ -45,25 +50,6 @@ void SEntityManager::Update() {
 
 		m_total_entities--;
 	}
-
-	// then, add in all the newly created entities to both the pool and tag map
-	for (Entity& e : m_entities_to_add) {
-		const EntityID new_id = m_entities.Add(e);
-		const EntityLiveState& e_data = std::get<EntityLiveState>(e.m_state);
-
-		// add to new (or existing) tag in tag map
-		if (m_entity_map.count(e_data.m_tag) > 0) {
-			m_entity_map[e_data.m_tag].insert(new_id);
-		}
-		else {
-			m_entity_map.insert({ e_data.m_tag, {new_id} });
-		}
-
-		m_total_entities++;
-	}
-
-	// clear to_add vector
-	m_entities_to_add.clear();
 }
 
 void SEntityManager::ClearAllEntities() {
@@ -74,7 +60,7 @@ void SEntityManager::ClearAllEntities() {
 			}, pool);
 	}
 
-	FreeContainer(m_entity_map);
+	// FreeContainer(m_entity_map);
 	FreeContainer(m_entities_to_add);
 	m_entities.ClearPool(); // have to thread through all the free slots again
 	m_total_entities = 0;
@@ -88,7 +74,7 @@ void SEntityManager::Shutdown() {
 	}
 
 	FreeContainer(m_component_pool_map);
-	FreeContainer(m_entity_map);
+	// FreeContainer(m_entity_map);
 	FreeContainer(m_entities);
 }
 
@@ -99,15 +85,15 @@ void SEntityManager::ChangeTag(const EntityID& e, const std::string& new_tag) {
 	std::string temp = e_data.m_tag;
 
 	// look for entity in the entity map
-	if (m_entity_map[temp].count(e) > 0) m_entity_map[temp].erase(e);
+	// if (m_entity_map[temp].count(e) > 0) m_entity_map[temp].erase(e);
 
 	// change tag in main entity vector
 	e_data.m_tag = new_tag;
 
 	// add to new tag in tag map
-	if (m_entity_map.count(new_tag) > 0) {
+	/*if (m_entity_map.count(new_tag) > 0) {
 		m_entity_map[new_tag].insert(e);
 	} else {
 		m_entity_map.insert({ new_tag, {e} });
-	}
+	}*/
 }

@@ -22,8 +22,6 @@ void MainMenu::InitGOs() {
 	for (int i = 0; i < m_num_dodecs; i++) {
 		m_dodecahedrons.push_back(SEntityManager::Instance().AddEntity("dodec"));
 	}
-	
-	SEntityManager::Instance().Update(); // initial update to get the new entity in the list
 
 	m_sbackground = SMenuBackground();
 	m_sbackground.Init(m_dodecahedrons);
@@ -40,9 +38,9 @@ void MainMenu::InstantiateGOs() {
 	Vector3 yellow = Vector3(0.8f, 0.67f, 0.31f);
 
 	CUIText ctitle = {};
-	ctitle.pos = Vector3(500.0f, 480.0f, 0.0f);
+	ctitle.pos = Vector3(450.0f, 480.0f, 0.0f);
 	ctitle.rgb = green;
-	ctitle.text = "Ruan: The Game";
+	ctitle.text = "[ARROW KEYS] to move or select";
 	SEntityManager::Instance().AddComponent<CUIText>(m_title, ctitle);
 
 	CUIText cplay = {};
@@ -58,9 +56,9 @@ void MainMenu::InstantiateGOs() {
 	SEntityManager::Instance().AddComponent<CUIText>(m_quit, cquit);
 	
 	CUIText cindic = {};
-	cindic.pos = Vector3(450.0f, 410.0f, 0.0f);
+	cindic.pos = Vector3(400.0f, 410.0f, 0.0f);
 	cindic.rgb = yellow;
-	cindic.text = ">";
+	cindic.text = "[ENTER]";
 	SEntityManager::Instance().AddComponent<CUIText>(m_indicator, cindic);
 
 	CUIText cborder_horizontal = {};
@@ -93,7 +91,7 @@ void MainMenu::InstantiateGOs() {
 
 		CMesh cmesh = {};
 		cmesh.model = dodec_model;
-		cmesh.colour = Vector3(RandomFloat(0.0f, 0.2f), RandomFloat(0.65f, 0.8f), RandomFloat(0.55f, 0.75f));
+		cmesh.colour = Vector3(RandomFloat(0.0f, 0.6f), RandomFloat(0.0f, 0.6f), RandomFloat(0.0f, 0.6f));
 		SEntityManager::Instance().AddComponent<CMesh>(m_dodecahedrons[i], cmesh);
 
 		float size = RandomFloat(5.0f, 10.0f);
@@ -109,7 +107,7 @@ void MainMenu::InstantiateGOs() {
 
 	m_pos_zoomed = SCamera::Instance().position;
 
-	App::PlaySound("data/mainmenu.wav", true); // loop
+	if (!App::IsSoundPlaying("data/music/water-menu.wav")) App::PlaySound("data/music/water-menu.wav", true); // loop
 }
 
 void MainMenu::Update(const float deltaTime) {
@@ -148,5 +146,5 @@ void MainMenu::LateUpdate(const float deltaTime) {
 void MainMenu::Shutdown() {
 	SEntityManager::Instance().ClearAllEntities(); //
 
-	App::StopSound("data/water-menu.wav");
+	App::StopSound("data/music/water-menu.wav");
 }

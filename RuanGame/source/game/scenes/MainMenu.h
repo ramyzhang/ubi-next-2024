@@ -1,9 +1,8 @@
 #pragma once
 
 #include "Scene.h"
-#include "engine\EngineIncludes.h"
-#include "game/systems/SMenuBackground.h"
-#include "game/systems/SMenuInput.h"
+#include "game/systems/mainmenu/SMenuBackground.h"
+#include "game/systems/mainmenu/SMenuInput.h"
 
 class MainMenu : public Scene {
 
@@ -31,7 +30,7 @@ private:
 
 	std::vector<EntityID>	m_dodecahedrons;
 
-	int						m_num_dodecs = 10;
+	int						m_num_dodecs = 30;
 
 	SMenuBackground			m_sbackground;
 	SMenuInput				m_sinput;

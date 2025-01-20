@@ -29,6 +29,7 @@ EntityID EntityPool::Add(const Entity& e) {
 void EntityPool::Remove(const EntityID& e) {
     m_entities[e].SetNext(m_next_available);
     m_next_available = &m_entities[e];
+    m_entities[e].m_isactive = false;
 }
 
 void EntityPool::ClearPool() {

@@ -31,16 +31,14 @@ void SRenderer::Update(const float deltaTime) {
 
 	// hard coding the floor because I don't want to implement quadtree painter's algo...
 	// i'm so sorry...
-	if (m_floor < MAX_ENTITIES) {
-		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(m_floor);
+	if (m_floor >= MAX_ENTITIES) return;
 
-		Vector3 camera_space = SCamera::Instance().view * ctrans->position;
-
-		m_render_queue.push_back({
-			m_floor,
-			camera_space.z  // Now using camera-space z value
-			});
-	}
+	CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(m_floor);
+	Vector3 camera_space = SCamera::Instance().view * ctrans->position;
+	m_render_queue.push_back({
+		m_floor,
+		camera_space.z  // Now using camera-space z value
+		});
 }
 
 void SRenderer::Render() {
@@ -48,6 +46,11 @@ void SRenderer::Render() {
 
 	// iterate through all render objects and draw them!
 	for (int i = (int)m_render_queue.size() - 1; i >= 0; i--) {
+		// since this is a delayed render queue, let's make sure everything still exists
+		if (!SEntityManager::Instance().GetEntity(m_render_queue[i].id).IsActive()) return;
+		if (!SEntityManager::Instance().GetEntity(m_render_queue[i].id).CheckComponent(CMESH)) return;
+		if (!SEntityManager::Instance().GetEntity(m_render_queue[i].id).CheckComponent(CTRANSFORM)) return;
+
 		CMesh* cmesh = SEntityManager::Instance().GetComponent<CMesh>(m_render_queue[i].id);
 		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(m_render_queue[i].id);
 
@@ -56,8 +59,30 @@ void SRenderer::Render() {
 
 #ifdef _DEBUG 
 	// let's draw the colliders in debug mode
-	for (EntityID e : EntityView<CCollider>(SEntityManager::Instance())) {
+	for (EntityID e : EntityView<CCollider, CRigidBody>(SEntityManager::Instance())) {
 		CCollider* ccollider = SEntityManager::Instance().GetComponent<CCollider>(e);
+		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(e);
+		CRigidBody* crb = SEntityManager::Instance().GetComponent<CRigidBody>(e);
+
+		DrawDebugCollider(*ccollider);
+		// DrawDebugLine(ctrans->position, ctrans->position + crb->velocity);
+	}
+
+	/*for (EntityID e : EntityView<CBoid>(SEntityManager::Instance())) {
+		CBoid* cboid = SEntityManager::Instance().GetComponent<CBoid>(e);
+		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(e);
+
+		DrawDebugLine(ctrans->position, ctrans->position + cboid->forward);
+	}*/
+#else
+	// draw the bounds - sadly hardcoded, since I don't want to
+	// store the bool in the mesh component
+	for (EntityID e : EntityView<CCollider, CRigidBody>(SEntityManager::Instance())) {
+		if (SEntityManager::Instance().GetEntity(e).GetTag() != "bound") continue;
+
+		CCollider* ccollider = SEntityManager::Instance().GetComponent<CCollider>(e);
+		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(e);
+		CRigidBody* crb = SEntityManager::Instance().GetComponent<CRigidBody>(e);
 
 		DrawDebugCollider(*ccollider);
 	}
@@ -73,8 +98,8 @@ void SRenderer::DrawDebugLine(Vector3 start, Vector3 end, Vector3 colour) const 
 
 	if (proj_s.z <= 0 || proj_e.z <= 0) return; // early return if it's behind the screen
 
-	proj_s.divideByW();
-	proj_e.divideByW();
+	proj_s.divide_by_w();
+	proj_e.divide_by_w();
 	
 	proj_s.add(m_offset);
 	proj_e.add(m_offset);
@@ -130,11 +155,11 @@ void SRenderer::DrawMesh(const CMesh& mesh, const CTransform& transform) {
 		// perform the projection from 3d to 2d
 		for (Triangle& tri : clipped_tris) {
 			projected_tri.verts[0] = SCamera::Instance().projection * tri.verts[0];
-			projected_tri.verts[0].divideByW();
+			projected_tri.verts[0].divide_by_w();
 			projected_tri.verts[1] = SCamera::Instance().projection * tri.verts[1];
-			projected_tri.verts[1].divideByW();
+			projected_tri.verts[1].divide_by_w();
 			projected_tri.verts[2] = SCamera::Instance().projection * tri.verts[2];
-			projected_tri.verts[2].divideByW();
+			projected_tri.verts[2].divide_by_w();
 
 			projected_tri.light_sim = tri.light_sim;
 
@@ -253,7 +278,7 @@ void SRenderer::DrawDebugCollider(const CCollider& collider) const {
 		projected[i] = view * proj * corners[i];
 		if (projected[i].z <= 0) return; // early return if it's behind the screen
 
-		projected[i].divideByW();
+		projected[i].divide_by_w();
 
 		projected[i].add(offset);
 

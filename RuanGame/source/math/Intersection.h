@@ -19,7 +19,3 @@ inline Vector3 IntersectLinePlane(const Vector3& p0, const Vector3& p1, const Ve
 
 	return (p0 + intersect);
 }
-
-bool IntersectRaySphere(const Vector3& ray_origin, Vector3 ray_dir, float& depth, const CCollider& sphere);
-
-bool IntersectRayAABB(const Vector3& ray_origin, const Vector3& ray_dir, float& depth, const CCollider& aabb);

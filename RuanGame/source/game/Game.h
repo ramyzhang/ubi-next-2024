@@ -7,7 +7,6 @@
 #include "scenes/SceneInclude.h"
 
 class Game {
-
 public: 
 	std::unordered_map<std::string, Scene*> scenes;
 	std::string current_scene;
@@ -16,5 +15,4 @@ public:
 	void Update(const float deltaTime);
 	void Render();
 	void Shutdown();
-
 };

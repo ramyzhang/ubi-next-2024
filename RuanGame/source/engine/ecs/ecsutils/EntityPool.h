@@ -15,6 +15,10 @@ public:
 
     ~EntityPool();
 
+    EntityID GetNextID() {
+        return (EntityID)(m_next_available - m_entities);
+    }
+
     EntityID Add(const Entity& e);
 
     void Remove(const EntityID& e);

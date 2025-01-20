@@ -30,6 +30,9 @@ void SCamera::HandleInputs(const float deltaTime) {
 		case SCamera::FIXEDTARGET:
 			FixedTargetCameraUpdate(deltaTime);
 			break;
+		case SCamera::FIXEDTARGETROTATE:
+			FixedTargetRotateCameraUpdate(deltaTime);
+			break;
 		default:
 			break;
 	}
@@ -49,16 +52,16 @@ void SCamera::UpdateViewMatrix() {
 		case SCamera::CLAMPED:
 			look = Matrix4x4().rotate(Vector3(pitch, yaw, 0)) * target;
 			break;
-		case SCamera::FIXEDTARGET:
-			// look has already been modified by the update function
-			break;
 		default:
+			// look has already been modified by the update function for fixed target modes
 			break;
 	}
 
 	target = position + look;
 
-	view = Matrix4x4().pointAt(position, target, up).dirtyInvert();
+	view_inverse = Matrix4x4().point_at(position, target, up);
+	Matrix4x4 copy = view_inverse;
+	view = copy.dirty_invert();
 }
 
 void SCamera::FreeCameraUpdate(const float deltaTime) {
@@ -168,12 +171,23 @@ void SCamera::FixedTargetCameraUpdate(const float deltaTime) {
 		new_yaw += m_rotate_speed * deltaTime;
 	}
 
-	float clamp_l = -80.0f * (float)M_PI / 180.0f;
-	float clamp_r = 80.0f * (float)M_PI / 180.0f;
+	float clamp_l = -70.0f * (float)M_PI / 180.0f;
+	float clamp_r = 70.0f * (float)M_PI / 180.0f;
 	pitch = std::clamp(new_pitch, clamp_l, clamp_r);
 	yaw = new_yaw;
 	
 	// rotate around the target, and always look at it O__O
 	position = Matrix4x4().rotate(Vector3(pitch, yaw, 0)) * m_relative_pos + ctrans->position;
+	look = (ctrans->position - position).normalize();
+}
+
+void SCamera::FixedTargetRotateCameraUpdate(const float deltaTime) {
+	CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(m_target);
+
+	// automatically revolve around the target
+	yaw += m_rotate_speed * deltaTime;
+
+	// rotate around the target, and always look at it O__O
+	position = Matrix4x4().rotate(Vector3(0, yaw, 0)) * m_relative_pos * 30.0f + ctrans->position;
 	look = (ctrans->position - position).normalize();
 }

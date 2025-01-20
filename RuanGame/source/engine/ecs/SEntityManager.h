@@ -26,7 +26,7 @@ using ComponentPoolVariant = std::variant<
 
 typedef std::vector<Entity> EntityVector;
 typedef std::unordered_set<EntityID> EntityIDSet;
-typedef std::unordered_map<std::string, EntityIDSet> EntityMap;
+// typedef std::unordered_map<std::string, EntityIDSet> EntityMap;
 
 typedef std::map<ComponentID, ComponentPoolVariant> ComponentPoolMap;
 
@@ -40,13 +40,14 @@ public:
     void ClearAllEntities();
     void Shutdown();
 
-    EntityID AddEntity(const std::string& tag);
+    EntityID    AddEntity(const std::string& tag);
+    void        RemoveEntity(const EntityID& e);
 
-    const Entity& GetEntity(const EntityID& e) { return m_entities.Get(e); };
-    EntityIDSet& GetEntities(const std::string& tag) { return m_entity_map[tag]; };
+    Entity& GetEntity(const EntityID& e) { return m_entities.Get(e); };
+    // EntityIDSet& GetEntities(const std::string& tag) { return m_entity_map[tag]; };
     size_t GetNumEntities() const { return m_total_entities; };
 
-    void ChangeTag(const EntityID& e, const std::string& new_tag); // use this sparingly
+    void ChangeTag(const EntityID& e, const std::string& new_tag);
 
     template <typename T>
     void AddComponent(const EntityID& e, T& c_data);
@@ -57,7 +58,7 @@ public:
 
 private:
     EntityPool           m_entities;
-    EntityMap            m_entity_map;
+    // EntityMap         m_entity_map;
     EntityVector         m_entities_to_add;
 
     ComponentPoolMap     m_component_pool_map;
@@ -69,7 +70,7 @@ template <typename T>
 void SEntityManager::AddComponent(const EntityID& e, T& c_data) {
     assert(m_entities.Get(e).m_isactive);
     assert(m_component_pool_map.count(GetComponentID<T>()) > 0); // this component map should alr be created
-    assert(!m_entities[e].CheckComponent(GetComponentID<T>()));
+    if (m_entities[e].CheckComponent(GetComponentID<T>())) return;
 
     ComponentPool<T>* component_pool = std::get<ComponentPool<T>*>(m_component_pool_map[GetComponentID<T>()]);
     assert(!component_pool->CheckComponentExists(e)); // check that component doesn't already exist

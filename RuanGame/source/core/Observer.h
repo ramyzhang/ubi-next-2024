@@ -9,5 +9,5 @@ const int MAX_OBSERVERS = 32;
 class Observer {
 public:
     virtual ~Observer() {}
-    virtual void OnNotify(Event event, const EntityID& entity) = 0;
+    virtual void OnNotify(Event event, std::vector<EntityID> entities) = 0;
 };

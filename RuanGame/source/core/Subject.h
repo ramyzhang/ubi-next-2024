@@ -16,5 +16,5 @@ private:
     int                             m_num_observers;
 
 protected:
-    void Notify(Event event, const EntityID& entity);
+    void Notify(Event event, std::vector<EntityID> entities);
 };

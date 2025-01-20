@@ -1,5 +1,7 @@
 #pragma once
 
+#include "engine/EngineIncludes.h"
+
 enum SceneState {
 	SCENE_STAY,
 	SCENE_NEXT
@@ -18,6 +20,7 @@ public:
 
 	void Init() {
 		InitGOs();
+		SEntityManager::Instance().Update(); // initial update to get the new entities in the list
 		InstantiateGOs();
 	}
 
