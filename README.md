@@ -1,4 +1,7 @@
+# The Big Catch: C++ 3D Game
+
 This is my submission for Ubisoft's NEXT 2024-2025 challenge this year!
+I began working on the engine on December 14th, 2024, and completed the game submission on January 20th :)
 
 ![ezgif-5-3b7335a1fe](https://github.com/user-attachments/assets/9503bdea-e39a-4e8e-956a-085794c5c47f)
 
@@ -17,3 +20,4 @@ Completed:
 - Components, component memory pools
 - UI system
 - Basic physics (mostly sphere and AABB collision w/ impulse, rigidbodies, basic dynamics, drag)
+
