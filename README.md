@@ -7,12 +7,13 @@ I began working on the engine on December 14th, 2024, and completed the game sub
 
 Video demo: https://youtu.be/JIPNhrzT12A?si=B-tTXGQSRBKkDaIk
 
-Completed:
-- Flocking & boids :D
+Completed features:
+- Flocking with boids :D
 - Grid-based level generation
+- Music and sound effects self-made on Beepbox!
 - 3D renderer (projection, triangles, rasterizer, lighting, backface culling, transformations, triangle clipping)
 - .obj file loading
-- Free camera
+- Free camera, fixed target camera, "parallax-clamp" camera
 - Scene management for levels
 - Tiny Vector3 and Matrix4x4 math library
 - Core game loop
@@ -21,3 +22,7 @@ Completed:
 - UI system
 - Basic physics (mostly sphere and AABB collision w/ impulse, rigidbodies, basic dynamics, drag)
 
+Features that I planned but shelved:
+- Octree spatial partitioning to improve z-depth rendering, and also optimize collision detection - decided to prioritize other things
+- Obstacle avoidance for the boids - required the above to be feasible performance-wise
+- More audio features, like spatial panning and effects - the given SimpleSound interface we were allowed to use was sadly only limited to starting, looping, and stopping sounds
