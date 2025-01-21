@@ -19,7 +19,8 @@ private:
 	EntityID				m_play;
 	EntityID				m_quit;
 	EntityID				m_indicator;
-
+	EntityID				m_credits;
+	
 	EntityID				m_border_top;
 	EntityID				m_border_bottom;
 	std::vector<EntityID>	m_border_left;

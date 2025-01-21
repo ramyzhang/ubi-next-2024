@@ -36,7 +36,7 @@ void SLevelManager::InitPlatforms() {
 	m_platform_coords.swap(to_swap);
 
 	// select four of the random coordinates for the stars to be on
-	for (int i = 0; i < num_stars; i++) {
+	for (int i = 0; i < STARS; i++) {
 		stars.push_back(SEntityManager::Instance().AddEntity("star"));
 		m_star_coords.push_back(m_platform_coords[i]);
 	}
@@ -44,8 +44,9 @@ void SLevelManager::InitPlatforms() {
 	m_moving_platform = SEntityManager::Instance().AddEntity("moving");
 }
 
-void SLevelManager::InstantiatePlatforms() {
-	for (int i = 0; i < num_stars; i++) {
+std::vector<EntityID> SLevelManager::InstantiatePlatforms() {
+	std::vector<EntityID> star_ids;
+	for (int i = 0; i < STARS; i++) {
 		GridCoord& gc = m_platform_coords[i];
 
 		WorldCoord wc = ConvertToWorldCoords(gc);
@@ -64,16 +65,17 @@ void SLevelManager::InstantiatePlatforms() {
 			stars[i],
 			Vector3(wc.first, -m_height / 2.0f + y_scale * 2.0f + 5.0f, wc.second)
 		);
+		star_ids.push_back(stars[i]);
 	}
 	
-	// instantiate the star platforms
-	for (int i = num_stars; i < m_platform_coords.size(); i++) {
+	// instantiate the random platforms
+	for (int i = STARS; i < m_platform_coords.size(); i++) {
 		GridCoord& gc = m_platform_coords[i];
 
 		if (m_grid[gc.first][gc.second] == MAX_ENTITIES) continue;
 
 		WorldCoord wc = ConvertToWorldCoords(gc);
-		float y_scale = RandomFloat(0.0f, m_height / 3.0f);
+		float y_scale = RandomFloat(10.0f, 10.0f * (STARS - 1) - 5.0f);
 
 		m_sspawner.InstantiateCube(
 			m_grid[gc.first][gc.second],
@@ -92,19 +94,24 @@ void SLevelManager::InstantiatePlatforms() {
 		true);
 
 	m_move_dir = Vector3(1.0f, 0, 0);
+
+	return star_ids;
 }
 
 void SLevelManager::Update(const float deltaTime) {
-	if (App::IsKeyPressed(VK_TAB)) m_game_won = true; //TODO: delete this	
+	if (App::IsKeyPressed(VK_TAB)) m_game_won = true; // TODO: delete this	
 
 	CTransform* move_trans = SEntityManager::Instance().GetComponent<CTransform>(m_moving_platform);
-	if (std::abs(move_trans->position.x) > m_width) {
+	if (std::abs(move_trans->position.x) > m_width / 2.0f) {
 		m_move_dir = Vector3() - m_move_dir;
 	}
 	move_trans->position = Lerp(move_trans->position, move_trans->position + m_move_dir, 0.1f * deltaTime);
 }
 
 void SLevelManager::Shutdown() {
+	m_moves = 0;
+	m_score = 0;
+	m_game_won = false;
 	stars.clear();
 	m_star_coords.clear();
 	m_platform_coords.clear();
@@ -118,6 +125,10 @@ void SLevelManager::OnNotify(Event event, std::vector<EntityID> entities) {
 	if (m_score == m_max_score) {
 		App::PlaySound("data/music/you-win.wav", false);
 		m_game_won = true;
+
+		if (m_moves <= m_high_score) {
+			m_high_score = m_moves;
+		}
 	}
 	else {
 		App::PlaySound("data/music/fish-freed.wav", false);

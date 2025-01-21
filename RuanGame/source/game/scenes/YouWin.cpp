@@ -9,6 +9,11 @@ void YouWin::InitGOs() {
 		m_you_win.push_back(SEntityManager::Instance().AddEntity("ui"));
 	}
 	m_restart = SEntityManager::Instance().AddEntity("ui");
+
+	m_this_score = SEntityManager::Instance().AddEntity("ui");
+	m_high_score = SEntityManager::Instance().AddEntity("ui");
+	m_new_high_score = SEntityManager::Instance().AddEntity("ui");
+
 	SCamera::Instance().mode = SCamera::FIXEDTARGETROTATE;
 }
 
@@ -23,16 +28,39 @@ void YouWin::InstantiateGOs() {
 		SEntityManager::Instance().AddComponent<CUIText>(m_you_win[i], ctitle);
 	}
 
-	CUIText restart = {};
-	restart.pos = Vector3(450.0f, 300.0f, 0.0f);
-	restart.text = "[R] PLAY AGAIN";
-	restart.rgb = Vector3(1.0f, 1.0f, 1.0f);
-	SEntityManager::Instance().AddComponent<CUIText>(m_restart, restart);
+	CUIText cscore = {};
+	cscore.pos = Vector3(425.0f, 300.0f, 0.0f);
+	cscore.text = "YOUR SCORE - " + std::to_string(SLevelManager::Instance().GetCurrentMoves()) + " MOVES";
+	cscore.rgb = m_yellow;
+	SEntityManager::Instance().AddComponent<CUIText>(m_this_score, cscore);
+	
+	CUIText chighscore = {};
+	chighscore.pos = Vector3(425.0f, 280.0f, 0.0f);
+	int high_score = SLevelManager::Instance().GetHighScoreMoves() == INT_MAX ? 0 : SLevelManager::Instance().GetHighScoreMoves();
+	chighscore.text = "HIGH SCORE - " + std::to_string(high_score) + " MOVES";
+	chighscore.rgb = m_green;
+	SEntityManager::Instance().AddComponent<CUIText>(m_high_score, chighscore);
+
+	CUIText crestart = {};
+	crestart.pos = Vector3(450.0f, 200.0f, 0.0f);
+	crestart.text = "[R] PLAY AGAIN";
+	crestart.rgb = Vector3(1.0f, 1.0f, 1.0f);
+	SEntityManager::Instance().AddComponent<CUIText>(m_restart, crestart);
 
 	if (!App::IsSoundPlaying("data/music/water-menu.wav")) App::PlaySound("data/music/water-menu.wav", true); // loop
+
+	if (SLevelManager::Instance().GetCurrentMoves() > SLevelManager::Instance().GetHighScoreMoves()) return;
+	
+	CUIText cbeat = {};
+	cbeat.pos = Vector3(410.0f, 260.0f, 0.0f);
+	cbeat.text = "!!! NEW PERSONAL BEST !!!";
+	cbeat.rgb = m_yellow;
+	SEntityManager::Instance().AddComponent<CUIText>(m_new_high_score, cbeat);
 }
 
 void YouWin::Update(const float deltaTime) {
+	SLevelManager::Instance().Update(deltaTime);
+
 	if (App::IsKeyPressed(0x52)) SetState(SCENE_NEXT);
 	if (!IncrementRate(m_rate_counter, m_rate)) return;
 	for (int i = 0; i < m_repeats; i++) {
@@ -42,10 +70,15 @@ void YouWin::Update(const float deltaTime) {
 }
 
 void YouWin::LateUpdate(const float deltaTime) {
+	SBoids::Instance().Update(deltaTime);
 }
 
 void YouWin::Shutdown() {
+	SBoids::Instance().Shutdown();
+	SLevelManager::Instance().Shutdown();
+
 	m_you_win.clear();
+	m_high_score_beat = false;
 	EntityID temp_e = (EntityID)MAX_ENTITIES;
 	SRenderer::Instance().SetFloorEntity(temp_e);
 	SEntityManager::Instance().ClearAllEntities(); // clear everything and go to main menu after

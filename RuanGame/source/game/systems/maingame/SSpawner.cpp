@@ -52,7 +52,7 @@ void SSpawner::InstantiateCube(
 
 	CRigidBody cube_rb = {};
 	cube_rb.velocity = Vector3(0, 0, 0);
-	cube_rb.mass = 1.0f;
+	cube_rb.mass = 50.0f;
 	cube_rb.is_static = _is_static;
 	cube_rb.has_gravity = false;
 	SEntityManager::Instance().AddComponent<CRigidBody>(_eid, cube_rb);
@@ -104,7 +104,11 @@ void SSpawner::InstantiateBoid(
 	SEntityManager::Instance().AddComponent<CTransform>(_eid, boid_trans); // front face
 
 	CRigidBody boid_rb = {};
-	boid_rb.velocity = Vector3(RandomFloat(0, 1.0f, _eid), RandomFloat(0, 1.0f, _eid), RandomFloat(0, 1.0f, _eid));
+	boid_rb.velocity = Vector3(
+		RandomFloat(-1.0f, 1.0f, _eid),
+		RandomFloat(-1.0f, 1.0f, _eid + 1),
+		RandomFloat(-1.0f, 1.0f, _eid + 2)
+	);
 	boid_rb.drag = 1.0f;
 	boid_rb.is_static = true;
 	SEntityManager::Instance().AddComponent<CRigidBody>(_eid, boid_rb);
@@ -118,6 +122,39 @@ void SSpawner::InstantiateBoid(
 	CBoid cboid = {};
 	cboid.forward = boid_rb.velocity;
 	SEntityManager::Instance().AddComponent<CBoid>(_eid, cboid);
+}
+
+void SSpawner::InstantiateHintBoid(
+	const EntityID& _eid,
+	Vector3 _position) {
+	std::shared_ptr<Model> cube_model = SModelManager::Instance().LoadModel("data/cube.obj");
+
+	CMesh boid_mesh = {};
+	boid_mesh.model = cube_model;
+	boid_mesh.colour = Vector3(RandomFloat(0.2f, 0.4f), RandomFloat(0.5f, 0.7f), RandomFloat(0.06f, 0.8f));
+	SEntityManager::Instance().AddComponent<CMesh>(_eid, boid_mesh);
+
+	CTransform boid_trans = {};
+	boid_trans.rotation = Vector3();
+	boid_trans.position = _position;
+	boid_trans.scale = Vector3(0.5f, 0.5f, 0.5f);
+	SEntityManager::Instance().AddComponent<CTransform>(_eid, boid_trans); // front face
+
+	CRigidBody boid_rb = {};
+	boid_rb.velocity = Vector3(
+		RandomFloat(-1.0f, 1.0f, _eid),
+		RandomFloat(-1.0f, 1.0f, _eid + 1),
+		RandomFloat(-1.0f, 1.0f, _eid + 2)
+	);
+	boid_rb.drag = 1.0f;
+	boid_rb.is_static = true;
+	SEntityManager::Instance().AddComponent<CRigidBody>(_eid, boid_rb);
+
+	CCollider boid_collider = {};
+	boid_collider.center = boid_trans.position;
+	boid_collider.volume_type = SPHERE;
+	boid_collider.radius = 0.25f; // since I know the cube model is a unit cube
+	SEntityManager::Instance().AddComponent<CCollider>(_eid, boid_collider);
 }
 
 void SSpawner::InstantiatePlayer(const EntityID& _eid) {
@@ -136,7 +173,7 @@ void SSpawner::InstantiatePlayer(const EntityID& _eid) {
 
 	CRigidBody player_rb = {};
 	player_rb.velocity = Vector3(0, 0, 0);
-	player_rb.bounciness = 1.5f; // i wanna be bouncy :D
+	player_rb.bounciness = 3.0f; // i wanna be bouncy :D
 	player_rb.drag = 0.5f;
 	player_rb.is_static = false;
 	player_rb.has_gravity = true;

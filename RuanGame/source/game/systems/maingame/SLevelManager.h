@@ -3,30 +3,35 @@
 #include "math/Utils.h"
 #include "game/systems/maingame/SSpawner.h"
 #include "game/systems/maingame/SStars.h"
+#include "game/GameConstants.h"
 
 typedef std::pair<int, int>		GridCoord;
 typedef std::pair<float, float> WorldCoord;
 
-class SLevelManager : public Observer {
+class SLevelManager : public System<SLevelManager>, public Observer {
 public:
 	void Init(const float& _width, const float& _depth, const float& _height);
 
 	void InitPlatforms();
-	void InstantiatePlatforms();
+	std::vector<EntityID> InstantiatePlatforms();
 	void Update(const float deltaTime);
 	void Shutdown();
 
-	static const int		num_stars = 4;
 	std::vector<EntityID>	stars;
 
 	void OnNotify(Event event, std::vector<EntityID> entities);
 
 	bool IsGameWon() const { return m_game_won; };
+	int	GetHighScoreMoves() const { return m_high_score; };
+	int GetCurrentMoves() const { return m_moves; };
+	void IncreaseMoves() { m_moves++; };
 
 private:
 	bool	m_game_won = false;
 	int		m_max_score = 4;
-	int		m_score = 0;
+	int		m_score = 0; // this is just for stars
+	int		m_moves = 0;
+	int		m_high_score = INT_MAX;
 
 	WorldCoord	ConvertToWorldCoords(GridCoord _gc) const;
 

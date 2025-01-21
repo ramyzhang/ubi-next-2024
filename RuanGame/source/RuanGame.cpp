@@ -31,12 +31,10 @@ void Render() {
 	engine.CoreRender();
 
 	game.Render();
-
-	// TODO: gamerender()
 }
 
 void Shutdown() {
-	// TODO: gameshutdown();
+	game.Shutdown();
 
-	// engine.CoreShutdown();
+	engine.CoreShutdown();
 }

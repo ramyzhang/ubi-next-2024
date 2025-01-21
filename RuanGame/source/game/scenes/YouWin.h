@@ -4,6 +4,8 @@
 
 #include "Scene.h"
 #include "core/IncrementRate.h"
+#include "game/systems/maingame/SBoids.h"
+#include "game/systems/maingame/SLevelManager.h"
 
 class YouWin : public Scene {
 
@@ -17,6 +19,11 @@ public:
 private:
 	std::vector<EntityID>	m_you_win;
 	EntityID				m_restart;
+	EntityID				m_this_score;
+	EntityID				m_high_score;
+	EntityID				m_new_high_score;
+
+	bool					m_high_score_beat = false;
 
 	int						m_repeats = 5;
 

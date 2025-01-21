@@ -2,6 +2,7 @@
 
 #include "Scene.h"
 #include "math/Utils.h"
+#include "game/GameConstants.h"
 #include "game/systems/maingame/SMovement.h"
 #include "game/systems/maingame/SSpawner.h"
 #include "game/systems/maingame/SBoids.h"
@@ -29,7 +30,7 @@ private:
 	SSpawner				m_sspawner;
 	//SBoids				m_sboids;
 	SMainUI					m_sui;
-	SLevelManager			m_slevelmanager;
+	//SLevelManager			m_slevelmanager;
 	SStars					m_sstars;
 
 	float					m_width = 200.0f;

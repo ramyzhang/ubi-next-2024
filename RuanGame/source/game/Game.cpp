@@ -10,7 +10,7 @@ void Game::Init() {
 	scenes["MainScene"]->next_scene = "YouWin";
 	scenes["YouWin"]->next_scene = "MainMenu";
 
-	current_scene = "MainScene";
+	current_scene = "MainMenu";
 	scenes[current_scene]->Init();
 };
 

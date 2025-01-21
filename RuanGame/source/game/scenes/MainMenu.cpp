@@ -5,11 +5,13 @@
 
 void MainMenu::InitGOs() {
 	SCamera::Instance().mode = SCamera::CLAMPED;
+	SCamera::Instance().position = Vector3();
 
 	m_title = SEntityManager::Instance().AddEntity("ui");
 	m_play = SEntityManager::Instance().AddEntity("ui");
 	m_quit = SEntityManager::Instance().AddEntity("ui");
 	m_indicator = SEntityManager::Instance().AddEntity("ui");
+	m_credits = SEntityManager::Instance().AddEntity("ui");
 
 	m_border_top = SEntityManager::Instance().AddEntity("ui");
 	m_border_bottom = SEntityManager::Instance().AddEntity("ui");
@@ -60,6 +62,12 @@ void MainMenu::InstantiateGOs() {
 	cindic.rgb = yellow;
 	cindic.text = "[ENTER]";
 	SEntityManager::Instance().AddComponent<CUIText>(m_indicator, cindic);
+	
+	CUIText ccredits = {};
+	ccredits.pos = Vector3(26.0f, 26.0f, 0.0f);
+	ccredits.rgb = green;
+	ccredits.text = "presented by RamiSoft Games";
+	SEntityManager::Instance().AddComponent<CUIText>(m_credits, ccredits);
 
 	CUIText cborder_horizontal = {};
 	cborder_horizontal.rgb = green;

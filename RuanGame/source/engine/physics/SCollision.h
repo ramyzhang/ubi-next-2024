@@ -22,10 +22,6 @@ public:
 		float			depth;
 	};
 
-	bool IntersectRayCollider(const Vector3& ray_origin, Vector3 ray_dir, float& depth, const CCollider& ccol);
-	bool IntersectRaySphere(const Vector3& ray_origin, Vector3 ray_dir, float& depth, const CCollider& sphere);
-	bool IntersectRayAABB(const Vector3& ray_origin, const Vector3& ray_dir, float& depth, const CCollider& aabb);
-
 private:
 	void GetCollisionInfo(const CCollider& e, const CCollider& o, Vector3& normal, float& depth);
 	void SphereCollisionInfo(const CCollider& e, const CCollider& o, Vector3& normal, float& depth);

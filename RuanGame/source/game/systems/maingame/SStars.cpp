@@ -31,8 +31,8 @@ void SStars::OnNotify(Event event, std::vector<EntityID> entities) {
 	if (player && star) {
 		m_stars->erase(std::find(m_stars->begin(), m_stars->end(), star_id));
 
-		Notify(STAR_COLLECTED, { m_player });
-
-		SEntityManager::Instance().RemoveEntity(star_id);
+		Notify(STAR_COLLECTED, { star_id });
+		// sboids will handle star deletion!
 	}
 }
+

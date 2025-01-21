@@ -6,30 +6,88 @@ void SBoids::Init() {
 	for (int i = 0; i < m_num_boids; i++) {
 		m_boids.push_back(SEntityManager::Instance().AddEntity("boid"));
 	}
-}
 
-void SBoids::Instantiate() {
-	for (EntityID& e : m_boids) {
-		m_sspawner.InstantiateBoid(e, Vector3());
+	// init the fake boids that will rotate around the stars
+	for (int i = 0; i < m_num_hint_boids * STARS; i++) {
+		if (m_hint_boids.count((EntityID)(i % STARS)) > 0) {
+			m_hint_boids[(EntityID)(i % STARS)].push_back(SEntityManager::Instance().AddEntity("boid"));
+		}
+		else {
+			m_hint_boids.insert({ (EntityID)(i % STARS), {SEntityManager::Instance().AddEntity("boid")} });
+		}
 	}
 }
 
-void SBoids::Update(const float deltaTime) {
-	m_create_boid_queue.clear();
-	
+void SBoids::Instantiate(const std::vector<EntityID>& _targets) {
+	m_targets = _targets;
+
+	// instantiate the fake boids that will rotate around the stars
+	for (int i = 0; i < STARS; i++) {
+		auto node = m_hint_boids.extract(i);
+		node.key() = m_targets[i];
+
+		m_hint_boids.insert(std::move(node));
+
+		CTransform* star_trans = SEntityManager::Instance().GetComponent<CTransform>(m_targets[i]);
+		for (EntityID& e : m_hint_boids[m_targets[i]]) {
+			float dist = RandomFloat(4.0f, 6.0f, e);
+			m_sspawner.InstantiateHintBoid(
+				e,
+				star_trans->position + Vector3(dist, dist, dist));
+		}
+	}
+}
+
+void SBoids::Update(const float deltaTime) {	
+	// just instantiate the boids once per frame if a star was collected so it looks like particles!
+	if (!m_create_boid_queue.empty() && m_boid_i < m_num_boids) {
+		m_sspawner.InstantiateBoid(m_boids[m_boid_i], m_create_boid_queue.front());
+		m_boid_i++;
+		m_create_boid_queue.pop_front();
+	}
+
+	// update the positions of all the boids
 	for (EntityID e : EntityView<CBoid>(SEntityManager::Instance())) {
 		CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(e);
 		CRigidBody* crb = SEntityManager::Instance().GetComponent<CRigidBody>(e);
-		CBoid* cboid = SEntityManager::Instance().GetComponent<CBoid>(e);
+		CBoid*		cboid = SEntityManager::Instance().GetComponent<CBoid>(e);
 		
 		cboid->forward = FindNextDirection(ctrans, cboid, crb, e);
 		Vector3 next_velo = Lerp(crb->velocity.normalize(), cboid->forward, 0.8f);
 		
-		ctrans->rotation.add(Vector3(RandomFloat(0, 1.0f), RandomFloat(0, 1.0f), RandomFloat(0, 1.0f)) * 0.001f * deltaTime);
-
+		ctrans->rotation.add(Vector3(RandomFloat(0, 1.0f, e), RandomFloat(0, 1.0f, e), RandomFloat(0, 1.0f, e)) * 0.001f * deltaTime);
 		crb->velocity = next_velo * m_speed * deltaTime;
 		cboid->forward = next_velo.normalize();
 	}
+
+	// update the positions of all the fake boids
+	for (auto& elem : m_hint_boids) {
+		CTransform* star_trans = SEntityManager::Instance().GetComponent<CTransform>(elem.first);
+		for (EntityID& hint_boid : elem.second) {
+			CTransform* boid_trans = SEntityManager::Instance().GetComponent<CTransform>(hint_boid);
+
+			float dist = RandomFloat(3.0f, 5.0f, hint_boid);
+			float speed_p = RandomFloat(0.001f, 0.005f, hint_boid);
+			float speed_y = RandomFloat(0.001f, 0.005f, hint_boid + 1);
+
+			float new_pitch = boid_trans->rotation.x + speed_p * deltaTime;
+			float new_yaw = boid_trans->rotation.y + speed_y * deltaTime;
+
+			Vector3 new_rot = Vector3(new_pitch, new_yaw, 0);
+			Vector3 target_pos = Matrix4x4().rotate(new_rot) * Vector3(dist, dist, dist) + star_trans->position;
+
+			boid_trans->rotation = Lerp(boid_trans->rotation, new_rot, 0.7f);
+			boid_trans->position = Lerp(boid_trans->position, target_pos, 0.7f);
+		}
+	}
+}
+
+void SBoids::Shutdown() {
+	m_boid_i = 0;
+	m_create_boid_queue.clear();
+	m_boids.clear();
+	m_targets.clear();
+	m_hint_boids.clear();
 }
 
 void SBoids::OnNotify(Event event, std::vector<EntityID> entities) {
@@ -38,7 +96,17 @@ void SBoids::OnNotify(Event event, std::vector<EntityID> entities) {
 	EntityID star_id = entities[0];
 	CTransform* star_trans = SEntityManager::Instance().GetComponent<CTransform>(star_id);
 
-	m_create_boid_queue.push_back(star_trans->position);
+	// queue the boid instantiation so we don't hold up whatever process is currently running
+	for (int i = 0; i < m_num_boids / STARS; i++) {
+		m_create_boid_queue.push_back(star_trans->position);
+	}
+	
+	// delete the fake boids around this star
+	for (EntityID& fake_boid : m_hint_boids[star_id]) {
+		SEntityManager::Instance().RemoveEntity(fake_boid);
+	}
+
+	m_hint_boids.erase(star_id);
 
 	// delete the star
 	SEntityManager::Instance().RemoveEntity(star_id);
@@ -153,26 +221,3 @@ Vector3 SBoids::CheckAgainstBounds(Vector3 position) const {
 
 	return avg_walls;
 }
-
-Vector3 SBoids::GetAngle(Vector3 a, Vector3 b) {
-	a.normalize();
-	b.normalize();
-
-	// get axis of rotation via cross product
-	Vector3 rot_axis = a.cross(b);
-	rot_axis = rot_axis.normalize();
-
-	float d = std::acosf(a.dot(b));
-
-	if (rot_axis.magnitude() < 0.001) {
-		return Vector3(0, 0, 0);
-	}
-
-	Vector3 angle;
-	angle.x = std::atan2f(rot_axis.y, rot_axis.z) * d; // pitch
-	angle.y = std::atan2f(rot_axis.x, rot_axis.z) * d; // yaw
-	angle.z = std::atan2f(rot_axis.x, rot_axis.y) * d; // roll
-
-	return angle;
-}
-

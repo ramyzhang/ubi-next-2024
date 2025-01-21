@@ -1,6 +1,7 @@
 #pragma once
 
 #include "App/AppSettings.h"
+#include "math/Vector3.h"
 
 constexpr int		STARS = 4;
 

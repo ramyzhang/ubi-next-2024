@@ -3,6 +3,7 @@
 #include "engine/EngineIncludes.h"
 #include "core/IncrementRate.h"
 #include "game/GameConstants.h"
+#include "game/systems/maingame/SLevelManager.h"
 
 class SMainUI : public Observer {
 
@@ -24,8 +25,12 @@ private:
 	bool	m_decrementing = false;
 
 	int		m_star_score = 0;
+	int		m_moves_score = 0;
 
 	EntityID	m_measures;
 	EntityID	m_score_keeper;
 	EntityID	m_move_keeper;
+
+	Vector3		m_green = Vector3(0.3f, 0.8f, 0.44f);
+	Vector3		m_yellow = Vector3(0.8f, 0.67f, 0.31f);
 };

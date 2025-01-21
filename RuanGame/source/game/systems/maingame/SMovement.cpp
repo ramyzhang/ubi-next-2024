@@ -39,9 +39,14 @@ void SMovement::Update(const float deltaTime) {
 	ctrans->rotation = new_rotation;
 	new_force = rot_mat * Vector3(0, 10.0f, 20.0f) * m_mass * m_multiplier;
 
-	UpdatePath(ctrans->position, new_force, deltaTime);
+	UpdatePath(ctrans->position, new_force);
+
+	// check if player has collided with any platforms or floors
+	if (m_collided_set.count(m_player) > 0) m_grounded = true;
+	else m_grounded = false;
 	
-	if (App::IsKeyPressed(VK_SPACE) && m_grounded) {
+	if (App::IsKeyPressed(VK_SPACE) && !m_key_was_pressed && m_grounded) {
+		SLevelManager::Instance().IncreaseMoves();
 		int random = RandomInt(1, 3);
 		if (random == 1) App::PlaySound("data/music/launch-1.wav");
 		if (random == 2) App::PlaySound("data/music/launch-2.wav");
@@ -49,13 +54,19 @@ void SMovement::Update(const float deltaTime) {
 		
 		m_last_position = ctrans->position;
 		crb->force = new_force * deltaTime;
-		m_grounded = false; // reset the grounded variable for the next frame
 
 		TogglePath();
+
+		// m_grounded = false; // reset the grounded variable for the next frame
+		m_key_was_pressed = true;
 	}
-	else if (m_grounded) {
+	else if (m_grounded && !App::IsKeyPressed(VK_SPACE)) {
 		TogglePath();
 	}
+
+	if (!App::IsKeyPressed(VK_SPACE)) m_key_was_pressed = false; // avoid re-triggering a ton
+
+	m_collided_set.clear(); // reset the set of collided pairs
 }
 
 void SMovement::Shutdown() {
@@ -75,22 +86,22 @@ void SMovement::TogglePath() {
 	}
 }
 
-void SMovement::UpdatePath(const Vector3& position, const Vector3& force, const float& deltaTime) {\
+void SMovement::UpdatePath(const Vector3& position, const Vector3& force) {\
 	// at peak height, vertical velocity = 0
 	// v = v0 + at
 	// 0 = force.y + gravity * t
-	float time_to_apex = -force.y / m_gravity;
+	float time_to_apex = -force.y / (m_gravity * m_multiplier);
 	float total_time = time_to_apex * 2; // Time to go up and come back down
 
 	float time_step = total_time / (path_length - 1);
 
 	for (int i = 0; i < path_length; i++) {
 		float t = time_step * i;
-		if (i == 0) t = time_step * 0.5f;
+		if (i == 0) t = time_step * 0.5f; // don't want it being inside the player
 		Vector3 new_position = position +
 			Vector3(
 				force.x * t,
-				force.y * t + 0.5f * m_gravity * t * t,
+				force.y * t + 0.5f * m_gravity * m_multiplier * t * t,
 				force.z * t
 			);
 
@@ -106,19 +117,15 @@ void SMovement::OnNotify(Event event, std::vector<EntityID> entities) {
 	std::string tag1 = SEntityManager::Instance().GetEntity(entities[1]).GetTag();
 
 	if (tag0 == "player") {
-		if (tag1 == "floor") {
-			m_grounded = true;
-		}
-		else if (tag1 == "platform") {
-			m_grounded = true; // problematic due to sides of platform, but wall jumping is fun lol
+		if (tag1 == "floor" || tag1 == "platform") {
+			m_collided_set.insert(entities[0]);
+			m_collided_set.insert(entities[1]);
 		}
 	}
 	else if (tag1 == "player") {
-		if (tag0 == "floor") {
-			m_grounded = true;
-		}
-		else if (tag0 == "platform") {
-			m_grounded = true;
+		if (tag0 == "floor" || tag0 == "platform") {
+			m_collided_set.insert(entities[0]);
+			m_collided_set.insert(entities[1]);
 		}
 	}
 }

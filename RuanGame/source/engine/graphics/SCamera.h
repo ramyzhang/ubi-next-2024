@@ -62,4 +62,5 @@ private:
 
 	float		m_move_speed = 0.03f; // only used in FREE mode
 	float		m_rotate_speed = 0.0015f; // used in FREE mode and FIXEDTARGET mode
+	float		m_carousel_rotate_speed = 0.0005f; // used in FREE mode and FIXEDTARGET mode
 };

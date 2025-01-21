@@ -185,7 +185,7 @@ void SCamera::FixedTargetRotateCameraUpdate(const float deltaTime) {
 	CTransform* ctrans = SEntityManager::Instance().GetComponent<CTransform>(m_target);
 
 	// automatically revolve around the target
-	yaw += m_rotate_speed * deltaTime;
+	yaw += m_carousel_rotate_speed * deltaTime;
 
 	// rotate around the target, and always look at it O__O
 	position = Matrix4x4().rotate(Vector3(0, yaw, 0)) * m_relative_pos * 30.0f + ctrans->position;
