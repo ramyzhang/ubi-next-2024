@@ -1,5 +1,7 @@
 This is my submission for Ubisoft's NEXT 2024-2025 challenge this year!
 
+![image](https://github.com/user-attachments/assets/1107d5d4-3494-4f63-a88c-c4c664ea8bb0)
+
 Video demo: https://youtu.be/JIPNhrzT12A?si=B-tTXGQSRBKkDaIk
 
 Completed:
