@@ -1,4 +1,4 @@
-This is my (soon-to-be) submission for Ubisoft's NEXT challenge this year!
+This is my submission for Ubisoft's NEXT 2024-2025 challenge this year!
 
 Completed:
 - 3D renderer (projection, triangles, rasterizer, lighting, backface culling, transformations, triangle clipping)
@@ -10,10 +10,5 @@ Completed:
 - Entity manager (game object creation), entity memory pool, custom entity iterator
 - Components, component memory pools
 - UI system
-- Basic physics (mostly just collision)
-
-To-do:
-- documentation
-- Particle system
+- Basic physics (mostly just collision, rigidbodies, very basic dynamics)
 - Flocking & boids :D
-- Animation via tweening
