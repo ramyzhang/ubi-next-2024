@@ -3,6 +3,8 @@
 This is my submission for Ubisoft's NEXT 2024-2025 challenge this year!
 I began working on the engine on December 14th, 2024, and completed the game submission on January 20th :)
 
+The theme was MINIGOLF, so I was inspired by Legend of Zelda: Echoes of Wisdom to play a 3D platformer level where you launch yourself around like a golf ball to collect objectives and free trapped "fish" (the boids!)
+
 ![ezgif-5-3b7335a1fe](https://github.com/user-attachments/assets/9503bdea-e39a-4e8e-956a-085794c5c47f)
 
 Video demo: https://youtu.be/JIPNhrzT12A?si=B-tTXGQSRBKkDaIk
